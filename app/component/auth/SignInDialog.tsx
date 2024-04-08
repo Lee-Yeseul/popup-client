@@ -6,16 +6,20 @@ import Form from '../common/Form'
 import { authAPI } from '@/app/api/auth'
 
 import useUserAction from '@/app/hook/useUserAction'
+import { useRouter } from 'next/navigation'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void
 }
 export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
+  const router = useRouter()
   const { login } = useUserAction()
 
   const onLoginBtnClick = async (loginData: SignInSchema) => {
     const { data } = await authAPI.signIn(loginData)
     login(data)
+    setIsDialogOpen(false)
+    router.push('/')
   }
 
   return (

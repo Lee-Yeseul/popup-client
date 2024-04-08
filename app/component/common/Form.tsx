@@ -13,6 +13,7 @@ type InputProps = CompoundItem & {
   name: string
   placeholder: string
   type?: string
+  label?: boolean | string
 }
 
 /**
@@ -53,14 +54,19 @@ export default function Form<Schema extends FieldValues>({
   )
 }
 
-function Input({ className, name, placeholder, type }: InputProps) {
+function Input({ className, name, placeholder, type, label }: InputProps) {
   const { register, errors } = useContext(FormContext)
   return (
-    <>
+    <div>
+      {label && (
+        <label htmlFor={name} className="text-sm font-semibold">
+          {typeof label === 'string' ? label : name}
+        </label>
+      )}
       <input
         className={`${
           errors[name] ? 'border-red-500' : ''
-        } border-1 border-solid focus:border-1 focus:border-gray-400 focus:outline-none ${className}`}
+        } mt-1 border-1 border-solid focus:border-1 focus:border-gray-400 focus:outline-none ${className}`}
         placeholder={placeholder}
         type={type ?? name}
         {...register(name)}
@@ -70,7 +76,7 @@ function Input({ className, name, placeholder, type }: InputProps) {
           {errors[name].message}
         </small>
       )}
-    </>
+    </div>
   )
 }
 
