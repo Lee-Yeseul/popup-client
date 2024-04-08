@@ -12,6 +12,9 @@ export const authAPI = {
   signUp: (bodyData: SignUpSchema): APIResponse<void> => {
     return instance.post(`${basicPathName}/signup`, bodyData)
   },
+  renewAccessToken: () => {
+    return instance.post('/auth/renew')
+  },
   // postKakaoLoginCode: (code: string): APIResponse<SignInResponse> => {
   //   return instance.post(`${basicPathName}/kakao-code`, { code })
   // },

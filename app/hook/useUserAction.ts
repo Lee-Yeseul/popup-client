@@ -1,7 +1,7 @@
 import { instance } from '../api'
 import { useUserStore } from '../store/userStore'
 import { SignInResponse } from '../type/auth'
-import { decodeJWT, deleteCookie } from '../util'
+import { decodeJWT } from '../util'
 
 export default function useUserAction() {
   const updateUser = useUserStore((state) => state.update)
@@ -13,26 +13,16 @@ export default function useUserAction() {
     const decodedJWT = decodeJWT(accessToken)
 
     updateUser({
-      accessToken,
       email: decodedJWT.email,
       userName: decodedJWT.user,
     })
-    instance.request({
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
+
+    instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`
     // router 동작
   }
 
   const logout = () => {
-    instance.request({
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: '',
-      },
-    })
+    instance.defaults.headers.common.Authorization = ''
     deleteUser()
   }
 

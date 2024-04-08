@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 
 interface User {
-  accessToken: string
   email: string
   userName: string
 }
@@ -12,9 +11,8 @@ interface UserAction {
 }
 
 export const useUserStore = create<User & UserAction>((set) => ({
-  accessToken: '',
   email: '',
   userName: '',
-  delete: () => set({ accessToken: '' }),
+  delete: () => set({ email: '', userName: '' }),
   update: (data) => set((prev) => ({ ...prev, ...data })),
 }))

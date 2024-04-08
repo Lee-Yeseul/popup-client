@@ -4,19 +4,16 @@ import Dialog from '../common/Dialog'
 import Form from '../common/Form'
 import KakaoSignIn from './KaKaoSignIn'
 import { authAPI } from '@/app/api/auth'
-import { useUserStore } from '@/app/store/userStore'
+
 import useUserAction from '@/app/hook/useUserAction'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void
 }
 export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
-  const accessToken = useUserStore((state) => state)
-  const updateAccessToken = useUserStore((state) => state.update)
-
   const { login } = useUserAction()
 
-  const onSubmit = async (loginData: SignInSchema) => {
+  const onLoginBtnClick = async (loginData: SignInSchema) => {
     const { data } = await authAPI.signIn(loginData)
     login(data)
   }
@@ -33,7 +30,7 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
       <Dialog.Body className="flex w-full flex-col items-center justify-center p-6">
         <Form<SignInSchema>
           schema={signInSchema}
-          handleSubmit={(data) => onSubmit(data)}
+          handleSubmit={(data) => onLoginBtnClick(data)}
           className="flex w-full flex-col gap-1"
         >
           <Form.Input
@@ -50,7 +47,7 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
             로그인
           </Form.SubmitButton>
         </Form>
-        {/* <div className="my-6 flex w-full items-center justify-between text-sm">
+        <div className="my-6 flex w-full items-center justify-between text-sm">
           <div className="h-px flex-1 bg-gray-300"></div>
           <div className="px-2 text-gray-500">다른 계정으로 로그인하기</div>
           <div className="h-px flex-1 bg-gray-300"></div>
@@ -58,10 +55,7 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
 
         <div className="flex w-full flex-col items-center justify-around gap-2">
           <KakaoSignIn />
-          <button className="h-12 w-full rounded-md border-1 border-solid border-gray-400 hover:bg-gray-50">
-            구글로 로그인하기
-          </button>
-        </div> */}
+        </div>
       </Dialog.Body>
     </Dialog>
   )
