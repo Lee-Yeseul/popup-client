@@ -2,7 +2,7 @@ import { SignInSchema, signInSchema } from '@/app/schema/auth'
 
 import Dialog from '../common/Dialog'
 import Form from '../common/Form'
-import KakaoSignIn from './KaKaoSignIn'
+
 import { authAPI } from '@/app/api/auth'
 
 import useUserAction from '@/app/hook/useUserAction'
@@ -47,15 +47,6 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
             로그인
           </Form.SubmitButton>
         </Form>
-        <div className="my-6 flex w-full items-center justify-between text-sm">
-          <div className="h-px flex-1 bg-gray-300"></div>
-          <div className="px-2 text-gray-500">다른 계정으로 로그인하기</div>
-          <div className="h-px flex-1 bg-gray-300"></div>
-        </div>
-
-        <div className="flex w-full flex-col items-center justify-around gap-2">
-          <KakaoSignIn />
-        </div>
       </Dialog.Body>
     </Dialog>
   )
