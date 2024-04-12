@@ -34,3 +34,16 @@ export function decodeJWT(token: string) {
 export function deleteCookie(name: string) {
   document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 }
+
+export const encodeFileToBase64 = async (fileBlob: Blob) => {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => {
+      resolve(reader.result as string)
+    }
+    reader.onerror = (error) => {
+      reject(error)
+    }
+    reader.readAsDataURL(fileBlob)
+  })
+}

@@ -1,5 +1,5 @@
 'use client'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import MenuIcon from '@/public/assets/icons/menu.svg'

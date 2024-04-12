@@ -1,8 +1,9 @@
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+
 import './globals.css'
 import Header from '../component/layout/Header'
-import BottomNav from '../component/layout/BottomNav'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: ReactNode
 }>) {
   return (
     <html lang="en">
@@ -22,8 +23,9 @@ export default function RootLayout({
         <div className="flex h-full w-full justify-center bg-pink-200">
           <div className="h-[100vh] w-[550px] bg-white">
             <Header />
-            <div className="h-full overflow-y-auto">{children}</div>
-            <BottomNav />
+            <div className="h-full overflow-y-auto">
+              <div className="mt-16">{children}</div>
+            </div>
           </div>
         </div>
       </body>

@@ -2,6 +2,7 @@
 
 import { authAPI } from '@/app/api/auth'
 import Form from '@/app/component/common/Form'
+
 import { SignUpSchema, signUpSchema } from '@/app/schema/auth'
 import { useRouter } from 'next/navigation'
 
@@ -31,21 +32,21 @@ export default function AuthPage() {
           handleSubmit={(data) => onSubmit(data)}
           className="flex w-full flex-col gap-2"
         >
-          <Form.Input
+          <Form.TextInput
             label="이메일"
             name="email"
             placeholder="test@test.com"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
           />
 
-          <Form.Input
+          <Form.TextInput
             label="비밀번호"
             name="password"
             placeholder="********"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
           />
 
-          <Form.Input
+          <Form.TextInput
             label="비밀번호 확인"
             name="confirmPassword"
             placeholder="********"

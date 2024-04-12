@@ -1,12 +1,12 @@
 import { SignInSchema, signInSchema } from '@/app/schema/auth'
 
 import Dialog from '../common/Dialog'
-import Form from '../common/Form'
 
 import { authAPI } from '@/app/api/auth'
 
 import useUserAction from '@/app/hook/useUserAction'
 import { useRouter } from 'next/navigation'
+import Form from '../common/Form'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void
@@ -37,12 +37,12 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
           handleSubmit={(data) => onLoginBtnClick(data)}
           className="flex w-full flex-col gap-1"
         >
-          <Form.Input
+          <Form.TextInput
             name="email"
             placeholder="test@test.com"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
           />
-          <Form.Input
+          <Form.TextInput
             name="password"
             placeholder="********"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
