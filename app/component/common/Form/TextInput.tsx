@@ -28,7 +28,7 @@ export default function TextInput({
   }
 
   return (
-    <div>
+    <>
       {label && (
         <label htmlFor={name} className="text-sm font-semibold">
           {typeof label === 'string' ? label : name}
@@ -58,6 +58,6 @@ export default function TextInput({
           {errors[name].message}
         </small>
       )}
-    </div>
+    </>
   )
 }

@@ -25,7 +25,7 @@ export default function AuthPage() {
   }
   return (
     <div className="flex h-[80vh] w-full flex-col items-center justify-center">
-      <div className="flex w-1/3 flex-col items-center gap-10 sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/4">
+      <div className="flex w-2/3 flex-col items-center gap-10">
         <h3 className="text-xl font-bold">회원가입</h3>
         <Form<SignUpSchema>
           schema={signUpSchema}

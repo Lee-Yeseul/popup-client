@@ -8,6 +8,8 @@ import TextareaInput from './TextareaInput'
 import TagListInput from './TagListInput'
 import SubmitButton from './SubmitButton'
 import ImageInput from './ImageInput'
+import CustomInput from './CustomInput'
+import DatePicker from './DatePicker'
 
 type FormProps<T extends FieldValues> = CompoundItem & {
   handleSubmit: SubmitHandler<T>
@@ -72,4 +74,6 @@ Form.TextInput = TextInput
 Form.TextareaInput = TextareaInput
 Form.TagListInput = TagListInput
 Form.ImageInput = ImageInput
+Form.CustomInput = CustomInput
+Form.DatePicker = DatePicker
 Form.SubmitButton = SubmitButton

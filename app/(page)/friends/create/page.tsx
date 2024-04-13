@@ -2,17 +2,17 @@
 
 import BottomBox from '@/app/component/common/BottomBox'
 import Form from '@/app/component/common/Form'
-import { CreateDogSchema, createDogSchema } from '@/app/schema/friends/create'
+import { CreateDogSchema, createDogSchema } from '@/app/schema/friends'
 
 export default function DogsFriendsCreatePage() {
-  const handleSubmit = (data: any) => {
+  const onSubmit = (data: any) => {
     console.log(data)
   }
   return (
     <>
       <Form<CreateDogSchema>
         schema={createDogSchema}
-        handleSubmit={(data) => handleSubmit(data)}
+        handleSubmit={(data) => onSubmit(data)}
         className="flex w-full flex-col gap-1"
       >
         <div className="mb-16 flex w-full flex-col gap-3 px-10 py-5">
