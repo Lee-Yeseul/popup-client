@@ -13,7 +13,7 @@ export type SignInSchema = z.infer<typeof signInSchema>
 function validatePassword() {
   return z
     .string()
-    .min(8, '비밀번호는 8글자 이상으로 입력해주세요')
+    .min(8, '비밀번호는 8글자 이상으로 입력해주세요.')
     .max(15, '비밀번호는 15자리 이하로 입력해주세요.')
     .regex(
       /^(?=.*[a-zA-Z])(?=.*\d).{8,}$/,
@@ -29,6 +29,10 @@ export const signUpSchema = z
       .email('이메일 형식을 입력해주세요'),
     password: validatePassword(),
     confirmPassword: validatePassword(),
+    username: z
+      .string()
+      .min(1, '이름을 입력해주세요.')
+      .max(8, '이름은 8글자 이하로 입력해주세요.'),
   })
   .refine((data) => data.password === data.confirmPassword, {
     path: ['confirmPassword'],

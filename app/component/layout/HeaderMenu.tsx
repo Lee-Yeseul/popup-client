@@ -7,6 +7,7 @@ import MenuIcon from '@/public/assets/icons/menu.svg'
 
 import Dropdown from '../common/Dropdown'
 import SignInDialog from '../auth/SignInDialog'
+import { set } from 'zod'
 
 // outside click 함수에서 사용하는 ref 수정하기
 export default function HeaderMenu() {
@@ -25,7 +26,8 @@ export default function HeaderMenu() {
   }
 
   const onClickSignUp = () => {
-    router.push('/signup')
+    router.push('/sign-up')
+    setIsDropdownButtonClicked(false)
   }
 
   const onClickOutsideToggle = () => {

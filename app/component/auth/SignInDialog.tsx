@@ -6,7 +6,7 @@ import { authAPI } from '@/app/api/auth'
 
 import useUserAction from '@/app/hook/useUserAction'
 import { useRouter } from 'next/navigation'
-import Form from '../common/Form'
+import Form from '../common/form'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void

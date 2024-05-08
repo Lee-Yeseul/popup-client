@@ -1,7 +1,7 @@
 'use client'
 
 import BottomBox from '@/app/component/common/BottomBox'
-import Form from '@/app/component/common/Form'
+import Form from '@/app/component/common/form'
 import { CreateDogSchema, createDogSchema } from '@/app/schema/friends'
 
 export default function DogsFriendsCreatePage() {

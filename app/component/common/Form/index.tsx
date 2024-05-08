@@ -14,6 +14,7 @@ import DatePicker from './DatePicker'
 type FormProps<T extends FieldValues> = CompoundItem & {
   handleSubmit: SubmitHandler<T>
   schema: z.ZodType<T>
+  mode?: 'onBlur' | 'onChange' | 'onSubmit' | 'onTouched' | 'all'
 }
 
 /**
@@ -32,6 +33,7 @@ export default function Form<Schema extends FieldValues>({
   className,
   handleSubmit: onSumbit,
   schema,
+  mode = 'onSubmit',
 }: FormProps<Schema>) {
   const {
     register,
@@ -44,6 +46,7 @@ export default function Form<Schema extends FieldValues>({
     getValues,
   } = useForm<Schema>({
     resolver: zodResolver(schema),
+    mode: mode,
   })
 
   const providerValue = {

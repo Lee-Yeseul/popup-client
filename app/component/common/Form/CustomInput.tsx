@@ -15,7 +15,8 @@ export default function CustomInput({
 
   return (
     <>
-      {children} <input {...register(name)} {...inputProps} />
+      {children}
+      <input {...register(name)} {...inputProps} />
     </>
   )
 }

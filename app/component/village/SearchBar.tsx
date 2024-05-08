@@ -1,5 +1,5 @@
 import { SearchKeywordSchema, searchKeywordSchema } from '@/app/schema/village'
-import Form from '../common/Form'
+import Form from '../common/form'
 import MyLocation from '@/public/assets/icons/myLocation.svg'
 import Search from '@/public/assets/icons/search.svg'
 import Tag from '../common/Tag'

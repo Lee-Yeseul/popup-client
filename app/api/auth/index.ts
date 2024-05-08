@@ -13,8 +13,15 @@ export const authAPI = {
     return instance.post(`${basicPathName}/signup`, bodyData)
   },
   renewAccessToken: (): APIResponse<renewAccessToken> => {
-    return instance.post('/auth/renew')
+    return instance.post(`${basicPathName}/renew`)
   },
+  isEmailUnique: (email: string): APIResponse<boolean> => {
+    return instance.post(`${basicPathName}/is-email-unique`, { email })
+  },
+  isUsernameUnique: (username: string): APIResponse<boolean> => {
+    return instance.post(`${basicPathName}/is-username-unique`, { username })
+  },
+
   // postKakaoLoginCode: (code: string): APIResponse<SignInResponse> => {
   //   return instance.post(`${basicPathName}/kakao-code`, { code })
   // },

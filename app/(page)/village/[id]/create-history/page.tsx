@@ -1,7 +1,7 @@
 'use client'
 
 import BottomBox from '@/app/component/common/BottomBox'
-import Form from '@/app/component/common/Form'
+import Form from '@/app/component/common/form'
 import Tag from '@/app/component/common/Tag'
 import { CreateDogSchema, createDogSchema } from '@/app/schema/friends'
 import { CreateHistorySchema, createHistorySchema } from '@/app/schema/village'
