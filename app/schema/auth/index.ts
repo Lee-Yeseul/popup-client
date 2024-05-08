@@ -1,15 +1,5 @@
 import { z } from 'zod'
 
-export const signInSchema = z.object({
-  email: z
-    .string()
-    .min(1, '이메일을 입력해주세요.')
-    .email('이메일 형식을 입력해주세요'),
-  password: z.string().min(8, '비밀번호는 8글자 이상으로 입력해주세요'),
-})
-
-export type SignInSchema = z.infer<typeof signInSchema>
-
 function validatePassword() {
   return z
     .string()
@@ -20,6 +10,16 @@ function validatePassword() {
       '비밀번호는 문자, 숫자, 특수문자를 혼합해 작성해주세요.',
     )
 }
+
+export const signInSchema = z.object({
+  email: z
+    .string()
+    .min(1, '이메일을 입력해주세요.')
+    .email('이메일 형식을 입력해주세요'),
+  password: validatePassword(),
+})
+
+export type SignInSchema = z.infer<typeof signInSchema>
 
 export const signUpSchema = z
   .object({

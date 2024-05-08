@@ -1,25 +1,34 @@
-import { SignInSchema, signInSchema } from '@/app/schema/auth'
-
-import Dialog from '../common/Dialog'
-
-import { authAPI } from '@/app/api/auth'
-
-import useUserAction from '@/app/hook/useUserAction'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { SignInSchema, signInSchema } from '@/app/schema/auth'
+import Dialog from '../common/Dialog'
 import Form from '../common/form'
+import { authAPI } from '@/app/api/auth'
+import useUserAction from '@/app/hook/useUserAction'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void
 }
 export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
+  const [errorMessage, setErrorMessage] = useState<string>('')
   const router = useRouter()
   const { login } = useUserAction()
 
   const onLoginBtnClick = async (loginData: SignInSchema) => {
-    const { data } = await authAPI.signIn(loginData)
-    login(data)
-    setIsDialogOpen(false)
-    router.push('/')
+    try {
+      const { data } = await authAPI.signIn(loginData)
+      login(data)
+      setIsDialogOpen(false)
+      setErrorMessage('')
+      router.push('/')
+    } catch (error: any) {
+      if (error.status === 401) {
+        setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.')
+      }
+      if (error.status === 404) {
+        setErrorMessage('존재하지 않는 이메일입니다.')
+      }
+    }
   }
 
   return (
@@ -46,7 +55,11 @@ export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
             name="password"
             placeholder="********"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
+            type="password"
           />
+          {errorMessage && (
+            <div className="mt-1 text-sm text-red-500">{errorMessage}</div>
+          )}
           <Form.SubmitButton className="mt-2 h-12 w-full rounded-md border-1 border-solid border-gray-400 hover:bg-gray-50">
             로그인
           </Form.SubmitButton>

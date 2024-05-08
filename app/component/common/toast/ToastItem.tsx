@@ -6,7 +6,7 @@ export default function ToastItem({ message, type, id }: ToastProps) {
   const removeToast = useToastStore((state) => state.removeToast)
   const toastType = {
     success: 'bg-yellow-200 text-black',
-    error: 'bg-red-300',
+    error: 'bg-red-400',
     warning: 'bg-orange-300',
     info: 'bg-blue-300',
   }
