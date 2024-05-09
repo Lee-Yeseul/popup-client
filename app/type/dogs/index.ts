@@ -16,3 +16,7 @@ export type DogBreedResponse = {
     [key: string]: string
   }
 }
+
+export type DogProfileResponse = {
+  id: number
+}

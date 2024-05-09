@@ -7,3 +7,7 @@ export type CompoundItem = {
   children?: ReactNode
   className?: string
 }
+
+export type Id = {
+  id: number
+}
