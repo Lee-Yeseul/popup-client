@@ -5,6 +5,7 @@ import Dialog from '../common/Dialog'
 import Form from '../common/form'
 import { authAPI } from '@/app/api/auth'
 import useUserAction from '@/app/hook/useUserAction'
+import { userAPI } from '@/app/api/user'
 
 interface SignInDialogProps {
   setIsDialogOpen: (isDialogOpen: boolean) => void
@@ -12,12 +13,14 @@ interface SignInDialogProps {
 export default function SignInDialog({ setIsDialogOpen }: SignInDialogProps) {
   const [errorMessage, setErrorMessage] = useState<string>('')
   const router = useRouter()
-  const { login } = useUserAction()
+  const { login, saveUserInfo } = useUserAction()
 
   const onLoginBtnClick = async (loginData: SignInSchema) => {
     try {
       const { data } = await authAPI.signIn(loginData)
       login(data)
+      const { data: userInfo } = await userAPI.getUserInfo()
+      saveUserInfo(userInfo)
       setIsDialogOpen(false)
       setErrorMessage('')
       router.push('/')

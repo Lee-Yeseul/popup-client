@@ -1,8 +1,10 @@
 import { create } from 'zustand'
 
 interface User {
+  isLogin: boolean
   email: string
-  userName: string
+  username: string
+  profileImageURL: string
 }
 
 interface UserAction {
@@ -10,9 +12,15 @@ interface UserAction {
   update: (user: Partial<User>) => void
 }
 
-export const useUserStore = create<User & UserAction>((set) => ({
+const defaultUser = {
+  isLogin: false,
   email: '',
-  userName: '',
-  delete: () => set({ email: '', userName: '' }),
+  username: '',
+  profileImageURL: '',
+} as const
+
+export const useUserStore = create<User & UserAction>((set) => ({
+  ...defaultUser,
+  delete: () => set(defaultUser),
   update: (data) => set((prev) => ({ ...prev, ...data })),
 }))
