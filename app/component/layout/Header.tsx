@@ -1,5 +1,10 @@
 import Link from 'next/link'
-import HeaderMenu from './HeaderMenu'
+import dynamic from 'next/dynamic'
+
+const DynamicHeaderMenu = dynamic(() => import('./HeaderMenu'), {
+  loading: () => <div></div>,
+  ssr: false,
+})
 
 export default function Header() {
   return (
@@ -8,8 +13,7 @@ export default function Header() {
         <Link href={'/'} className="text-xl font-bold">
           Dog Friends
         </Link>
-
-        <HeaderMenu />
+        <DynamicHeaderMenu />
       </div>
     </header>
   )

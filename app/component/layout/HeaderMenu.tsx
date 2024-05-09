@@ -1,19 +1,17 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import MenuIcon from '@/public/assets/icons/menu.svg'
-
 import SignInDialog from '../auth/SignInDialog'
 import Dropdown from '../common/dropDown'
 import useUserAction from '@/app/hook/useUserAction'
 import { useUserStore } from '@/app/store/userStore'
 import Avatar from '../common/Avatar'
-import { userAPI } from '@/app/api/user'
 
 export default function HeaderMenu() {
   const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false)
-  const { logout, saveUserInfo } = useUserAction()
+  const { logout } = useUserAction()
   const { profileImageURL, isLogin } = useUserStore()
 
   const router = useRouter()
@@ -34,17 +32,6 @@ export default function HeaderMenu() {
     logout()
     router.push('/')
   }
-
-  const getUserInfo = async () => {
-    const { data: userInfo } = await userAPI.getUserInfo()
-    saveUserInfo(userInfo)
-  }
-
-  useEffect(() => {
-    if (!isLogin) {
-      getUserInfo()
-    }
-  })
 
   return (
     <div>

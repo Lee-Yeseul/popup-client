@@ -1,3 +1,3 @@
 export default function DogCreatePage() {
-  return
+  return <div></div>
 }

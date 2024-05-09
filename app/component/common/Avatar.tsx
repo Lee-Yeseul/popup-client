@@ -1,6 +1,6 @@
 import Image from 'next/image'
 interface AvartarProps {
-  src: string
+  src?: string
   alt: string
   width?: string
   height?: string
@@ -13,7 +13,11 @@ export default function Avatar({
 }: AvartarProps) {
   return (
     <div className={`relative ${width} ${height}`}>
-      <Image src={src} alt={alt} fill className="rounded-full" />
+      {src ? (
+        <Image src={src} alt={alt} fill className="rounded-full" />
+      ) : (
+        <div className="h-full w-full rounded-full bg-gray-300"></div>
+      )}
     </div>
   )
 }
