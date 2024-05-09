@@ -11,6 +11,7 @@ type CheckUniqueState = boolean | 'notChecked'
 export default function AuthPage() {
   const router = useRouter()
   const { toast } = useToast()
+
   const [isEmailUnique, setIsEmailUnique] =
     useState<CheckUniqueState>('notChecked')
   const [isUsernameUnique, setIsUsernameUnique] =
@@ -22,12 +23,9 @@ export default function AuthPage() {
       if (status !== 201) throw new Error()
       alert('환영합니다! 회원가입이 완료되었습니다.')
       router.push('/')
-    } catch (err) {
-      if (err instanceof Error && 'status' in err) {
-        if (err.status === 409) alert('해당 이메일의 유저가 이미 존재합니다.')
-      } else {
-        alert('회원가입 실패')
-      }
+    } catch (err: any) {
+      if (err.status === 409) alert('해당 이메일의 유저가 이미 존재합니다.')
+      alert('회원가입에 실패하였습니다. 다시 시도해주세요.')
     }
   }
 
