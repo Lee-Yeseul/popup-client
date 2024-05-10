@@ -11,3 +11,7 @@ export type CompoundItem = {
 export type Id = {
   id: number
 }
+
+export type ImagePath = {
+  imagePath: string
+}

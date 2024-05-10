@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const postDogSchema = z.object({
+export const createDogSchema = z.object({
   name: z
     .string()
     .min(1, '이름을 입력해주세요.')
@@ -9,4 +9,4 @@ export const postDogSchema = z.object({
   age: z.number().min(0, '나이를 입력해주세요.'),
 })
 
-export type PostDogSchema = z.infer<typeof postDogSchema>
+export type CreateDogSchema = z.infer<typeof createDogSchema>

@@ -1,12 +1,12 @@
-import { MouseEvent, ReactNode, useContext } from 'react'
+import { MouseEvent, useContext } from 'react'
 
 import { useWatch } from 'react-hook-form'
 import { FormContext } from '.'
 
 type TextInputProps = {
-  className: string
   name: string
-  placeholder: string
+  className?: string
+  placeholder?: string
   type?: string
   label?: boolean | string
   hasBtn?: boolean | string
@@ -50,7 +50,9 @@ export default function TextInput({
             } mt-1 border-1 border-solid focus:border-1 focus:border-gray-400 focus:outline-none ${className}`}
             placeholder={placeholder}
             type={type ?? 'text'}
-            {...register(name)}
+            {...register(name, {
+              valueAsNumber: type === 'number' ? true : false,
+            })}
           />
           {value && (
             <button

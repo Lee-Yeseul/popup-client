@@ -1,5 +1,10 @@
 import { FormEvent, createContext } from 'react'
-import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import {
+  DefaultValues,
+  FieldValues,
+  SubmitHandler,
+  useForm,
+} from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { CompoundItem } from '@/app/type'
@@ -10,11 +15,13 @@ import SubmitButton from './SubmitButton'
 import ImageInput from './ImageInput'
 import CustomInput from './CustomInput'
 import DatePicker from './DatePicker'
+import Select from './Select'
 
 type FormProps<T extends FieldValues> = CompoundItem & {
   handleSubmit: SubmitHandler<T>
   schema: z.ZodType<T>
   mode?: 'onBlur' | 'onChange' | 'onSubmit' | 'onTouched' | 'all'
+  defaultValues?: DefaultValues<T>
 }
 
 /**
@@ -34,6 +41,7 @@ export default function Form<Schema extends FieldValues>({
   handleSubmit: onSumbit,
   schema,
   mode = 'onSubmit',
+  defaultValues,
 }: FormProps<Schema>) {
   const {
     register,
@@ -47,6 +55,9 @@ export default function Form<Schema extends FieldValues>({
   } = useForm<Schema>({
     resolver: zodResolver(schema),
     mode: mode,
+    defaultValues: defaultValues
+      ? defaultValues
+      : ({} as DefaultValues<Schema>),
   })
 
   const providerValue = {
@@ -79,4 +90,5 @@ Form.TagListInput = TagListInput
 Form.ImageInput = ImageInput
 Form.CustomInput = CustomInput
 Form.DatePicker = DatePicker
+Form.Select = Select
 Form.SubmitButton = SubmitButton

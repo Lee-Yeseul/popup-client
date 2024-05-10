@@ -1,4 +1,4 @@
-import { APIResponse } from '@/app/type'
+import { APIResponse, ImagePath } from '@/app/type'
 import { instance } from '..'
 import {
   DogBreedResponse,
@@ -6,17 +6,17 @@ import {
   DogResponse,
   PostDogResponse,
 } from '@/app/type/dogs'
-import { PostDogSchema } from '@/app/schema/dogs'
+import { CreateDogSchema } from '@/app/schema/dogs'
 
 const basicPathName = '/dogs'
 
 export const dogAPI = {
-  postDog: (bodyData: PostDogSchema): APIResponse<PostDogResponse> => {
+  postDog: (bodyData: CreateDogSchema): APIResponse<PostDogResponse> => {
     return instance.post(`${basicPathName}/create`, bodyData)
   },
   putDog: (
     id: number,
-    bodyData: PostDogSchema,
+    bodyData: Partial<CreateDogSchema>,
   ): APIResponse<PostDogResponse> => {
     return instance.put(`${basicPathName}/${id}`, bodyData)
   },
@@ -35,14 +35,14 @@ export const dogAPI = {
 
   postDogProfile: (
     id: number,
-    bodyData: any,
+    bodyData: ImagePath,
   ): APIResponse<DogProfileResponse> => {
     return instance.post(`${basicPathName}/${id}/profile`, bodyData)
   },
 
   putDogProfile: (
     id: number,
-    bodyData: any,
+    bodyData: ImagePath,
   ): APIResponse<DogProfileResponse> => {
     return instance.put(`${basicPathName}/${id}/profile`, bodyData)
   },

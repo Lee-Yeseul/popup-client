@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const createDogSchema = z.object({
+export const createDogPostSchema = z.object({
   title: z.string(),
   images: z.any(),
   name: z.string(),
@@ -10,4 +10,4 @@ export const createDogSchema = z.object({
   tags: z.string().array().max(5),
 })
 
-export type CreateDogSchema = z.infer<typeof createDogSchema>
+export type CreateDogPostSchema = z.infer<typeof createDogPostSchema>

@@ -27,6 +27,6 @@ export const useUserStore = create(
       delete: () => set(defaultUser),
       update: (data) => set((prev) => ({ ...prev, ...data })),
     }),
-    { name: 'user-storage', getStorage: () => localStorage },
+    { name: 'user-storage' },
   ),
 )
