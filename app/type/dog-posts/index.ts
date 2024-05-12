@@ -1,3 +1,5 @@
+import { DogResponse } from '../dogs'
+
 export type DogPostResponse = {
   id: number
   authorId: number
@@ -7,4 +9,5 @@ export type DogPostResponse = {
   primaryActivityZone: string
   dogId: number
   createdAt: Date
+  dog: DogResponse
 }

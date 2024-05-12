@@ -1,79 +1,61 @@
 'use client'
 
-import BottomBox from '@/app/component/common/BottomBox'
-import Form from '@/app/component/common/form'
-import { CreateDogPostSchema, createDogPostSchema } from '@/app/schema/friends'
+import { dogAPI } from '@/app/api/dog'
+import { dogPostAPI } from '@/app/api/dog-posts'
+import { imageAPI } from '@/app/api/image'
+import useToast from '@/app/component/common/toast/useToast'
+import CreateDogPostForm from '@/app/component/dog-posts/CreateDogPostForm'
+import DogCard from '@/app/component/dog-posts/DogCard'
+import { CreateDogPostSchema } from '@/app/schema/dog-posts'
+import { CreateDogSchema } from '@/app/schema/dogs'
+import { DogResponse } from '@/app/type/dogs'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 
-export default function DogsFriendsCreatePage() {
-  const onSubmit = (data: any) => {
-    console.log(data)
+export default function DogPostCreatePage() {
+  const router = useRouter()
+  const { toast } = useToast()
+
+  const [dogInfo, setDogInfo] = useState<DogResponse>()
+  const [imageUrl, setImageUrl] = useState<string>('')
+
+  const getDogInfo = async () => {
+    const { data } = await dogAPI.getMyDogs()
+    const { imagePath } = data[0]
+
+    if (imagePath) {
+      const { body } = await imageAPI.getImagePresignedUrl(imagePath)
+      setImageUrl(body)
+    }
+    setDogInfo(data[0])
   }
+
+  const handleSubmit = async (dogData: CreateDogPostSchema) => {
+    console.log('his')
+    try {
+      if (!dogInfo?.id) return
+      const { data } = await dogPostAPI.postDogPost({
+        dogId: dogInfo.id,
+        ...dogData,
+      })
+      router.push(`/dog-posts/${data.id}`)
+    } catch (error) {
+      toast('포스트 등록에 실패했습니다.', 'error')
+    }
+  }
+
+  useEffect(() => {
+    getDogInfo()
+  }, [])
+
   return (
     <>
-      <Form<CreateDogPostSchema>
-        schema={createDogPostSchema}
-        handleSubmit={(data) => onSubmit(data)}
-        className="flex w-full flex-col gap-1"
-      >
-        <div className="mb-16 flex w-full flex-col gap-3 px-10 py-5">
-          <div className="my-2">
-            <Form.ImageInput />
-          </div>
-
-          <Form.TextInput
-            label="제목"
-            name="title"
-            placeholder=""
-            className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
-          />
-
-          <div className="flex w-full items-center gap-2">
-            <Form.TextInput
-              label="반려견 이름"
-              name="name"
-              placeholder=""
-              className="h-12 flex-1 rounded-md border-gray-300 p-2 ps-5"
-            />
-            <Form.TextInput
-              label="반려견 종"
-              name="species"
-              placeholder=""
-              className="h-12 flex-1 rounded-md border-gray-300 p-2 ps-5"
-            />
-          </div>
-
-          {/* 주소 form으로 변경 */}
-
-          <Form.TextInput
-            label="주 활동 영역"
-            name="territory"
-            placeholder=""
-            className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
-          />
-
-          <Form.TextareaInput
-            label="반려견 소개 글"
-            name="description"
-            placeholder=""
-            className="w-full rounded-md border-gray-300 p-2 ps-5"
-          />
-
-          <Form.TagListInput
-            label="해시태그"
-            name="tags"
-            placeholder=""
-            className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
-          />
+      {dogInfo && (
+        <div className="mt-20">
+          <DogCard dogInfo={dogInfo} imageUrl={imageUrl} />
+          <CreateDogPostForm type="create" onSubmit={handleSubmit} />
         </div>
-        <BottomBox>
-          <div className="flex h-full w-full items-center">
-            <button className="h-full w-1/6">취소</button>
-            <Form.SubmitButton className="h-full w-full bg-yellow-100 text-xl font-bold">
-              작성 완료
-            </Form.SubmitButton>
-          </div>
-        </BottomBox>
-      </Form>
+      )}
     </>
   )
 }

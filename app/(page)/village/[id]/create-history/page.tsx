@@ -3,7 +3,7 @@
 import BottomBox from '@/app/component/common/BottomBox'
 import Form from '@/app/component/common/form'
 import Tag from '@/app/component/common/Tag'
-import { CreateDogSchema, createDogSchema } from '@/app/schema/friends'
+import { CreateDogSchema, createDogSchema } from '@/app/schema/dog-posts'
 import { CreateHistorySchema, createHistorySchema } from '@/app/schema/village'
 import ClockIcon from '@/public/assets/icons/clock.svg'
 import LocationOn from '@/public/assets/icons/locationOn.svg'
