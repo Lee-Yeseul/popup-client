@@ -11,7 +11,7 @@ export default function CustomInput({
   name,
   inputProps,
 }: CustomInputProps) {
-  const { register, errors, resetField, control } = useContext(FormContext)
+  const { register } = useContext(FormContext)
 
   return (
     <>

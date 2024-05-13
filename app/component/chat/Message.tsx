@@ -1,27 +1,58 @@
-import Avatar from '../common/Avatar'
-
-export default function Message() {
+interface MessageProps {
+  content: string
+  timestamp: number
+  senderId: string
+  type: 'me' | 'other'
+}
+export default function Message({
+  content,
+  timestamp,
+  senderId,
+  type,
+}: MessageProps) {
+  const time = new Date(timestamp).toLocaleTimeString('en-US', {
+    hour: 'numeric',
+    minute: 'numeric',
+  })
   return (
-    <div className="w-fit max-w-96">
-      <div className="flex gap-2">
-        <div>
-          <Avatar
-            src="https://i.imgur.com/7kmLp3v.jpeg"
-            alt="profile"
-            width="w-12"
-            height="h-12"
-          />
-        </div>
-        <div>
-          <div className="rounded-3xl rounded-tl-none bg-green-100 p-5 text-base/6">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et dolorum
-            amet voluptas, quo necessitatibus quasi. Asperiores repellat eius
-            quaerat aspernatur consequatur blanditiis sint voluptatem soluta
-            deserunt autem dolorum, similique neque!
+    <div>
+      {type === 'other' ? (
+        <div className="w-fit max-w-96">
+          <div className="g flex flex-col gap-1">
+            <div className="ml-1 text-sm text-gray-500">말하는 오리너구리</div>
+            <div className="flex items-end gap-2">
+              <div className="rounded-lg bg-yellow-50 px-3 py-2.5 text-base/6">
+                {content}
+              </div>
+              <div
+                className={`flex shrink-0 justify-end text-sm text-gray-400`}
+              >
+                {time}
+              </div>
+            </div>
           </div>
-          <div className="mt-1 text-sm text-gray-400">11:30 AM</div>
         </div>
-      </div>
+      ) : (
+        <div className="my-4 flex w-full justify-end">
+          <div className="w-fit max-w-96">
+            <div className="flex items-end">
+              <div
+                className={`flex shrink-0 justify-end text-sm text-gray-400`}
+              >
+                {time}
+              </div>
+              <div>
+                <div className="ml-1 text-sm text-gray-500">
+                  말하는 오리너구리
+                </div>
+                <div className="rounded-lg bg-yellow-50 px-3 py-2.5 text-base/6">
+                  {content}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

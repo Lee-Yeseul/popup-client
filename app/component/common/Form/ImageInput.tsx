@@ -1,13 +1,20 @@
 import { encodeFileToBase64 } from '@/app/util'
 import Image from 'next/image'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useContext, useState } from 'react'
+import { FormContext } from '.'
 
-export default function ImageInput() {
+export default function ImageInput({ name }: { name: string }) {
+  const { setValue } = useContext(FormContext)
   const [previewImageList, setPreviewImageList] = useState<string[]>([])
+  const [fileList, setFileList] = useState<File[]>([])
+
   const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
+
     const imageURL = await encodeFileToBase64(e.target.files[0])
     setPreviewImageList((prev) => [...prev, imageURL])
+    setFileList((prev) => [...prev, e.target.files[0]])
+    setValue(name, [...fileList, e.target.files[0]])
   }
 
   return (
