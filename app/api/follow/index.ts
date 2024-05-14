@@ -4,13 +4,13 @@ import { FollowResponse } from '@/app/type/follow'
 
 const basicPathName = '/follow'
 export const followAPI = {
-  postFollow: (id: number): APIResponse<Id> => {
+  postFollow: (id: string): APIResponse<Id> => {
     return instance.post(`${basicPathName}/${id}`)
   },
-  confirmFollow: (id: number) => {
+  confirmFollow: (id: string) => {
     return instance.patch(`${basicPathName}/${id}/confirm`)
   },
-  deleteFollow: (id: number) => {
+  deleteFollow: (id: string) => {
     return instance.delete(`${basicPathName}/${id}`)
   },
   getMutualFollows: (): APIResponse<FollowResponse[]> => {

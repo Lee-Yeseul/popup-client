@@ -11,9 +11,9 @@ export default function Header() {
     <header className="fixed z-10 h-16 w-[550px] border-b-2 border-solid border-gray-200 bg-white">
       <div className="flex h-full items-center justify-between px-4">
         <Link href={'/'} className="text-xl font-bold">
-          Dog Friends
+          pop-up NOW
         </Link>
-        <DynamicHeaderMenu />
+        {/* <DynamicHeaderMenu /> */}
       </div>
     </header>
   )

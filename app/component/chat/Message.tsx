@@ -1,15 +1,11 @@
-interface MessageProps {
-  content: string
-  timestamp: number
-  senderId: string
-  type: 'me' | 'other'
-}
+import { ChatMessage } from '@/app/type/chat'
+
 export default function Message({
-  content,
+  message,
   timestamp,
   senderId,
   type,
-}: MessageProps) {
+}: ChatMessage) {
   const time = new Date(timestamp).toLocaleTimeString('en-US', {
     hour: 'numeric',
     minute: 'numeric',
@@ -22,7 +18,7 @@ export default function Message({
             <div className="ml-1 text-sm text-gray-500">말하는 오리너구리</div>
             <div className="flex items-end gap-2">
               <div className="rounded-lg bg-yellow-50 px-3 py-2.5 text-base/6">
-                {content}
+                {message}
               </div>
               <div
                 className={`flex shrink-0 justify-end text-sm text-gray-400`}
@@ -46,7 +42,7 @@ export default function Message({
                   말하는 오리너구리
                 </div>
                 <div className="rounded-lg bg-yellow-50 px-3 py-2.5 text-base/6">
-                  {content}
+                  {message}
                 </div>
               </div>
             </div>
