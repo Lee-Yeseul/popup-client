@@ -5,6 +5,7 @@ import EventAvailable from '@/public/assets/icons/eventAvailable.svg'
 import { popUpAPI } from '@/app/api/pop-up'
 import ImageCarousel from '@/app/component/common/ImageCarausel'
 import PopUpChat from '@/app/component/pop-up/PopUpChat'
+import MarkdownViewer from '@/app/component/common/MarkdownViewer'
 
 export default async function PopupDetailPage({
   params,
@@ -19,7 +20,7 @@ export default async function PopupDetailPage({
     return data
   }
 
-  const { tags, chatRoomId } = await getPopUpDetail()
+  const { tags, chatRoomId, content } = await getPopUpDetail()
 
   const imageList = [
     {
@@ -71,11 +72,7 @@ export default async function PopupDetailPage({
       <div>
         <div className="text-lg font-bold">What's about?</div>
         <div className="text-wrap text-base">
-          토니모리의 첫번째 팝업 스토어 겟잇 베이크샵이 성수동에 문을
-          열었습니다. 이번 팝업은 빵지순례 콘셉트로, 💛 보기만 해도 고소한 빵
-          냄새 가득! 다양한 포토존 💛 각종 베이커리 샵에서 진행하는 게임! 💛
-          신제품 “워터풀버터 NEW컬러 빵지순례 시리즈” 등 즐길 거리가
-          넘쳐난다구👀
+          <MarkdownViewer content={content} />
         </div>
       </div>
 

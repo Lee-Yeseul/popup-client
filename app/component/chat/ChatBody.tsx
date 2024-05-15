@@ -13,13 +13,12 @@ export default function ChatBody() {
 
   return (
     <div className="max-h-60 min-h-20 overflow-y-scroll">
-      {messageList.map(({ message, type, timestamp, senderId }) => (
+      {messageList.map(({ message, timestamp, senderId }) => (
         <Message
           key={`${timestamp}_${senderId}`}
           message={message}
           senderId={senderId}
           timestamp={timestamp}
-          type={type}
         />
       ))}
       <div ref={scrollRef}></div>

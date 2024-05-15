@@ -5,12 +5,13 @@ import ExpandLess from '@/public/assets/icons/expandLess.svg'
 import ExpandMore from '@/public/assets/icons/expandMore.svg'
 import SocketProvider from '@/app/component/chat/SocketProvider'
 import Chat from '../chat'
+import { randomNicknameGenerator } from '@/app/util/randomNicknameGenerator'
 
 interface PopUpChatProps {
   roomId: string
 }
 
-const userId = Math.random()
+const userId = randomNicknameGenerator()
 
 export default function PopUpChat({ roomId }: PopUpChatProps) {
   const [isChatOpen, setIsChatOpen] = useState(true)
@@ -36,7 +37,7 @@ export default function PopUpChat({ roomId }: PopUpChatProps) {
       </div>
 
       <SocketProvider>
-        <Chat roomId={roomId} senderId={String(userId)}>
+        <Chat roomId={roomId} currentUserId={String(userId)}>
           {isChatOpen && (
             <div>
               <Chat.Body />

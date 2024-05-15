@@ -8,7 +8,7 @@ interface ChatInputProps {
   handleSubmit?: () => void
 }
 export default function ChatInput({ handleSubmit }: ChatInputProps) {
-  const { roomId, senderId } = useContext(ChatContext)
+  const { roomId, currentUserId } = useContext(ChatContext)
   const { socket } = useSocket()
   const [message, setMessage] = useState('')
 
@@ -17,7 +17,7 @@ export default function ChatInput({ handleSubmit }: ChatInputProps) {
     socket.emit('send-message', {
       message,
       roomId,
-      senderId,
+      senderId: currentUserId,
       timestamp: new Date(),
     })
     setMessage('')

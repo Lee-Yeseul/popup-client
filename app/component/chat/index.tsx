@@ -3,29 +3,27 @@ import ChatBody from './ChatBody'
 import ChatInput from './ChatInput'
 import { useSocket } from './SocketProvider'
 import { chatAPI } from '@/app/api/chat'
-import { ChatMessage, ChatMessageType } from '@/app/type/chat'
+import { ChatMessage } from '@/app/type/chat'
 
 interface ChatProps {
   children: ReactNode
   roomId: string
-  senderId: string
+  currentUserId: string
 }
 
 type ChatContextValue = {
   roomId: string
-  senderId: string
+  currentUserId: string
   messageList: ChatMessage[]
 }
 
 export const ChatContext = createContext<ChatContextValue>({
   roomId: '',
-  senderId: '',
-  messageList: [
-    { message: '', type: 'other', timestamp: new Date(), senderId: '' },
-  ],
+  currentUserId: '',
+  messageList: [{ message: '', timestamp: new Date(), senderId: '' }],
 })
 
-export default function Chat({ children, roomId, senderId }: ChatProps) {
+export default function Chat({ children, roomId, currentUserId }: ChatProps) {
   const [messageList, setMessageList] = useState<ChatMessage[]>([])
   const { socket } = useSocket()
 
@@ -44,13 +42,8 @@ export default function Chat({ children, roomId, senderId }: ChatProps) {
     socket.emit('join-room', { roomId: roomId })
 
     socket.on('new-message', (data: ChatMessage) => {
-      let type: ChatMessageType = 'other'
-      const { message, timestamp, senderId: currentSenderId } = data
-      if (currentSenderId === senderId) type = 'me'
-      setMessageList((prev) => [
-        ...prev,
-        { message, type, timestamp, senderId },
-      ])
+      const { message, timestamp, senderId } = data
+      setMessageList((prev) => [...prev, { message, timestamp, senderId }])
     })
 
     return () => {
@@ -58,7 +51,7 @@ export default function Chat({ children, roomId, senderId }: ChatProps) {
     }
   }, [socket])
   return (
-    <ChatContext.Provider value={{ roomId, senderId, messageList }}>
+    <ChatContext.Provider value={{ roomId, currentUserId, messageList }}>
       {children}
     </ChatContext.Provider>
   )
