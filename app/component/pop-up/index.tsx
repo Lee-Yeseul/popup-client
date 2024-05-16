@@ -1,14 +1,12 @@
 import Link from 'next/link'
 import Card from '../common/Card'
+import { usePopUpStore } from '@/app/store/popUpStore'
 
-interface DashboardProps {
-  dataList: any[]
-}
-
-export default async function Dashboard({ dataList }: DashboardProps) {
+export default function PopUpDashboard() {
+  const { popUpList } = usePopUpStore()
   return (
     <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 ">
-      {dataList.map(({ title, tags, id, dog }) => (
+      {popUpList.map(({ title, tags, id }) => (
         <Link href={`/pop-up/${id}`} key={id}>
           <Card className="hover:cursor-pointer">
             <div className={`relative h-48 w-full`}>

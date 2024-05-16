@@ -4,7 +4,6 @@ import Script from 'next/script'
 
 import Spinner from '@/app/component/common/Spinner'
 import VillageMap from '@/app/component/map/VillageMap'
-import SearchBar from '@/app/component/map/SearchBar'
 
 export default function VlliageListPage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -39,7 +38,6 @@ export default function VlliageListPage() {
         strategy="lazyOnload"
       ></Script>
       <div className="relative flex h-[100vh] w-full flex-col items-center justify-center">
-        <SearchBar />
         {isLoading ? <Spinner /> : <VillageMap lat={lat} lng={lng} />}
       </div>
     </>

@@ -18,3 +18,13 @@ export type PopUpDetail = PopUp & {
   chatRoomId: string
   authorId: string
 }
+
+export type PopUpQuery = {
+  category?: string | string[]
+  search?: string
+}
+
+export type PopUpCategory = {
+  value: string
+  label: string
+}

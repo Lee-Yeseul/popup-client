@@ -15,3 +15,5 @@ export type Id = {
 export type ImagePath = {
   imagePath: string
 }
+
+export type IndexSignature = { [key: string]: string }

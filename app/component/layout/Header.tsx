@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
+import SearchBar from '../common/SearchBar'
 
 const DynamicHeaderMenu = dynamic(() => import('./HeaderMenu'), {
   loading: () => <div></div>,
@@ -13,6 +14,7 @@ export default function Header() {
         <Link href={'/'} className="text-xl font-bold">
           pop-up NOW
         </Link>
+        <SearchBar />
         {/* <DynamicHeaderMenu /> */}
       </div>
     </header>
