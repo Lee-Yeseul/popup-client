@@ -2,13 +2,14 @@ import ClockIcon from '@/public/assets/icons/clock.svg'
 import LocationOn from '@/public/assets/icons/locationOn.svg'
 import EventAvailable from '@/public/assets/icons/eventAvailable.svg'
 
-import Tag from '@/app/component/common/Tag'
-import ImageCarousel from '@/app/component/common/ImageCarausel'
-import PopUpChat from '@/app/component/pop-up/PopUpChat'
-import MarkdownViewer from '@/app/component/common/MarkdownViewer'
-import PopUpDetailMap from '@/app/component/map/popUpDetailMap'
-import { popUpAPI } from '@/app/api/pop-up'
-import { convertDateToISOFormat } from '@/app/util'
+import Tag from '@/app/src/component/common/Tag'
+import ImageCarousel from '@/app/src/component/common/ImageCarausel'
+import PopUpChat from '@/app/src/component/pop-up/PopUpChat'
+import MarkdownViewer from '@/app/src/component/common/MarkdownViewer'
+import PopUpDetailMap from '@/app/src/component/pop-up/popUpDetailMap'
+
+import { convertDateToISOFormat } from '@/app/src/util'
+import { popUpAPI } from '@/app/src/api/pop-up'
 
 export default async function PopupDetailPage({
   params,
@@ -50,7 +51,7 @@ export default async function PopupDetailPage({
   ]
 
   return (
-    <div className="mx-6 py-6">
+    <div className="mx-6 mt-16">
       <h3 className="mb-2 text-xl font-bold">{title}</h3>
 
       <div className="flex flex-col gap-2  ">

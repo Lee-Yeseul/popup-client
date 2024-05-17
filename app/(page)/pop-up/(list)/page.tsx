@@ -1,9 +1,11 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { popUpAPI } from '@/app/api/pop-up'
-import { PopUpCategory } from '@/app/type/pop-up'
-import SearchFilter from '@/app/component/common/SearchFilter'
-import PopUpDashboard from '@/app/component/pop-up/PopUpDashboard'
+import SearchFilter from '@/app/src/component/common/SearchFilter'
+import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
+
+import { PopUpCategory } from '@/app/src/type/pop-up'
+import Banner from '@/app/src/component/pop-up/Banner'
+import { popUpAPI } from '@/app/src/api/pop-up'
 
 export default function PopUpListPage() {
   const [popUpCategoryList, setPopUpCategoryList] = useState<PopUpCategory[]>(
@@ -29,9 +31,7 @@ export default function PopUpListPage() {
 
   return (
     <main className="mx-6 mt-16">
-      <div className="mb-6 flex h-48 w-full items-center justify-center bg-pink-50">
-        배너
-      </div>
+      <Banner />
       {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
       <PopUpDashboard />
     </main>

@@ -2,10 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { authAPI } from '@/app/api/auth'
-import Form from '@/app/component/common/form'
-import { SignUpSchema, signUpSchema } from '@/app/schema/auth'
-import useToast from '@/app/component/common/toast/useToast'
+import Form from '@/app/src/component/common/form'
+import { SignUpSchema, signUpSchema } from '@/app/src/schema/auth'
+import useToast from '@/app/src/component/common/toast/useToast'
+import { authAPI } from '@/app/src/api/auth'
 
 type CheckUniqueState = boolean | 'notChecked'
 export default function AuthPage() {

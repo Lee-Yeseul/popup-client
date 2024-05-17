@@ -1,14 +1,14 @@
-import PopUpListHeader from '@/app/src/component/pop-up/PopUpListHeader'
 import { ReactNode } from 'react'
+import Header from '@/app/src/component/layout/Header'
 
-export default function PopUpListPageLayout({
+export default function PopUpDetailPageLayout({
   children,
 }: Readonly<{
   children: ReactNode
 }>) {
   return (
     <>
-      <PopUpListHeader />
+      <Header />
       <div className="min-h-[90vh]">{children}</div>
     </>
   )

@@ -2,12 +2,12 @@
 import { useEffect, useState } from 'react'
 import Script from 'next/script'
 
-import Spinner from '@/app/component/common/Spinner'
-import KakaoMap from '@/app/component/map/KakaoMap'
+import Spinner from '@/app/src/component/common/Spinner'
+import KakaoMap from '@/app/src/component/map/KakaoMap'
 
 export default function VlliageListPage() {
   const [isLoading, setIsLoading] = useState(true)
-  // localstorage에 넣어서 저장해놓기
+
   const [lat, setLat] = useState(33.5563)
   const [lng, setLng] = useState(126.79581)
 
