@@ -47,3 +47,15 @@ export const encodeFileToBase64 = async (fileBlob: Blob) => {
     reader.readAsDataURL(fileBlob)
   })
 }
+
+export const convertDateToISOFormat = (stringDate: Date) => {
+  const originalDate = new Date(stringDate)
+
+  // 년, 월, 일 추출
+  const year = originalDate.getFullYear()
+  const month = (originalDate.getMonth() + 1).toString().padStart(2, '0')
+  const day = originalDate.getDate().toString().padStart(2, '0')
+
+  // "YYYY.MM.DD" 형식으로 반환
+  return `${year}.${month}.${day}`
+}

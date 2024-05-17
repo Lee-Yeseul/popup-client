@@ -18,7 +18,7 @@ export default function SearchBar() {
   }
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
-      <div className="flex h-11 items-center justify-between rounded-full border-1 border-solid border-gray-300 pl-6 pr-3 shadow-md hover:shadow-lg">
+      <div className="flex h-11 items-center justify-between rounded-full border-1 border-solid border-gray-300 pl-6 pr-3 hover:shadow-sm">
         <input
           ref={searchInputRef}
           className="h-full w-11/12 hover:border-none focus:outline-none"

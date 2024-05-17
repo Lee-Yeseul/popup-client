@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import Script from 'next/script'
 
 import Spinner from '@/app/component/common/Spinner'
-import VillageMap from '@/app/component/map/VillageMap'
+import KakaoMap from '@/app/component/map/KakaoMap'
 
 export default function VlliageListPage() {
   const [isLoading, setIsLoading] = useState(true)
@@ -38,7 +38,7 @@ export default function VlliageListPage() {
         strategy="lazyOnload"
       ></Script>
       <div className="relative flex h-[100vh] w-full flex-col items-center justify-center">
-        {isLoading ? <Spinner /> : <VillageMap lat={lat} lng={lng} />}
+        {isLoading ? <Spinner /> : <KakaoMap lat={lat} lng={lng} />}
       </div>
     </>
   )

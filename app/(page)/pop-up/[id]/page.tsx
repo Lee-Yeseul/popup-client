@@ -1,11 +1,14 @@
-import Tag from '@/app/component/common/Tag'
 import ClockIcon from '@/public/assets/icons/clock.svg'
 import LocationOn from '@/public/assets/icons/locationOn.svg'
 import EventAvailable from '@/public/assets/icons/eventAvailable.svg'
-import { popUpAPI } from '@/app/api/pop-up'
+
+import Tag from '@/app/component/common/Tag'
 import ImageCarousel from '@/app/component/common/ImageCarausel'
 import PopUpChat from '@/app/component/pop-up/PopUpChat'
 import MarkdownViewer from '@/app/component/common/MarkdownViewer'
+import PopUpDetailMap from '@/app/component/map/popUpDetailMap'
+import { popUpAPI } from '@/app/api/pop-up'
+import { convertDateToISOFormat } from '@/app/util'
 
 export default async function PopupDetailPage({
   params,
@@ -16,11 +19,20 @@ export default async function PopupDetailPage({
 
   const getPopUpDetail = async () => {
     const { data } = await popUpAPI.getPopUpDetail(id)
-
     return data
   }
 
-  const { tags, chatRoomId, content } = await getPopUpDetail()
+  const {
+    tags,
+    chatRoomId,
+    content,
+    title,
+    address,
+    openTime,
+    closeTime,
+    startDate,
+    endDate,
+  } = await getPopUpDetail()
 
   const imageList = [
     {
@@ -39,9 +51,7 @@ export default async function PopupDetailPage({
 
   return (
     <div className="mx-6 py-6">
-      <h3 className="mb-2 text-xl font-bold">
-        토니모리 팝업 스토어: 겟잇베이크샵
-      </h3>
+      <h3 className="mb-2 text-xl font-bold">{title}</h3>
 
       <div className="flex flex-col gap-2  ">
         <div>
@@ -49,15 +59,20 @@ export default async function PopupDetailPage({
         </div>
         <div className="flex items-center gap-2">
           <EventAvailable width="22" height="22" fill="#6b7280" />
-          <div className="font-semibold">2024-05-12 ~ 2024-05-12</div>
+          <div className="font-semibold">
+            {convertDateToISOFormat(startDate)} ~{' '}
+            {convertDateToISOFormat(endDate)}
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <ClockIcon width="22" height="22" fill="#6b7280" />
-          <div className="font-semibold">11:00 ~ 22:00</div>
+          <div className="font-semibold">
+            {openTime} ~ {closeTime}
+          </div>
         </div>
         <div className="flex items-center gap-2">
           <LocationOn width="24" height="24" fill="#6b7280" />
-          <div className="font-semibold">성동구 연무장길 47, 마를리카페</div>
+          <div className="font-semibold">{address}</div>
         </div>
         <div className="mt-2 flex items-center gap-2">
           {tags.map((tag) => (
@@ -75,7 +90,7 @@ export default async function PopupDetailPage({
           <MarkdownViewer content={content} />
         </div>
       </div>
-
+      <PopUpDetailMap />
       <PopUpChat roomId={chatRoomId} />
     </div>
   )

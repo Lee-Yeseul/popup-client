@@ -2,8 +2,9 @@ import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Header from '../component/layout/Header'
 import Toast from '../component/common/toast/Toast'
+import BottomNav from '../component/layout/BottomNav'
+import Footer from '../component/layout/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,14 +19,13 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="kor">
       <body className={inter.className} id="root">
-        <div className="flex h-full w-full justify-center bg-pink-200">
-          <div className="h-[100vh] w-[550px] bg-white">
-            <Header />
-            <div className="h-full overflow-y-auto">
-              <div className="mt-16">{children}</div>
-            </div>
+        <div className="flex h-full w-full justify-center">
+          <div className="w-[550px] shadow-lg">
+            {children}
+            <Footer />
+            <BottomNav />
           </div>
         </div>
         <Toast />
