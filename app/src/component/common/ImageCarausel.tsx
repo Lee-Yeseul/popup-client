@@ -4,8 +4,6 @@ import { useRef, useState } from 'react'
 
 interface CardProps {
   imageList: { id: number; url: string }[]
-  width: number
-  height: number
 }
 
 type MoveToNthSlide = (
@@ -13,11 +11,7 @@ type MoveToNthSlide = (
   translateNumber: number,
 ) => void
 
-export default function ImageCarousel({
-  imageList: data,
-  width,
-  height,
-}: CardProps) {
+export default function ImageCarousel({ imageList: data }: CardProps) {
   const imageList = [data[data.length - 1], ...data, data[0]]
   const ref = useRef<HTMLDivElement>(null)
 
@@ -97,55 +91,62 @@ export default function ImageCarousel({
   }
 
   return (
-    <div
-      className="group relative overflow-hidden rounded-sm"
-      style={{ width: width, height: height }}
-    >
+    <div>
       <div
-        className="flex h-full w-full items-center"
-        ref={ref}
-        style={style}
-        onTouchStart={(e) => handleTouchStart(e)}
-        onTouchMove={(e) => handleTouchMove(e)}
-        onTouchEnd={(e) => handleTouchEnd(e)}
+        className="group relative overflow-hidden rounded-sm"
+        style={{
+          width: '100%',
+          minWidth: '350px',
+          maxWidth: '550px',
+          height: '300px',
+        }}
       >
-        {imageList.map((image, index) => (
-          <div className="relative h-full w-full shrink-0" key={index}>
-            <Image
-              key={index}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="object-cover"
-              src={image.url}
-              alt={image.url}
-            />
-          </div>
-        ))}
-      </div>
-      <button
-        onClick={() => handleSwife(-1)}
-        className="shadow-grey-500 invisible absolute left-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
-      >
-        {'<'}
-      </button>
-      <button
-        onClick={() => handleSwife(1)}
-        className="shadow-grey-500 invisible absolute right-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
-      >
-        {'>'}
-      </button>
-      <div className="absolute bottom-2 w-full">
-        <div className="flex items-center justify-center gap-1.5">
-          {data.map((image, index) => (
-            <div
-              key={index}
-              className={`rounded-full ${
-                image.id === currentImageIndex - 1
-                  ? 'h-2.5 w-2.5 bg-white'
-                  : 'h-2 w-2 bg-gray-300'
-              }`}
-            ></div>
+        <div
+          className="flex h-full w-full items-center"
+          ref={ref}
+          style={style}
+          onTouchStart={(e) => handleTouchStart(e)}
+          onTouchMove={(e) => handleTouchMove(e)}
+          onTouchEnd={(e) => handleTouchEnd(e)}
+        >
+          {imageList.map((image, index) => (
+            <div className="relative h-full w-full shrink-0" key={index}>
+              <Image
+                key={index}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+                src={image.url}
+                alt={image.url}
+              />
+            </div>
           ))}
+        </div>
+        <button
+          onClick={() => handleSwife(-1)}
+          className="shadow-grey-500 invisible absolute left-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
+        >
+          {'<'}
+        </button>
+        <button
+          onClick={() => handleSwife(1)}
+          className="shadow-grey-500 invisible absolute right-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
+        >
+          {'>'}
+        </button>
+        <div className="absolute bottom-2 w-full">
+          <div className="flex items-center justify-center gap-1.5">
+            {data.map((image, index) => (
+              <div
+                key={index}
+                className={`rounded-full ${
+                  image.id === currentImageIndex - 1
+                    ? 'h-2.5 w-2.5 bg-white'
+                    : 'h-2 w-2 bg-gray-300'
+                }`}
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

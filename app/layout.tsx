@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="kor">
       <body className={inter.className} id="root">
         <div className="flex h-full w-full justify-center">
-          <div className="w-[550px] shadow-lg">
+          <div className="w-full min-w-[350px] max-w-[550px] shadow-lg">
             <Suspense>{children}</Suspense>
             <Footer />
             <BottomNav />

@@ -32,7 +32,7 @@ export default function PopUpListPage() {
   return (
     <main className="mt-16">
       <Banner />
-      {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
+      {<SearchFilter filterList={popUpCategoryList} />}
       <Divider />
       <PopUpDashboard />
     </main>

@@ -6,7 +6,7 @@ export default function Header() {
   const router = useRouter()
 
   return (
-    <header className="fixed z-10 h-16 w-[550px] bg-white/80">
+    <header className="fixed z-10 h-16 w-full min-w-[350px] max-w-[550px] bg-white/80">
       <div className="flex h-full items-center justify-between px-4">
         <button onClick={() => router.back()}>
           <ArrowBack width="32" height="32" fill="black" className="p-1" />

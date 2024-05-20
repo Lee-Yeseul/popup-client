@@ -23,8 +23,15 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
   }, [imagePath])
 
   return (
-    <Suspense fallback={<Spinner />}>
-      {imageUrl && <Image src={imageUrl} alt={'pop_up_thumbnail'} fill />}
-    </Suspense>
+    <>
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          alt={'pop_up_thumbnail'}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        />
+      )}
+    </>
   )
 }

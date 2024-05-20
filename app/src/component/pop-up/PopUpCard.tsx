@@ -31,7 +31,7 @@ export default function PopUpCard({ popUpDetail }: PopUpCardProps) {
 
   return (
     <div className="my-2 flex flex-col gap-2">
-      <ImageCarousel imageList={imageList} width={550} height={300} />
+      <ImageCarousel imageList={imageList} />
 
       <div className="mx-6">
         <h3 className="my-2 text-2xl font-bold">{title}</h3>

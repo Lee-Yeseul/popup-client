@@ -2,26 +2,46 @@
 
 import { useEffect, useState } from 'react'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
-import Spinner from '../common/Spinner'
-import useToast from '../common/toast/useToast'
+import Spinner from '@/app/src/component/common/Spinner'
+import useToast from '@/app/src/component/common/toast/useToast'
+import { popUpAPI } from '@/app/src/api/pop-up'
+import { PopUpLocationInfo } from '@/app/src/type/pop-up'
 
 export default function NearByPopUpMap() {
   const { toast } = useToast()
   const [isLoaded, setIsLoaded] = useState(false)
   const [lat, setLat] = useState(33.5563)
   const [lng, setLng] = useState(126.79581)
+  const [positions, setPositions] = useState<PopUpLocationInfo[]>([])
 
-  const success: PositionCallback = ({ coords }) => {
+  const getMapList = async () => {
+    try {
+      const response = await popUpAPI.getPopUpMapList()
+      const { data } = response
+      return data
+    } catch (err) {
+      toast('팝업 정보를 불러오는데 실패했습니다.', 'error')
+    }
+  }
+
+  const success: PositionCallback = async ({ coords }) => {
     const { latitude, longitude } = coords
 
     setLat(latitude)
     setLng(longitude)
     setIsLoaded(true)
+
+    const mapList = await getMapList()
+    if (!mapList) return
+    setPositions(mapList)
   }
-  const error: PositionErrorCallback = (err) => {
+  const error: PositionErrorCallback = async (err) => {
     console.log(err)
     setIsLoaded(true)
-    toast('현재 위치를 찾을 수 없습니다.', 'error')
+
+    const mapList = await getMapList()
+    if (!mapList) return toast('현재 위치를 찾을 수 없습니다.', 'error')
+    setPositions(mapList)
   }
 
   useEffect(() => {
@@ -42,25 +62,36 @@ export default function NearByPopUpMap() {
       }
     }
   }, [])
+
   return (
     <div className="flex h-full w-full justify-items-center">
       {isLoaded ? (
         <Map
-          center={{ lat, lng }}
+          center={{
+            lat: lat,
+            lng: lng,
+          }}
           style={{ width: '100%', height: '100%' }}
           level={2}
         >
-          <MapMarker
-            position={{
-              lat,
-              lng,
-            }}
-          />
-          <CustomOverlayMap position={{ lat, lng }} yAnchor={2}>
-            <div className="mb-1 rounded-lg bg-white p-2">
-              <span className="font-semibold">구의야구공원</span>
+          {positions.map(({ latitude, longitude, title }) => (
+            <div key={`${title}_${latitude}_${longitude}`}>
+              <MapMarker
+                position={{
+                  lat: latitude,
+                  lng: longitude,
+                }}
+              />
+              <CustomOverlayMap
+                position={{ lat: latitude, lng: longitude }}
+                yAnchor={2}
+              >
+                <div className="mb-1 rounded-lg bg-secondary-500 p-2 text-white">
+                  <span>{title}</span>
+                </div>
+              </CustomOverlayMap>
             </div>
-          </CustomOverlayMap>
+          ))}
         </Map>
       ) : (
         <Spinner />

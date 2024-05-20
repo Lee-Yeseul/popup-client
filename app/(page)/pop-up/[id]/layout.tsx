@@ -10,10 +10,9 @@ export default function PopUpDetailPageLayout({
   return (
     <>
       <Script
-        type="text/javascript"
         src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
         strategy="beforeInteractive"
-      ></Script>
+      />
       <Header />
       <div className="min-h-[90vh]">{children}</div>
     </>

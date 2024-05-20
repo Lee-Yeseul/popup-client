@@ -40,7 +40,7 @@ export default async function PopupDetailPage({
         </div>
         <Divider />
         <div className="mx-6 mt-2.5">
-          <PopUpDetailMap />
+          <PopUpDetailMap popUpDetail={popUpDetail} />
         </div>
       </main>
     </>

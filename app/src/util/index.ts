@@ -1,8 +1,8 @@
-type queryObject = {
+type QueryObject = {
   [key: string]: string | string[]
 }
 
-export function queryStringify(queryObject: queryObject): string {
+export function queryStringify(queryObject: QueryObject): string {
   const searchParams = new URLSearchParams()
   Object.entries(queryObject).forEach(([key, value]) => {
     if (Array.isArray(value)) {
@@ -51,7 +51,6 @@ export const encodeFileToBase64 = async (fileBlob: Blob) => {
 export const convertDateToISOFormat = (date: Date | string) => {
   const originalDate = new Date(date)
 
-  // 년, 월, 일 추출
   const year = originalDate.getFullYear()
   const month = (originalDate.getMonth() + 1).toString().padStart(2, '0')
   const day = originalDate.getDate().toString().padStart(2, '0')
@@ -61,7 +60,6 @@ export const convertDateToISOFormat = (date: Date | string) => {
   })
 
   return `${year}.${month}.${day}`
-  // return formatter.format(originalDate)
 }
 
 export const convertDateToKor = (date: Date | string) => {
@@ -72,4 +70,24 @@ export const convertDateToKor = (date: Date | string) => {
   })
 
   return formatter.format(originalDate)
+}
+
+export const calculateMapCenter = (coords: any[]) => {
+  if (!coords.length) return null
+
+  const sumCoords = coords.reduce(
+    (acc, coord) => {
+      acc.lat += coord.lat
+      acc.lng += coord.lng
+      return acc
+    },
+    { lat: 0, lng: 0 },
+  )
+
+  const center = {
+    lat: sumCoords.lat / coords.length,
+    lng: sumCoords.lng / coords.length,
+  }
+
+  return center
 }

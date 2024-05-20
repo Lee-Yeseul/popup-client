@@ -9,11 +9,11 @@ export default function PopUpDashboard() {
   const { popUpList } = usePopUpStore()
 
   return (
-    <div className="mx-6 my-6 grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+    <div className="mx-6 my-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
       {popUpList.map(({ title, startDate, endDate, id, address }) => (
         <Link href={`/pop-up/${id}`} key={id}>
           <Card className="hover:cursor-pointer">
-            <div className={`relative h-48 w-full`}>
+            <div className={`relative h-52 w-full`}>
               <div className="absolute bottom-0 left-0 z-10">
                 <div className="mx-2 mt-1 text-xl font-bold text-white">
                   {title}
