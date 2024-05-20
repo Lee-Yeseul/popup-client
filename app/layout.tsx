@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className} id="root">
         <div className="flex h-full w-full justify-center">
           <div className="w-[550px] shadow-lg">
-            {children}
+            <Suspense>{children}</Suspense>
             <Footer />
             <BottomNav />
           </div>

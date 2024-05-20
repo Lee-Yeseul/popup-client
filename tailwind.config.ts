@@ -25,6 +25,29 @@ const config: Config = {
       },
       colors: {
         'black-rgba': 'rgba(0, 0, 0, 0.2)',
+        neutral: {
+          100: '#f7f7f5',
+        },
+        primary: {
+          100: '',
+          200: '#fffea2',
+          300: '#fbf95b',
+          400: '',
+          500: '',
+        },
+        secondary: {
+          100: '',
+          200: '',
+          300: '',
+          400: '',
+          500: '#1d1b78',
+        },
+        dark: {},
+        accent: {
+          100: '',
+          300: '',
+          500: '',
+        },
       },
       keyframes: {
         'fade-in': {

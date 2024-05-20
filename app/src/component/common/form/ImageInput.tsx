@@ -10,11 +10,12 @@ export default function ImageInput({ name }: { name: string }) {
 
   const onImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return
+    const file = e.target.files[0]
 
-    const imageURL = await encodeFileToBase64(e.target.files[0])
+    const imageURL = await encodeFileToBase64(file)
     setPreviewImageList((prev) => [...prev, imageURL])
-    setFileList((prev) => [...prev, e.target.files[0]])
-    setValue(name, [...fileList, e.target.files[0]])
+    setFileList((prev) => [...prev, file])
+    setValue(name, [...fileList, file])
   }
 
   return (

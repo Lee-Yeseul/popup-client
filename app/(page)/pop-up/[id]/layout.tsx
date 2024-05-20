@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 import Header from '@/app/src/component/layout/Header'
+import Script from 'next/script'
 
 export default function PopUpDetailPageLayout({
   children,
@@ -8,6 +9,11 @@ export default function PopUpDetailPageLayout({
 }>) {
   return (
     <>
+      <Script
+        type="text/javascript"
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
+        strategy="beforeInteractive"
+      ></Script>
       <Header />
       <div className="min-h-[90vh]">{children}</div>
     </>

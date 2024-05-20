@@ -48,14 +48,28 @@ export const encodeFileToBase64 = async (fileBlob: Blob) => {
   })
 }
 
-export const convertDateToISOFormat = (stringDate: Date) => {
-  const originalDate = new Date(stringDate)
+export const convertDateToISOFormat = (date: Date | string) => {
+  const originalDate = new Date(date)
 
   // 년, 월, 일 추출
   const year = originalDate.getFullYear()
   const month = (originalDate.getMonth() + 1).toString().padStart(2, '0')
   const day = originalDate.getDate().toString().padStart(2, '0')
+  const formatter = new Intl.DateTimeFormat('ko-KR', {
+    month: 'long',
+    day: 'numeric',
+  })
 
-  // "YYYY.MM.DD" 형식으로 반환
   return `${year}.${month}.${day}`
+  // return formatter.format(originalDate)
+}
+
+export const convertDateToKor = (date: Date | string) => {
+  const originalDate = new Date(date)
+  const formatter = new Intl.DateTimeFormat('ko-KR', {
+    month: 'long',
+    day: 'numeric',
+  })
+
+  return formatter.format(originalDate)
 }

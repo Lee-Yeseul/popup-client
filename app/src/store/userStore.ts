@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
+import { createJSONStorage, persist } from 'zustand/middleware'
 
 interface User {
   isLogin: boolean
@@ -27,6 +27,6 @@ export const useUserStore = create(
       delete: () => set(defaultUser),
       update: (data) => set((prev) => ({ ...prev, ...data })),
     }),
-    { name: 'user-storage' },
+    { name: 'user-storage', storage: createJSONStorage(() => sessionStorage) },
   ),
 )

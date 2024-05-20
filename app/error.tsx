@@ -8,7 +8,9 @@ export default function ErrorPage() {
       <h2 className="text-center font-bold">
         <div>
           <span className="mr-4 text-5xl text-red-500">500</span>
-          <span className="text-5xl">Sorry, Something Error!</span>
+          <span className="text-5xl">
+            죄송합니다. 알 수 없는 에러가 발생했습니다.
+          </span>
         </div>
         <div className="mt-4 text-xl">
           {"sorry, we couldn't find this page"}

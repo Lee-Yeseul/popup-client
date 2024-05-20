@@ -75,53 +75,57 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
   }, [params.toString()])
 
   return (
-    <div className="relative flex h-16 w-full items-center gap-3">
-      <div
-        className={`${
-          leftScrollBtnVisibleState ? 'visible animate-fade-in' : 'hidden'
-        }  absolute left-0 z-30 bg-white`}
-      >
-        <button
-          className="shadow-grey-500 h-8 w-8 rounded-full border-1 border-solid border-gray-300 p-2 hover:shadow-md"
-          onClick={() => handleClickScrollBtn(-100)}
+    <div className="mx-6 my-3">
+      <div className="relative flex h-16 w-full items-center gap-3">
+        <div
+          className={`${
+            leftScrollBtnVisibleState ? 'visible animate-fade-in' : 'hidden'
+          }  absolute left-0 z-30`}
         >
-          {'<'}
-        </button>
-      </div>
-      <div
-        className="flex basis-11/12 flex-nowrap gap-3 overflow-x-scroll scroll-smooth scrollbar-hide"
-        ref={scrollRef}
-      >
-        {filterList.map(({ value, label }, index) => (
-          <div
-            key={value}
-            className="shrink-0"
-            ref={
-              index === 0
-                ? setLeftScrollTarget
-                : index === filterList.length - 1
-                  ? setRightScrollTarget
-                  : null
-            }
+          <button
+            className="flex h-8 w-8 items-center rounded-full border-secondary-500 bg-primary-300 p-3 shadow-secondary-500 hover:shadow-md"
+            onClick={() => handleClickScrollBtn(-100)}
           >
-            <button
-              className={`hover:bold rounded-lg border-1 border-solid border-gray-300 p-3 text-gray-500 hover:border-gray-800 hover:text-gray-800 ${selectedCategory.includes(value) ? 'bg-pink-200' : ''}`}
-              onClick={() => onClickTarget(value)}
-            >
-              {label}
-            </button>
-          </div>
-        ))}
-      </div>
-      <div>
-        <button
-          className={`shadow-grey-500 h-8 w-8 rounded-full border-1 border-solid border-gray-300 p-2 hover:shadow-md ${
-            rightScrollBtnVisibleState ? 'visible animate-fade-in' : 'invisible'
-          }`}
-          onClick={() => handleClickScrollBtn(100)}
+            {'<'}
+          </button>
+        </div>
+        <div
+          className="flex basis-11/12 flex-nowrap gap-3 overflow-x-scroll scroll-smooth scrollbar-hide"
+          ref={scrollRef}
         >
-          {'>'}
-        </button>
+          {filterList.map(({ value, label }, index) => (
+            <div
+              key={value}
+              className="shrink-0"
+              ref={
+                index === 0
+                  ? setLeftScrollTarget
+                  : index === filterList.length - 1
+                    ? setRightScrollTarget
+                    : null
+              }
+            >
+              <button
+                className={`hover:bold rounded-lg p-3 ${selectedCategory.includes(value) ? 'bg-primary-300 text-black' : 'bg-secondary-500 text-white'}`}
+                onClick={() => onClickTarget(value)}
+              >
+                {label}
+              </button>
+            </div>
+          ))}
+        </div>
+        <div>
+          <button
+            className={`flex h-8 w-8 items-center rounded-full bg-primary-300 p-3 shadow-secondary-500 hover:shadow-md ${
+              rightScrollBtnVisibleState
+                ? 'visible animate-fade-in'
+                : 'invisible'
+            }`}
+            onClick={() => handleClickScrollBtn(100)}
+          >
+            {'>'}
+          </button>
+        </div>
       </div>
     </div>
   )

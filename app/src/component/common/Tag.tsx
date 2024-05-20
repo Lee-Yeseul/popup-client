@@ -12,9 +12,7 @@ export default function Tag({
   onClickRemoveButton,
 }: TagProps) {
   return (
-    <div
-      className={`rounded-lg px-2.5 py-1 text-sm font-semibold ${className}`}
-    >
+    <div className={`rounded-lg px-2.5 py-0.5 font-semibold ${className}`}>
       {value}
       {removable && (
         <button

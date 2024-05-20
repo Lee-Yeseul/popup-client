@@ -10,7 +10,7 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
   const getImageByImagePath = async (imagePath: string) => {
     try {
       if (!imagePath) return
-      console.log(imagePath)
+
       const { body } = await imageAPI.getImagePresignedUrl(imagePath)
       setImageUrl(body)
     } catch (error) {
@@ -23,10 +23,8 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
   }, [imagePath])
 
   return (
-    <div>
-      <Suspense fallback={<Spinner />}>
-        <Image src={imageUrl} alt={'asd'} fill />
-      </Suspense>
-    </div>
+    <Suspense fallback={<Spinner />}>
+      {imageUrl && <Image src={imageUrl} alt={'pop_up_thumbnail'} fill />}
+    </Suspense>
   )
 }

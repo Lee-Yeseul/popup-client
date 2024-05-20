@@ -2,10 +2,10 @@
 import { useEffect, useState } from 'react'
 import SearchFilter from '@/app/src/component/common/SearchFilter'
 import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
-
-import { PopUpCategory } from '@/app/src/type/pop-up'
 import Banner from '@/app/src/component/pop-up/Banner'
+import { PopUpCategory } from '@/app/src/type/pop-up'
 import { popUpAPI } from '@/app/src/api/pop-up'
+import Divider from '@/app/src/component/common/Divider'
 
 export default function PopUpListPage() {
   const [popUpCategoryList, setPopUpCategoryList] = useState<PopUpCategory[]>(
@@ -30,9 +30,10 @@ export default function PopUpListPage() {
   }, [])
 
   return (
-    <main className="mx-6 mt-16">
+    <main className="mt-16">
       <Banner />
       {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
+      <Divider />
       <PopUpDashboard />
     </main>
   )

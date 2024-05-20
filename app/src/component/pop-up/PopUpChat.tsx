@@ -1,25 +1,30 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ExpandLess from '@/public/assets/icons/expandLess.svg'
 import ExpandMore from '@/public/assets/icons/expandMore.svg'
 import SocketProvider from '@/app/src/component/chat/SocketProvider'
-import Chat from '../chat'
+import Chat from '@/app/src/component/chat'
 import { randomNicknameGenerator } from '@/app/src/util/randomNicknameGenerator'
+import { useUserStore } from '@/app/src/store/userStore'
 
 interface PopUpChatProps {
   roomId: string
 }
 
-const userId = randomNicknameGenerator()
-
 export default function PopUpChat({ roomId }: PopUpChatProps) {
   const [isChatOpen, setIsChatOpen] = useState(true)
+  const { username, update } = useUserStore()
+
+  useEffect(() => {
+    if (username) return
+    update({ username: randomNicknameGenerator() })
+  }, [])
 
   return (
     <>
-      <div className="flex h-full items-center justify-between">
-        <div className="text-lg font-bold">
+      <div className="my-2 flex h-full items-center justify-between">
+        <div className="mx-6 text-xl font-bold text-secondary-500">
           실시간 채팅
           <span className="ml-2 text-sm text-gray-500">
             실시간으로 현장 상황을 공유해주세요!
@@ -37,12 +42,16 @@ export default function PopUpChat({ roomId }: PopUpChatProps) {
       </div>
 
       <SocketProvider>
-        <Chat roomId={roomId} currentUserId={String(userId)}>
+        <Chat roomId={roomId} currentUserId={String(username)}>
           {isChatOpen && (
-            <div>
-              <Chat.Body />
-              <Chat.Input />
-            </div>
+            <>
+              <div className="border-y-2 border-solid border-neutral-100 px-6">
+                <Chat.Body />
+              </div>
+              <div className="px-3">
+                <Chat.Input />
+              </div>
+            </>
           )}
         </Chat>
       </SocketProvider>

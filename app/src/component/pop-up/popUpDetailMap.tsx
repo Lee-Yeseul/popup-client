@@ -1,43 +1,32 @@
 'use client'
 
-import { useState } from 'react'
-import Script from 'next/script'
-import KakaoMap from '@/app/src/component/map/KakaoMap'
-import Spinner from '../common/Spinner'
-import { CustomOverlayMap, MapMarker } from 'react-kakao-maps-sdk'
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 
 export default function PopUpDetailMap() {
-  const [isLoading, setIsLoading] = useState(true)
-
   return (
     <>
-      <Script
-        type="text/javascript"
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
-        onLoad={() => setIsLoading(false)}
-        strategy="lazyOnload"
-      ></Script>
-      <div className="h-40 w-full">
-        {isLoading ? (
-          <Spinner />
-        ) : (
-          <KakaoMap lat={33.5563} lng={126.79581}>
-            <MapMarker
-              position={{
-                lat: 33.5563,
-                lng: 126.79581,
-              }}
-            />
-            <CustomOverlayMap
-              position={{ lat: 33.5563, lng: 126.79581 }}
-              yAnchor={2}
-            >
-              <div className="mb-1 rounded-lg bg-white p-2">
-                <span className="font-semibold">구의야구공원</span>
-              </div>
-            </CustomOverlayMap>
-          </KakaoMap>
-        )}
+      <div className="flex h-56 w-full flex-col justify-items-center">
+        <div className="my-2 text-xl font-bold">팝업 장소</div>
+        <Map
+          center={{ lat: 33.5563, lng: 126.79581 }}
+          style={{ width: '100%', height: '100%' }}
+          level={2}
+        >
+          <MapMarker
+            position={{
+              lat: 33.5563,
+              lng: 126.79581,
+            }}
+          />
+          <CustomOverlayMap
+            position={{ lat: 33.5563, lng: 126.79581 }}
+            yAnchor={2}
+          >
+            <div className="mb-1 rounded-lg bg-white p-2">
+              <span className="font-semibold">구의야구공원</span>
+            </div>
+          </CustomOverlayMap>
+        </Map>
       </div>
     </>
   )

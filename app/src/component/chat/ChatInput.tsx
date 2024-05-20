@@ -24,11 +24,11 @@ export default function ChatInput({ handleSubmit }: ChatInputProps) {
     handleSubmit?.()
   }
   return (
-    <form className="h-full grow" onSubmit={onSubmit}>
+    <form className="h-full grow bg-white py-2" onSubmit={onSubmit}>
       <div className="flex h-full w-full items-center justify-between gap-4">
         <input
           placeholder="메시지 보내기"
-          className="h-full w-full border-none p-4 focus:outline-none"
+          className="bg-primary-200 h-full w-full rounded-3xl border-none p-4 focus:outline-none"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
         />
