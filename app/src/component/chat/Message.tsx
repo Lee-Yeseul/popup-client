@@ -15,7 +15,7 @@ export default function Message({ message, timestamp, senderId }: ChatMessage) {
           <div className="g flex flex-col gap-1">
             <div className="ml-1 text-sm text-secondary-500">{senderId}</div>
             <div className="flex items-end gap-2">
-              <div className="bg-primary-200 rounded-3xl px-5 py-2.5 text-base/6">
+              <div className="rounded-lg bg-primary-200 px-3 py-2.5 text-base/6">
                 {message}
               </div>
               <div
@@ -31,13 +31,15 @@ export default function Message({ message, timestamp, senderId }: ChatMessage) {
           <div className="w-fit max-w-96">
             <div className="flex items-end">
               <div
-                className={`flex shrink-0 justify-end text-sm text-gray-400`}
+                className={`mx-2 flex shrink-0 justify-end text-sm text-gray-400`}
               >
                 {time}
               </div>
               <div>
-                <div className="ml-1 text-sm text-gray-500">{senderId}</div>
-                <div className="rounded-lg bg-yellow-50 px-3 py-2.5 text-base/6">
+                <div className="ml-1 text-sm text-secondary-500">
+                  {senderId}
+                </div>
+                <div className="rounded-lg bg-primary-200 px-3 py-2.5 text-base/6">
                   {message}
                 </div>
               </div>
