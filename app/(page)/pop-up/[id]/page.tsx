@@ -1,6 +1,5 @@
 import PopUpChat from '@/app/src/component/pop-up/PopUpChat'
 import MarkdownViewer from '@/app/src/component/common/MarkdownViewer'
-import PopUpDetailMap from '@/app/src/component/pop-up/PopUpDetailMap'
 import PopUpCard from '@/app/src/component/pop-up/PopUpCard'
 import Divider from '@/app/src/component/common/Divider'
 import { popUpAPI } from '@/app/src/api/pop-up'
@@ -40,7 +39,7 @@ export default async function PopupDetailPage({
         </div>
         <Divider />
         <div className="mx-6 mt-2.5">
-          <PopUpDetailMap popUpDetail={popUpDetail} />
+          {/* <PopUpDetailMap popUpDetail={popUpDetail} /> */}
         </div>
       </main>
     </>

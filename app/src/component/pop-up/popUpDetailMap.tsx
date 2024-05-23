@@ -1,7 +1,7 @@
 'use client'
 
 import Script from 'next/script'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 import { PopUpDetail } from '@/app/src/type/pop-up'
 
