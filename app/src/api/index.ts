@@ -4,7 +4,7 @@ import { authAPI } from './auth'
 import { queryStringify } from '@/app/src/util'
 
 export const instance = axios.create({
-  baseURL: `${process.env.PROTOCOL ?? process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.HOST_NAME ?? process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.SERVER_PORT ?? process.env.NEXT_PUBLIC_SERVER_PORT}/`,
+  baseURL: `${process.env.NEXT_PUBLIC_PROTOCOL ?? process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/`,
   timeout: 1000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
