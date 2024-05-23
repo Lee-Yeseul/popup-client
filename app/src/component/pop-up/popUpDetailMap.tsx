@@ -1,9 +1,9 @@
 'use client'
 
+import Script from 'next/script'
 import { useEffect, useRef, useState } from 'react'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 import { PopUpDetail } from '@/app/src/type/pop-up'
-import Script from 'next/script'
 
 interface PopUpDetailMapProps {
   popUpDetail: PopUpDetail
@@ -27,12 +27,6 @@ export default function PopUpDetailMap({ popUpDetail }: PopUpDetailMapProps) {
     })
     setIsLoaded(true)
   }
-
-  useEffect(() => {
-    window.kakao?.maps.load(() => {
-      initMap()
-    })
-  }, [mapRef.current])
 
   return (
     <>
