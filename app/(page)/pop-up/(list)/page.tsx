@@ -1,17 +1,10 @@
-'use client'
-import { useEffect, useState } from 'react'
 import SearchFilter from '@/app/src/component/common/SearchFilter'
 import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
 import Banner from '@/app/src/component/pop-up/Banner'
-import { PopUpCategory } from '@/app/src/type/pop-up'
-import { popUpAPI } from '@/app/src/api/pop-up'
 import Divider from '@/app/src/component/common/Divider'
+import { popUpAPI } from '@/app/src/api/pop-up'
 
-export default function PopUpListPage() {
-  const [popUpCategoryList, setPopUpCategoryList] = useState<PopUpCategory[]>(
-    [],
-  )
-
+export default async function PopUpListPage() {
   const getPopUpCategoryList = async () => {
     try {
       const { data } = await popUpAPI.getPopUpCategoryList()
@@ -19,20 +12,19 @@ export default function PopUpListPage() {
         value,
         label,
       }))
-      setPopUpCategoryList(parsedArray)
+      return parsedArray
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    getPopUpCategoryList()
-  }, [])
+  const popUpCategoryList = await getPopUpCategoryList()
 
   return (
     <main className="mt-16">
       <Banner />
-      {<SearchFilter filterList={popUpCategoryList} />}
+
+      {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
       <Divider />
       <PopUpDashboard />
     </main>

@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import Script from 'next/script'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 import Spinner from '@/app/src/component/common/Spinner'
 import useToast from '@/app/src/component/common/toast/useToast'
@@ -36,15 +37,16 @@ export default function NearByPopUpMap() {
     setPositions(mapList)
   }
   const error: PositionErrorCallback = async (err) => {
+    toast('현재 위치를 찾을 수 없습니다.', 'error')
     console.log(err)
     setIsLoaded(true)
 
     const mapList = await getMapList()
-    if (!mapList) return toast('현재 위치를 찾을 수 없습니다.', 'error')
+    if (!mapList) return
     setPositions(mapList)
   }
 
-  useEffect(() => {
+  const initMap = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, {
         timeout: 5000,
@@ -61,41 +63,49 @@ export default function NearByPopUpMap() {
         $body.style.overflow = overflow
       }
     }
-  }, [])
+  }
 
   return (
-    <div className="flex h-full w-full justify-items-center">
-      {isLoaded ? (
-        <Map
-          center={{
-            lat: lat,
-            lng: lng,
-          }}
-          style={{ width: '100%', height: '100%' }}
-          level={2}
-        >
-          {positions.map(({ latitude, longitude, title }) => (
-            <div key={`${title}_${latitude}_${longitude}`}>
-              <MapMarker
-                position={{
-                  lat: latitude,
-                  lng: longitude,
-                }}
-              />
-              <CustomOverlayMap
-                position={{ lat: latitude, lng: longitude }}
-                yAnchor={2}
-              >
-                <div className="mb-1 rounded-lg bg-secondary-500 p-2 text-white">
-                  <span>{title}</span>
-                </div>
-              </CustomOverlayMap>
-            </div>
-          ))}
-        </Map>
-      ) : (
-        <Spinner />
-      )}
-    </div>
+    <>
+      <Script
+        type="text/javascript"
+        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
+        strategy="lazyOnload"
+        onLoad={() => initMap()}
+      />
+      <div className="flex h-full w-full justify-items-center">
+        {isLoaded ? (
+          <Map
+            center={{
+              lat: lat,
+              lng: lng,
+            }}
+            style={{ width: '100%', height: '100%' }}
+            level={2}
+          >
+            {positions.map(({ latitude, longitude, title }) => (
+              <div key={`${title}_${latitude}_${longitude}`}>
+                <MapMarker
+                  position={{
+                    lat: latitude,
+                    lng: longitude,
+                  }}
+                />
+                <CustomOverlayMap
+                  position={{ lat: latitude, lng: longitude }}
+                  yAnchor={2}
+                >
+                  <div className="mb-1 rounded-lg bg-secondary-500 p-2 text-white">
+                    <span>{title}</span>
+                  </div>
+                </CustomOverlayMap>
+              </div>
+            ))}
+          </Map>
+        ) : (
+          <Spinner />
+        )}
+      </div>
+    </>
   )
 }
