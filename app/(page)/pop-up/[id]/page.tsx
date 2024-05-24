@@ -4,6 +4,7 @@ import PopUpCard from '@/app/src/component/pop-up/PopUpCard'
 import Divider from '@/app/src/component/common/Divider'
 import PopUpDetailMap from '@/app/src/component/pop-up/PopUpDetailMap'
 import { popUpAPI } from '@/app/src/api/pop-up'
+import { PopUpDetail } from '@/app/src/type/pop-up'
 
 export default async function PopupDetailPage({
   params,
@@ -12,19 +13,23 @@ export default async function PopupDetailPage({
 }) {
   const { id } = params
 
-  const getPopUpDetail = async () => {
-    const { data } = await popUpAPI.getPopUpDetail(id)
-    return data
+  const getPopUpDetail = async (popUpId: string) => {
+    try {
+      const { data } = await popUpAPI.getPopUpDetail(popUpId)
+      return data
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  const popUpDetail = await getPopUpDetail()
+  const popUpDetail = await getPopUpDetail(id)
 
-  const { chatRoomId, content } = await getPopUpDetail()
+  const { chatRoomId, content } = popUpDetail as PopUpDetail
 
   return (
     <>
       <main className="mt-16">
-        <PopUpCard popUpDetail={popUpDetail} />
+        {popUpDetail && <PopUpCard popUpDetail={popUpDetail} />}
         <Divider />
         <div className="mx-6 mt-2.5">
           <div className="mt-2.5 text-xl font-bold text-secondary-500">
@@ -40,7 +45,7 @@ export default async function PopupDetailPage({
         </div>
         <Divider />
         <div className="mx-6 mt-2.5">
-          <PopUpDetailMap popUpDetail={popUpDetail} />
+          {popUpDetail && <PopUpDetailMap popUpDetail={popUpDetail} />}
         </div>
       </main>
     </>

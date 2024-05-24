@@ -3,8 +3,10 @@ import axios from 'axios'
 import { authAPI } from './auth'
 import { queryStringify } from '@/app/src/util'
 
+const baseURL = `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api`
+
 export const instance = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_PROTOCOL ?? process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/`,
+  baseURL,
   timeout: 1000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
@@ -31,6 +33,7 @@ instance.interceptors.response.use(
         return Promise.reject(response)
       }
     } catch (err) {
+      console.log(err)
       return Promise.reject(response)
     }
   },

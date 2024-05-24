@@ -65,6 +65,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
         category: selectedCategory,
         search: params.get('search') ?? '',
       })
+
       setPopUpList(data)
     } catch (error) {
       console.log(error)

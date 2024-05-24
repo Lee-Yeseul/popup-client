@@ -33,7 +33,7 @@ export default function SocketProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const socketInstance = new (ClientIO as any)(
-      `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SOCKET_SERVER_PORT}/chat`,
+      `${process.env.NEXT_PUBLIC_SOCKET_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SOCKET_SERVER_PORT}/chat`,
       {
         path: '/socket.io',
       },
