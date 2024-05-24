@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 import Spinner from '@/app/src/component/common/Spinner'
@@ -39,31 +39,34 @@ export default function NearByPopUpMap() {
   const error: PositionErrorCallback = async (err) => {
     toast('현재 위치를 찾을 수 없습니다.', 'error')
     console.log(err)
-    setIsLoaded(true)
 
     const mapList = await getMapList()
     if (!mapList) return
     setPositions(mapList)
+    setIsLoaded(true)
   }
 
   const initMap = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error, {
-        timeout: 5000,
+        timeout: 2000,
         enableHighAccuracy: false,
       })
     } else {
       alert('no geolocation support')
     }
-    const $body = document.querySelector('body')
-    if ($body !== null) {
-      const { overflow } = $body.style
-      $body.style.overflow = 'hidden'
-      return () => {
-        $body.style.overflow = overflow
-      }
-    }
   }
+
+  useEffect(() => {
+    const $body = document.querySelector('body')
+    if (!$body) return
+    const { overflow } = $body.style
+    $body.style.overflow = 'hidden'
+
+    return () => {
+      $body.style.overflow = overflow
+    }
+  }, [])
 
   return (
     <>
