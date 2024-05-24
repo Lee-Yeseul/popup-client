@@ -3,7 +3,7 @@ import axios from 'axios'
 import { authAPI } from './auth'
 import { queryStringify } from '@/app/src/util'
 
-const baseURL = `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}:${process.env.NEXT_PUBLIC_SERVER_PORT}/api`
+const baseURL = `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}/api`
 
 export const instance = axios.create({
   baseURL,
