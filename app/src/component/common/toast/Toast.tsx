@@ -8,7 +8,7 @@ export default function Toast() {
 
   return (
     <Portal>
-      <div className="fixed bottom-0 right-0 z-50 flex w-full justify-center">
+      <div className="fixed bottom-20 right-0 z-50 flex w-full justify-center">
         <div className="mb-2.5 mr-5 flex w-full min-w-[330px] max-w-[550px] flex-col items-end gap-2">
           {toastList.map((toast) => (
             <ToastItem
