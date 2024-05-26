@@ -4,6 +4,7 @@ import { useRef, useState } from 'react'
 
 interface CardProps {
   imageList: { id: number; url: string }[]
+  bgColor?: string
 }
 
 type MoveToNthSlide = (
@@ -11,7 +12,7 @@ type MoveToNthSlide = (
   translateNumber: number,
 ) => void
 
-export default function ImageCarousel({ imageList: data }: CardProps) {
+export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
   const imageList = [data[data.length - 1], ...data, data[0]]
   const ref = useRef<HTMLDivElement>(null)
 
@@ -98,7 +99,7 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
           width: '100%',
           minWidth: '350px',
           maxWidth: '550px',
-          height: '300px',
+          height: '350px',
         }}
       >
         <div
@@ -115,7 +116,7 @@ export default function ImageCarousel({ imageList: data }: CardProps) {
                 key={index}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover"
+                className={`${bgColor ? bgColor : 'bg-black'} object-contain`}
                 src={image.url}
                 alt={image.url}
               />
