@@ -39,13 +39,13 @@ export const imageAPI = {
     })
   },
 
-  getImagePresignedUrl: async (path: string) => {
+  getImagePresignedUrl: async (path: string): Promise<string> => {
     const { data } = await axios.post(
       `${awsURL}/${stage}/image/get-image-presigned-url`,
       {
         fileKey: path,
       },
     )
-    return data
+    return data.body
   },
 }

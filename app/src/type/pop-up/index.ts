@@ -16,9 +16,10 @@ export type PopUpLocationInfo = {
 
 export type PopUpDetail = PopUp &
   PopUpLocationInfo & {
-    type: string
-    openTime: string
-    closeTime: string
+    category: string
+    subTitle: string
+    openTime?: string
+    closeTime?: string
     chatRoomId: string
     tags: string[]
     authorId: string

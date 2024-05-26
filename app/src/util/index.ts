@@ -48,30 +48,6 @@ export const encodeFileToBase64 = async (fileBlob: Blob) => {
   })
 }
 
-export const convertDateToISOFormat = (date: Date | string) => {
-  const originalDate = new Date(date)
-
-  const year = originalDate.getFullYear()
-  const month = (originalDate.getMonth() + 1).toString().padStart(2, '0')
-  const day = originalDate.getDate().toString().padStart(2, '0')
-  const formatter = new Intl.DateTimeFormat('ko-KR', {
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return `${year}.${month}.${day}`
-}
-
-export const convertDateToKor = (date: Date | string) => {
-  const originalDate = new Date(date)
-  const formatter = new Intl.DateTimeFormat('ko-KR', {
-    month: 'long',
-    day: 'numeric',
-  })
-
-  return formatter.format(originalDate)
-}
-
 export const calculateMapCenter = (coords: any[]) => {
   if (!coords.length) return null
 
