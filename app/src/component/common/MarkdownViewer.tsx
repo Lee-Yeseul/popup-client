@@ -6,11 +6,11 @@ import rehypeRaw from 'rehype-raw'
 
 const customStyles = {
   code: 'bg-[#f5f7ff] text-[#23a2c9] p-1 rounded-sm font-semibold text-base',
-  h1: 'text-4xl my-3 font-bold',
-  h2: 'text-3xl my-2.5 font-bold',
-  h3: 'text-2xl my-2 font-bold',
-  h4: 'text-xl my-1.5 font-bold',
-  h5: 'text-lg my-1 font-bold',
+  h1: 'text-4xl mt-3.5 font-bold',
+  h2: 'text-3xl mt-2 font-bold',
+  h3: 'text-2xl mt-1.5 font-bold',
+  h4: 'text-xl mt-1 font-bold',
+  h5: 'text-lg font-bold',
   h6: 'text-lg font-bold',
   aside: 'bg-amber-50 px-12 py-8 my-1 whitespace-normal',
   ul: 'm-0 ml-8 list-disc list-inside whitespace-normal',
