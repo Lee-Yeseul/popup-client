@@ -15,6 +15,9 @@ const config: Config = {
         lg: '920px',
         xl: '1200px',
       },
+      fontFamily: {
+        pretendard: ['Pretendard', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

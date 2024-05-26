@@ -107,7 +107,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
               }
             >
               <button
-                className={`hover:bold rounded-lg p-3 ${selectedCategory.includes(value) ? 'bg-primary-300 text-black' : 'bg-secondary-500 text-white'}`}
+                className={`rounded-lg p-3 ${selectedCategory.includes(value) ? 'bg-primary-300 text-black' : 'bg-secondary-500 text-white'}`}
                 onClick={() => onClickTarget(value)}
               >
                 {label}

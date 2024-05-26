@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import SearchBar from '../common/SearchBar'
 
 export default function PopUpListHeader() {
   return (
@@ -8,7 +7,7 @@ export default function PopUpListHeader() {
         <div className="flex h-full items-center justify-between px-4">
           <Link
             href={'/'}
-            className="shrink-0 text-xl font-bold text-secondary-500"
+            className="shrink-0 text-2xl font-bold text-secondary-500"
           >
             pop-up NOW
           </Link>

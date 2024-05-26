@@ -2,6 +2,10 @@
 
 import Link from 'next/link'
 
+export const metadata = {
+  title: 'Error',
+}
+
 export default function ErrorPage() {
   return (
     <section className="flex min-h-[50vh] flex-col items-center justify-center text-white">
