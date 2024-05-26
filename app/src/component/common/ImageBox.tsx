@@ -1,8 +1,7 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
-import Spinner from './Spinner'
 import { imageAPI } from '@/app/src/api/image'
 
 export default function ImageBox({ imagePath }: { imagePath: string }) {
@@ -11,8 +10,8 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
     try {
       if (!imagePath) return
 
-      const { body } = await imageAPI.getImagePresignedUrl(imagePath)
-      setImageUrl(body)
+      const s3ImageUrl = await imageAPI.getImagePresignedUrl(imagePath)
+      setImageUrl(s3ImageUrl)
     } catch (error) {
       console.log(error)
     }
@@ -29,6 +28,7 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
           src={imageUrl}
           alt={'pop_up_thumbnail'}
           fill
+          className="bg-black object-contain"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       )}
