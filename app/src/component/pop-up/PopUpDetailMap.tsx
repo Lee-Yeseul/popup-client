@@ -22,7 +22,6 @@ export default function PopUpDetailMap({ popUpDetail }: PopUpDetailMapProps) {
     window.kakao.maps.load(() => {
       const geocoder = new window.kakao.maps.services.Geocoder()
       geocoder.addressSearch(fullAddress, (result, status) => {
-        console.log(result)
         if (status === window.kakao.maps.services.Status.OK) {
           setLat(Number(result[0].y))
           setLng(Number(result[0].x))

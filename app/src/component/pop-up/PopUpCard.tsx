@@ -63,7 +63,7 @@ export default async function PopUpCard({ popUpDetail }: PopUpCardProps) {
             <Tag
               key={tag}
               value={tag}
-              className="bg-secondary-500 text-base/7 text-white"
+              className="bg-secondary-500 text-sm/7 text-white"
             />
           ))}
         </div>

@@ -37,7 +37,7 @@ export default function PopUpDashboard() {
                   <div className="mr-1 mt-1 flex justify-end">
                     <Tag
                       value={getStatus(new Date(startDate), new Date(endDate))}
-                      className="bg-primary-300 text-base/7 text-secondary-500"
+                      className="bg-white text-base/7 text-secondary-500"
                     ></Tag>
                   </div>
                 </div>
