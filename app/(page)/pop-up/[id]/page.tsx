@@ -21,9 +21,6 @@ export async function generateMetadata({
     openGraph: {
       title,
       description: `${title}에 대한 상세 정보 페이지입니다.`,
-      // images: [
-      //   { url: 'https://i.imgur.com/dI5n9zc.png', width: 400, height: 300 },
-      // ],
     },
   }
 }
@@ -50,7 +47,7 @@ export default async function PopupDetailPage({
         {popUpDetail && <PopUpCard popUpDetail={popUpDetail} />}
         <Divider />
         <div className="mx-6 mt-2.5">
-          <div className="mt-2.5 text-xl font-bold text-secondary-500">
+          <div className="mt-2.5 text-2xl font-bold text-secondary-500">
             What's about?
           </div>
           <div className="my-2.5 text-wrap text-base">
