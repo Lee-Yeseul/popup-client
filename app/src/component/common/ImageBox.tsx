@@ -23,7 +23,7 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
 
   return (
     <>
-      {imageUrl && (
+      {imageUrl ? (
         <Image
           src={imageUrl}
           alt={'pop_up_thumbnail'}
@@ -31,6 +31,8 @@ export default function ImageBox({ imagePath }: { imagePath: string }) {
           className="bg-black object-contain"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
+      ) : (
+        <div className="h-full w-full rounded-md bg-neutral-100"></div>
       )}
     </>
   )
