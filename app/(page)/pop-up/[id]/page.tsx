@@ -5,6 +5,7 @@ import Divider from '@/app/src/component/common/Divider'
 import PopUpDetailMap from '@/app/src/component/pop-up/PopUpDetailMap'
 import { popUpAPI } from '@/app/src/api/pop-up'
 import { PopUpDetail } from '@/app/src/type/pop-up'
+import PopUpControlButton from '@/app/src/component/pop-up/PopUpControlButton'
 
 interface PopupDetailPageProps {
   params: { id: string }
@@ -44,24 +45,29 @@ export default async function PopupDetailPage({
   return (
     <>
       <main className="mt-16">
-        {popUpDetail && <PopUpCard popUpDetail={popUpDetail} />}
-        <Divider />
-        <div className="mx-6 mt-2.5">
-          <div className="mt-2.5 text-2xl font-bold text-secondary-500">
-            What's about?
-          </div>
-          <div className="my-2.5 text-wrap text-base">
-            <MarkdownViewer content={content} />
-          </div>
-        </div>
-        <Divider />
-        <div className="mt-2.5">
-          <PopUpChat roomId={chatRoomId} />
-        </div>
-        <Divider />
-        <div className="mx-6 mt-2.5">
-          {popUpDetail && <PopUpDetailMap popUpDetail={popUpDetail} />}
-        </div>
+        {popUpDetail && (
+          <>
+            <PopUpControlButton id={id} isAvailable={popUpDetail.isAvailable} />
+            <PopUpCard popUpDetail={popUpDetail} />
+            <Divider />
+            <div className="mx-6 mt-2.5">
+              <div className="mt-2.5 text-2xl font-bold text-secondary-500">
+                What's about?
+              </div>
+              <div className="my-2.5 text-wrap text-base">
+                <MarkdownViewer content={content} />
+              </div>
+            </div>
+            <Divider />
+            <div className="mt-2.5">
+              <PopUpChat roomId={chatRoomId} />
+            </div>
+            <Divider />
+            <div className="mx-6 mt-2.5">
+              <PopUpDetailMap popUpDetail={popUpDetail} />
+            </div>
+          </>
+        )}
       </main>
     </>
   )

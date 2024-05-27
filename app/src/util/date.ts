@@ -9,7 +9,7 @@ export const convertDateToISOFormat = (date: Date | string) => {
   const month = (originalDate.getMonth() + 1).toString().padStart(2, '0')
   const day = originalDate.getDate().toString().padStart(2, '0')
 
-  return `${year}.${month}.${day}`
+  return `${year}-${month}-${day}`
 }
 
 export const convertDateToKor = (date: Date | string) => {

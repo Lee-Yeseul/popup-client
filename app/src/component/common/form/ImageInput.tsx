@@ -18,6 +18,11 @@ export default function ImageInput({ name }: { name: string }) {
     setValue(name, [...fileList, file])
   }
 
+  const onRemoveImage = (index: number) => {
+    setPreviewImageList((prev) => prev.filter((_, i) => i !== index))
+    setFileList((prev) => prev.filter((_, i) => i !== index))
+  }
+
   return (
     <div className="flex w-full items-center gap-4">
       <div>
@@ -49,6 +54,7 @@ export default function ImageInput({ name }: { name: string }) {
                 alt="preview image"
                 fill
                 className="rounded-lg"
+                onClick={() => onRemoveImage(index)}
               />
             </div>
           ))}
