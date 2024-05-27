@@ -6,6 +6,8 @@ import Favicon from '@/public/favicon.ico'
 import Footer from '@/app/src/component/layout/Footer'
 import BottomNav from '@/app/src/component/layout/BottomNav'
 import Toast from '@/app/src/component/common/toast/Toast'
+import { Analytics } from '@vercel/analytics/react'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -40,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="kor">
       <body className={inter.className} id="root">
-        <div className="font-pretendard flex h-full w-full justify-center">
+        <div className="flex h-full w-full justify-center font-pretendard">
           <div className="w-full min-w-[350px] max-w-[550px] shadow-lg">
             <Suspense>{children}</Suspense>
             <Footer />
@@ -49,6 +51,8 @@ export default function RootLayout({
         </div>
         <Toast />
       </body>
+      <Analytics />
+      <GoogleAnalytics gaId="G-S1RPEX4P1B" />
     </html>
   )
 }
