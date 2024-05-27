@@ -4,6 +4,18 @@ import Banner from '@/app/src/component/pop-up/Banner'
 import Divider from '@/app/src/component/common/Divider'
 import { popUpAPI } from '@/app/src/api/pop-up'
 
+export async function generateMetadata() {
+  const title = process.env.SERVICE_NAME
+  const description = process.env.SERVICE_DESCRIPTION
+
+  return {
+    openGraph: {
+      title,
+      description,
+    },
+  }
+}
+
 export default async function PopUpListPage() {
   const getPopUpCategoryList = async () => {
     try {
@@ -23,7 +35,6 @@ export default async function PopUpListPage() {
   return (
     <main className="mt-16">
       <Banner />
-
       {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
       <Divider />
       <PopUpDashboard />

@@ -64,6 +64,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
       const { data } = await popUpAPI.getPopUpList({
         category: selectedCategory,
         search: params.get('search') ?? '',
+        isAvailable: true,
       })
 
       setPopUpList(data)

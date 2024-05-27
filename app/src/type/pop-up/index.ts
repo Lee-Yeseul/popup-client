@@ -1,3 +1,5 @@
+import { CreatePopUpSchema } from '../../schema/pop-up'
+
 export type PopUp = {
   id: string
   title: string
@@ -25,14 +27,21 @@ export type PopUpDetail = PopUp &
     authorId: string
     fullAddress: string
     addressDetail: string
+    isAvailable: boolean
   }
 
 export type PopUpQuery = {
   category?: string | string[]
   search?: string
+  isAvailable?: boolean
 }
 
 export type PopUpCategory = {
   value: string
   label: string
+}
+
+export type CreateBasicPopUpInfo = Partial<CreatePopUpSchema> & {
+  content?: string
+  imageList?: string[]
 }
