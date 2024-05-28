@@ -12,7 +12,10 @@ export default function PopUpDashboard() {
 
   const getStatus = (startDate: Date, endDate: Date) => {
     const today = new Date()
+
     today.setHours(0, 0, 0, 0)
+    startDate.setHours(0, 0, 0, 0)
+    endDate.setHours(0, 0, 0, 0)
 
     if (today < startDate) {
       const daysUntilStart = calculateDateDifference(startDate, today)
