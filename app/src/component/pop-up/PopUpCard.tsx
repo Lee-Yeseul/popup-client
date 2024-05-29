@@ -23,24 +23,29 @@ export default async function PopUpCard({ popUpDetail }: PopUpCardProps) {
   } = popUpDetail
 
   const getImageSource = async () => {
-    const imageSourceList = []
-    for (let i = 0; i < imageList.length; i++) {
-      const s3ImageUrl = await imageAPI.getImagePresignedUrl(
-        `pop-up/${imageList[i]}`,
-      )
-      imageSourceList.push({
-        id: i,
-        url: s3ImageUrl,
-      })
+    try {
+      if (!imageList) return
+      const imageSourceList = []
+      for (let i = 0; i < imageList.length; i++) {
+        const s3ImageUrl = await imageAPI.getImagePresignedUrl(
+          `pop-up/${imageList[i]}`,
+        )
+        imageSourceList.push({
+          id: i,
+          url: s3ImageUrl,
+        })
+      }
+      return imageSourceList
+    } catch (error) {
+      console.log(error)
     }
-    return imageSourceList
   }
 
   const imageSourceList = await getImageSource()
 
   return (
     <div className="my-2 flex flex-col gap-2">
-      <ImageCarousel imageList={imageSourceList} />
+      {imageSourceList && <ImageCarousel imageList={imageSourceList} />}
 
       <div className="mx-6">
         <h3 className="my-2 text-2xl font-bold">{title}</h3>
@@ -58,12 +63,12 @@ export default async function PopUpCard({ popUpDetail }: PopUpCardProps) {
             <div>{`${fullAddress}, ${addressDetail}`}</div>
           </div>
         </div>
-        <div className="my-2 flex items-center gap-2">
+        <div className="my-2 flex items-center gap-1">
           {tags.map((tag) => (
             <Tag
               key={tag}
-              value={tag}
-              className="bg-secondary-500 text-sm/7 text-white"
+              value={`# ${tag}`}
+              className="bg-white text-sm/7 text-secondary-400"
             />
           ))}
         </div>

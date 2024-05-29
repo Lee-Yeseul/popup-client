@@ -58,7 +58,7 @@ export default function PopUpDetailMap({ popUpDetail }: PopUpDetailMapProps) {
             />
             <CustomOverlayMap position={{ lat, lng }} yAnchor={2}>
               <Link href={`https://map.kakao.com/link/search/${fullAddress}`}>
-                <div className="mb-1 flex items-center gap-2 rounded-lg bg-secondary-500 p-2 text-white">
+                <div className="mb-1 flex items-center gap-2 rounded-lg bg-primary-500 p-2 text-white">
                   {title}
                   <ArrowOutward width="21" height="21" fill="#fff" />
                 </div>

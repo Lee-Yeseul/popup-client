@@ -48,13 +48,13 @@ export default function PopUpControlButton({
               checked={isChecked}
               onChange={onClickToggle}
             />
-            <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-secondary-500 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+            <div className="peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-primary-500 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-4 peer-focus:ring-blue-300 rtl:peer-checked:after:-translate-x-full dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
             <span className="ms-3 font-semibold text-gray-900 dark:text-gray-300">
               {isChecked ? '공개됨' : '비공개됨'}
             </span>
           </label>
           <button
-            className="rounded-md bg-secondary-500 p-2.5 text-white"
+            className="rounded-md bg-primary-500 p-2.5 text-white"
             onClick={() => router.push(`update/${id}`)}
           >
             편집하기

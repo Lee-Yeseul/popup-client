@@ -98,7 +98,7 @@ export default function NearByPopUpMap() {
                   position={{ lat: latitude, lng: longitude }}
                   yAnchor={2}
                 >
-                  <div className="mb-1 rounded-lg bg-secondary-500 p-2 text-white">
+                  <div className="mb-1 rounded-lg bg-primary-500 p-2 text-white">
                     <span>{title}</span>
                   </div>
                 </CustomOverlayMap>
