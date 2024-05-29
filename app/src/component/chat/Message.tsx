@@ -13,9 +13,9 @@ export default function Message({ message, timestamp, senderId }: ChatMessage) {
       {currentUserId !== senderId ? (
         <div className="w-fit max-w-96">
           <div className="g flex flex-col gap-1">
-            <div className="ml-1 text-sm text-secondary-500">{senderId}</div>
+            <div className="ml-1 text-sm text-primary-500">{senderId}</div>
             <div className="flex items-end gap-2">
-              <div className="rounded-lg bg-primary-200 px-3 py-2.5 text-base/6">
+              <div className="rounded-lg bg-secondary-100 px-3 py-2.5 text-base/6">
                 {message}
               </div>
               <div
@@ -36,10 +36,8 @@ export default function Message({ message, timestamp, senderId }: ChatMessage) {
                 {time}
               </div>
               <div>
-                <div className="ml-1 text-sm text-secondary-500">
-                  {senderId}
-                </div>
-                <div className="rounded-lg bg-primary-200 px-3 py-2.5 text-base/6">
+                <div className="ml-1 text-sm text-primary-500">{senderId}</div>
+                <div className="rounded-lg bg-secondary-100 px-3 py-2.5 text-base/6">
                   {message}
                 </div>
               </div>

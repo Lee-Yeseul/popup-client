@@ -7,7 +7,7 @@ export default function PopUpListHeader() {
         <div className="flex h-full items-center justify-between px-4">
           <Link
             href={'/'}
-            className="shrink-0 text-2xl font-bold text-secondary-500"
+            className="shrink-0 bg-clip-text text-2xl font-bold text-primary-500"
           >
             pop-up NOW
           </Link>

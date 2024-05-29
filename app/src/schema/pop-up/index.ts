@@ -11,6 +11,7 @@ export const createPopUpSchema = z.object({
   startDate: z.string(),
   endDate: z.string(),
   imageList: z.array(z.any()).optional(),
+
 })
 
 export type CreatePopUpSchema = z.infer<typeof createPopUpSchema>
