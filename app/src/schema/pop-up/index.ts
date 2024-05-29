@@ -10,7 +10,8 @@ export const createPopUpSchema = z.object({
   addressDetail: z.string().optional(),
   startDate: z.string(),
   endDate: z.string(),
-  imageList: z.any(),
+  imageList: z.array(z.any()).optional(),
+
 })
 
 export type CreatePopUpSchema = z.infer<typeof createPopUpSchema>

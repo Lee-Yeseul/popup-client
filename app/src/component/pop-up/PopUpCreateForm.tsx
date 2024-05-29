@@ -149,6 +149,7 @@ export default function PopUpCreateForm({
             </div>
           </div>
           <Form.SubmitButton className="mt-10 w-full bg-secondary-100 py-2.5 text-xl font-bold">
+
             기본정보 작성 완료
           </Form.SubmitButton>
         </Form>
