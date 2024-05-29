@@ -85,7 +85,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
           }  absolute left-0 z-30`}
         >
           <button
-            className="flex h-8 w-8 items-center rounded-full border-secondary-500 bg-gray-300 p-3 shadow-secondary-500 hover:shadow-md"
+            className="flex h-8 w-8 items-center rounded-full border-1 border-solid border-gray-300 bg-white p-3 shadow-gray-500 hover:shadow-md"
             onClick={() => handleClickScrollBtn(-100)}
           >
             {'<'}
@@ -108,7 +108,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
               }
             >
               <button
-                className={`rounded-lg p-3 ${selectedCategory.includes(value) ? 'bg-gray-300 text-black' : 'bg-secondary-500 text-white'}`}
+                className={`rounded-lg border-1 border-solid border-gray-300 p-3 ${selectedCategory.includes(value) ? 'bg-primary-500 text-white' : 'bg-white text-black'}`}
                 onClick={() => onClickTarget(value)}
               >
                 {label}
@@ -118,7 +118,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
         </div>
         <div>
           <button
-            className={`flex h-8 w-8 items-center rounded-full bg-gray-300 p-3 shadow-secondary-500 hover:shadow-md ${
+            className={`flex h-8 w-8 items-center rounded-full border-1 border-solid border-gray-300 bg-white p-3 shadow-gray-500 hover:shadow-md ${
               rightScrollBtnVisibleState
                 ? 'visible animate-fade-in'
                 : 'invisible'

@@ -26,11 +26,15 @@ export default function PopUpUpdateForm({
   const router = useRouter()
 
   const onsubmit = async (submitData: CreatePopUpSchema) => {
-    await popUpAPI.putPopUpById(id, {
-      ...submitData,
-      content,
-    })
-    router.push(`/pop-up/${id}`)
+    try {
+      await popUpAPI.putPopUpById(id, {
+        ...submitData,
+        content,
+      })
+      router.push(`/pop-up/${id}`)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   useEffect(() => {
@@ -131,7 +135,7 @@ export default function PopUpUpdateForm({
               <MDEditor.Markdown source={content} />
             </div>
           </div>
-          <Form.SubmitButton className="mt-10 w-full bg-primary-200 py-2.5 text-xl font-bold">
+          <Form.SubmitButton className="mt-10 w-full bg-secondary-100 py-2.5 text-xl font-bold">
             기본정보 작성 완료
           </Form.SubmitButton>
         </Form>

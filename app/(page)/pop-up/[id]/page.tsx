@@ -51,7 +51,7 @@ export default async function PopupDetailPage({
             <PopUpCard popUpDetail={popUpDetail} />
             <Divider />
             <div className="mx-6 mt-2.5">
-              <div className="mt-2.5 text-2xl font-bold text-secondary-500">
+              <div className="mt-2.5 text-2xl font-bold text-primary-500">
                 What's about?
               </div>
               <div className="my-2.5 text-wrap text-base">

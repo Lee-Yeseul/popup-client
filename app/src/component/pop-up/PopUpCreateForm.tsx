@@ -21,31 +21,35 @@ export default function PopUpCreateForm({
   const router = useRouter()
 
   const onsubmit = async (submitData: CreatePopUpSchema) => {
-    const { imageList } = submitData
-    delete submitData['imageList']
+    try {
+      const { imageList } = submitData
+      delete submitData['imageList']
 
-    const {
-      data: { id },
-    } = await popUpAPI.postPopUp({ ...submitData, content })
+      const {
+        data: { id },
+      } = await popUpAPI.postPopUp({ ...submitData, content })
 
-    if (!imageList) return
-    const imagePathList = []
-    for (let i = 0; i < imageList.length; i++) {
-      const path = 'pop-up'
-      const { data } = await imageAPI.createPreSignedUrl({
-        path,
-        filename: `${id}_${i}`,
+      if (!imageList) return
+      const imagePathList = []
+      for (let i = 0; i < imageList.length; i++) {
+        const path = 'pop-up'
+        const { data } = await imageAPI.createPreSignedUrl({
+          path,
+          filename: `${id}_${i}`,
+        })
+        const { body } = data
+        const { url, fields } = body
+        await imageAPI.uploadImage({ url, fields, file: imageList[i] })
+        imagePathList.push(`${id}_${i}`)
+      }
+
+      await popUpAPI.putPopUpById(id, {
+        imageList: imagePathList,
       })
-      const { body } = data
-      const { url, fields } = body
-      await imageAPI.uploadImage({ url, fields, file: imageList[i] })
-      imagePathList.push(`${id}_${i}`)
+      router.push(`/pop-up/${id}`)
+    } catch (error) {
+      console.log(error)
     }
-
-    await popUpAPI.putPopUpById(id, {
-      imageList: imagePathList,
-    })
-    router.push(`/pop-up/${id}`)
   }
 
   useEffect(() => {
@@ -141,13 +145,10 @@ export default function PopUpCreateForm({
               />
             </div>
             <div className="my-4 border-1 border-solid border-gray-300 p-2">
-              <MDEditor.Markdown
-                source={content}
-                style={{ whiteSpace: 'pre-wrap' }}
-              />
+              <MDEditor.Markdown source={content} />
             </div>
           </div>
-          <Form.SubmitButton className="mt-10 w-full bg-primary-200 py-2.5 text-xl font-bold">
+          <Form.SubmitButton className="mt-10 w-full bg-secondary-100 py-2.5 text-xl font-bold">
             기본정보 작성 완료
           </Form.SubmitButton>
         </Form>

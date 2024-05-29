@@ -24,7 +24,7 @@ export default function PopUpChat({ roomId }: PopUpChatProps) {
   return (
     <>
       <div className="my-2 flex h-full items-center justify-between">
-        <div className="mx-6 text-xl font-bold text-secondary-500">
+        <div className="mx-6 text-xl font-bold text-primary-500">
           실시간 채팅
           <span className="ml-2 text-sm text-gray-500">
             실시간으로 현장 상황을 공유해주세요!

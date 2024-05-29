@@ -40,12 +40,12 @@ export default function PopUpDashboard() {
                   <div className="mr-1 mt-1 flex justify-end">
                     <Tag
                       value={getStatus(new Date(startDate), new Date(endDate))}
-                      className="bg-white text-base/7 text-secondary-500"
+                      className="bg-clip-text text-base/7 font-semibold text-secondary-400 backdrop-blur-sm"
                     ></Tag>
                   </div>
                 </div>
 
-                <ImageBox imagePath={`pop-up/${imageList[0]}`} />
+                {imageList && <ImageBox imagePath={`pop-up/${imageList[0]}`} />}
               </div>
               <Card.Description>
                 <div className="text-sm text-gray-500">
