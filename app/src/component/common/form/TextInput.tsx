@@ -67,7 +67,7 @@ export default function TextInput({
         {hasBtn && (
           <button
             type="button"
-            className="ml-2 mt-1 h-12 shrink-0 rounded-md bg-pink-300 px-2.5 font-bold text-white"
+            className="ml-2 mt-1 h-12 shrink-0 rounded-md bg-primary-500 px-2.5 font-bold text-white hover:bg-primary-400"
             onClick={onClickBtn}
           >
             {typeof hasBtn === 'string' ? hasBtn : '중복 확인'}

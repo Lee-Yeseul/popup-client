@@ -9,7 +9,7 @@ export default function PopUpListHeader() {
             href={'/'}
             className="shrink-0 bg-clip-text text-2xl font-bold text-black"
           >
-            POPUP NOW
+            pop up NOW
           </Link>
         </div>
       </header>
