@@ -1,11 +1,9 @@
 'use client'
-import ArrowOutward from '@/public/assets/icons/arrowOutward.svg'
-
-import Script from 'next/script'
-import { useRef, useState } from 'react'
-import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
-import { PopUpDetail } from '@/app/src/type/pop-up'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
+import ArrowOutward from '@/public/assets/icons/arrowOutward.svg'
+import { PopUpDetail } from '@/app/src/type/pop-up'
 
 interface PopUpDetailMapProps {
   popUpDetail: PopUpDetail
@@ -16,7 +14,6 @@ export default function PopUpDetailMap({ popUpDetail }: PopUpDetailMapProps) {
   const [isLoaded, setIsLoaded] = useState(false)
   const [lat, setLat] = useState(33.5563)
   const [lng, setLng] = useState(126.79581)
-  const [isOpen, setIsOpen] = useState(false)
 
   const initMap = () => {
     window.kakao.maps.load(() => {
@@ -31,16 +28,12 @@ export default function PopUpDetailMap({ popUpDetail }: PopUpDetailMapProps) {
     setIsLoaded(true)
   }
 
+  useEffect(() => {
+    initMap()
+  }, [])
+
   return (
     <>
-      <Script
-        type="text/javascript"
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
-        strategy="lazyOnload"
-        onLoad={() => {
-          initMap()
-        }}
-      />
       <div className="flex h-56 w-full flex-col justify-items-center">
         <div className="my-2 text-xl font-bold">팝업 장소</div>
         {isLoaded && (

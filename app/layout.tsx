@@ -8,6 +8,7 @@ import BottomNav from '@/app/src/component/layout/BottomNav'
 import Toast from '@/app/src/component/common/toast/Toast'
 import { Analytics } from '@vercel/analytics/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -47,6 +48,11 @@ export default function RootLayout({
             <Suspense>{children}</Suspense>
             <Footer />
             <BottomNav />
+            <Script
+              type="text/javascript"
+              src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
+              strategy="beforeInteractive"
+            />
           </div>
         </div>
         <Toast />

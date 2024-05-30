@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Script from 'next/script'
 import { CustomOverlayMap, Map, MapMarker } from 'react-kakao-maps-sdk'
 import Spinner from '@/app/src/component/common/Spinner'
 import useToast from '@/app/src/component/common/toast/useToast'
@@ -63,6 +62,8 @@ export default function NearByPopUpMap() {
     const { overflow } = $body.style
     $body.style.overflow = 'hidden'
 
+    initMap()
+
     return () => {
       $body.style.overflow = overflow
     }
@@ -70,12 +71,6 @@ export default function NearByPopUpMap() {
 
   return (
     <>
-      <Script
-        type="text/javascript"
-        src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer&autoload=false`}
-        strategy="lazyOnload"
-        onLoad={() => initMap()}
-      />
       <div className="flex h-full w-full justify-items-center">
         {isLoaded ? (
           <Map
