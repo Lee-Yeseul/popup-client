@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import Image from 'next/image'
 import { imageAPI } from '@/app/src/api/image'
+import useDetectElement from '@/app/src/hook/useDetectElement'
 
 interface ImageBoxProps {
   imagePath: string
@@ -28,12 +29,24 @@ export default function ImageBox({ imagePath, objectFit, alt }: ImageBoxProps) {
     }
   }
 
-  useEffect(() => {
-    getImageByImagePath(imagePath)
-  }, [imagePath])
+  const [target] = useDetectElement({
+    threshold: 0.5,
+    onIntersect: useCallback(
+      async ([{ isIntersecting }]) => {
+        if (isIntersecting) {
+          if (imageUrl) return
+          console.log('why?', imageUrl)
+          await getImageByImagePath(imagePath)
+        } else {
+          return
+        }
+      },
+      [imageUrl],
+    ),
+  })
 
   return (
-    <>
+    <div ref={target}>
       {imageUrl ? (
         <Image
           src={imageUrl}
@@ -45,6 +58,6 @@ export default function ImageBox({ imagePath, objectFit, alt }: ImageBoxProps) {
       ) : (
         <div className="h-full w-full rounded-md bg-neutral-100"></div>
       )}
-    </>
+    </div>
   )
 }
