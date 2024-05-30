@@ -35,7 +35,6 @@ export default function ImageBox({ imagePath, objectFit, alt }: ImageBoxProps) {
       async ([{ isIntersecting }]) => {
         if (isIntersecting) {
           if (imageUrl) return
-          console.log('why?', imageUrl)
           await getImageByImagePath(imagePath)
         } else {
           return
