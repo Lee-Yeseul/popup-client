@@ -12,9 +12,10 @@ interface ImageBoxProps {
     | 'object-cover'
     | 'object-fill'
     | 'scale-down'
+  alt?: string
 }
 
-export default function ImageBox({ imagePath, objectFit }: ImageBoxProps) {
+export default function ImageBox({ imagePath, objectFit, alt }: ImageBoxProps) {
   const [imageUrl, setImageUrl] = useState('')
   const getImageByImagePath = async (imagePath: string) => {
     try {
@@ -36,7 +37,7 @@ export default function ImageBox({ imagePath, objectFit }: ImageBoxProps) {
       {imageUrl ? (
         <Image
           src={imageUrl}
-          alt={'pop_up_thumbnail'}
+          alt={alt ?? 'pop_up_thumbnail'}
           fill
           className={`bg-black ${objectFit ?? 'object-contain'}`}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

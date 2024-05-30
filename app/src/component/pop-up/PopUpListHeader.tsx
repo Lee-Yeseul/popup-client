@@ -7,11 +7,10 @@ export default function PopUpListHeader() {
         <div className="flex h-full items-center justify-between px-4">
           <Link
             href={'/'}
-            className="shrink-0 bg-clip-text text-2xl font-bold text-primary-500"
+            className="shrink-0 bg-clip-text text-2xl font-bold text-black"
           >
-            pop-up NOW
+            POPUP NOW
           </Link>
-          {/* <SearchBar /> */}
         </div>
       </header>
     </>

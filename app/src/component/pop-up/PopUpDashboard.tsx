@@ -40,7 +40,7 @@ export default function PopUpDashboard() {
                   <div className="mr-1 mt-1 flex justify-end">
                     <Tag
                       value={getStatus(new Date(startDate), new Date(endDate))}
-                      className="bg-clip-text text-base/7 font-semibold text-secondary-400 backdrop-blur-sm"
+                      className="bg-clip-text text-base/7 font-semibold text-white backdrop-blur-sm"
                     ></Tag>
                   </div>
                 </div>
