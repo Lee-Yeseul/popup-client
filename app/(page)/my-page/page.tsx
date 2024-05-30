@@ -1,8 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { useUserStore } from '@/app/src/store/userStore'
 import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
 import { popUpAPI } from '@/app/src/api/pop-up'
 import { PopUp } from '@/app/src/type/pop-up'
@@ -10,8 +8,6 @@ import Link from 'next/link'
 
 export default function MyPage() {
   const [dataList, setDataList] = useState<PopUp[]>([])
-  const { isLogin } = useUserStore()
-  const router = useRouter()
 
   const getMyPopUpList = async () => {
     const { data } = await popUpAPI.getMyPopUpList()
@@ -19,9 +15,6 @@ export default function MyPage() {
   }
 
   useEffect(() => {
-    if (!isLogin) {
-      return router.push('/auth/sign-in')
-    }
     getMyPopUpList()
   }, [])
 
