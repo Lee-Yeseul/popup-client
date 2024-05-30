@@ -6,8 +6,13 @@ import Tag from '@/app/src/component/common/Tag'
 
 import { usePopUpStore } from '@/app/src/store/popUpStore'
 import { calculateDateDifference, convertDateToKor } from '@/app/src/util/date'
+import { PopUp } from '@/app/src/type/pop-up'
 
-export default function PopUpDashboard() {
+interface PopUpDashboardProps {
+  dataList?: PopUp[]
+}
+
+export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
   const { popUpList } = usePopUpStore()
 
   const getStatus = (startDate: Date, endDate: Date) => {
@@ -29,9 +34,11 @@ export default function PopUpDashboard() {
     return `${daysUntilEnd}일 후 종료`
   }
 
+  const selectedPopUpList = dataList || popUpList
+
   return (
     <div className="mx-6 my-6 grid grid-cols-1 gap-6 sm:grid-cols-2">
-      {popUpList.map(
+      {selectedPopUpList.map(
         ({ title, startDate, endDate, id, address, imageList }) => (
           <Link href={`/pop-up/${id}`} key={id}>
             <Card className="hover:cursor-pointer">

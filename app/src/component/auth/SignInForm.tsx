@@ -42,7 +42,7 @@ export default function SignInForm() {
         >
           <Form.TextInput
             name="email"
-            placeholder="test@test.com"
+            placeholder="popupNOW@gmail.com"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
           />
           <Form.TextInput

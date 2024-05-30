@@ -7,12 +7,14 @@ import {
   PopUpLocationInfo,
   PopUpQuery,
 } from '@/app/src/type/pop-up'
-import { CreatePopUpSchema } from '../../schema/pop-up'
 
 const basicPathName = '/pop-up'
 export const popUpAPI = {
   getPopUpList: (query?: PopUpQuery): APIResponse<PopUp[]> => {
     return instance.get(`${basicPathName}/list`, { params: query })
+  },
+  getMyPopUpList: (): APIResponse<PopUp[]> => {
+    return instance.get(`${basicPathName}/list/me`)
   },
   getPopUpDetail: (id: string): APIResponse<PopUpDetail> => {
     return instance.get(`${basicPathName}/${id}`)
