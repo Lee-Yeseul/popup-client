@@ -54,7 +54,7 @@ export default function AuthPage() {
   return (
     <main className="flex h-[80vh] w-full flex-col items-center justify-center">
       <div className="flex w-2/3 flex-col items-center gap-10">
-        <h3 className="text-xl font-bold">회원가입</h3>
+        <h3 className="text-2xl font-bold text-primary-500">회원가입</h3>
         <Form<SignUpSchema>
           schema={signUpSchema}
           handleSubmit={(data) => onSubmit(data)}
@@ -64,7 +64,7 @@ export default function AuthPage() {
           <Form.TextInput
             label="이메일"
             name="email"
-            placeholder="test@test.com"
+            placeholder="popupNOW@gmail.com"
             className="h-12 w-full rounded-md border-gray-300 p-2 ps-5"
             hasBtn
             handleClickBtn={onClickEmailDuplicateBtn}
@@ -98,7 +98,7 @@ export default function AuthPage() {
             type="password"
           />
           <Form.SubmitButton
-            className="mt-5 h-12 w-full rounded-md border-1 border-solid border-gray-400 hover:bg-gray-50 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-200 disabled:text-gray-500"
+            className="mt-5 h-12 w-full rounded-md border-1 border-solid border-gray-400 bg-primary-500 font-bold text-white hover:bg-primary-400 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-200 disabled:text-gray-500"
             buttonProps={{
               disabled: !(isEmailUnique === true && isUsernameUnique === true),
             }}

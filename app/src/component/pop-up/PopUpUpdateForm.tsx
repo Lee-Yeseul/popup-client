@@ -37,12 +37,6 @@ export default function PopUpUpdateForm({
     }
   }
 
-  useEffect(() => {
-    if (!isLogin) {
-      router.push('/')
-      toast('접근 불가능한 페이지입니다.', 'error')
-    }
-  }, [])
   return (
     <div className="mx-6">
       {isLogin && (
