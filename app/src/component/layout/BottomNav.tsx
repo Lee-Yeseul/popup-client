@@ -1,10 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import BottomBox from '@/app/src/component/common/BottomBox'
 import Home from '@/public/assets/icons/home.svg'
 import Map from '@/public/assets/icons/map.svg'
-// import Person from '@/public/assets/icons/person.svg'
+import Person from '@/public/assets/icons/person.svg'
+import BottomBox from '@/app/src/component/common/BottomBox'
 import { usePathname } from 'next/navigation'
 
 export default function BottomNav() {
@@ -39,19 +39,19 @@ export default function BottomNav() {
             홈
           </div>
         </Link>
-        {/* <Link href={'/my-page'}>
+        <Link href={'/my-page'}>
           <div
-            className={`flex h-full flex-1 flex-col items-center justify-between ${pathname === '/my-page' ? 'text-pink-500' : 'text-gray-500'}`}
+            className={`flex h-full flex-1 flex-col items-center justify-between ${pathname === '/my-page' ? 'text-primary-500' : 'text-gray-400'}`}
           >
             <Person
-              width="24"
-              height="24"
+              width="22"
+              height="22"
               className="m-1"
-              fill={pathname === '/my-page' ? 'pink' : 'black'}
+              fill={pathname === '/my-page' ? '#1d1b78' : '#6b7280'}
             />
             마이페이지
           </div>
-        </Link> */}
+        </Link>
       </div>
     </BottomBox>
   )
