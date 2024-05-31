@@ -1,25 +1,32 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import withAuth from '@/app/src/middleware/withAuth'
-import withoutAuth from '@/app/src/middleware/withoutAuth'
+
+import authenticate from './app/src/middleware/authenticate'
 
 export async function middleware(request: NextRequest) {
+  const isAuthenticated = await authenticate(request)
+
   try {
     if (
       request.nextUrl.pathname === '/my-page' ||
       request.nextUrl.pathname === '/pop-up/create'
     ) {
-      return await withAuth(request)
+      console.log(isAuthenticated)
+      if (isAuthenticated) return NextResponse.next()
+      return NextResponse.redirect(new URL('/auth/sign-in', request.url))
     }
 
     if (
       request.nextUrl.pathname === '/auth/sign-in' ||
       request.nextUrl.pathname === '/auth/sign-up'
     ) {
-      return await withoutAuth(request)
+      console.log(isAuthenticated)
+      if (isAuthenticated)
+        return NextResponse.redirect(new URL('/', request.url))
+      return NextResponse.next()
     }
   } catch (error) {
-    return NextResponse.redirect(new URL('/', request.url))
+    console.error(error)
   }
 }
 
