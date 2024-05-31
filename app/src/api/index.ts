@@ -28,7 +28,7 @@ instance.interceptors.response.use(
 
         await authAPI.renewAccessToken()
 
-        return instance({ ...config })
+        return await instance({ ...config })
       } else {
         return Promise.reject(response)
       }
