@@ -26,8 +26,8 @@ instance.interceptors.response.use(
         if (isRefreshing) return Promise.reject(response)
         isRefreshing = true
 
-        const { data } = await authAPI.renewAccessToken()
-        instance.defaults.headers.common.Authorization = `Bearer ${data.newAccessToken}`
+        await authAPI.renewAccessToken()
+
         return instance({ ...config })
       } else {
         return Promise.reject(response)
