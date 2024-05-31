@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { ChangeEvent, useContext, useState } from 'react'
 import { FormContext } from '.'
 import { encodeFileToBase64 } from '@/app/src/util'
@@ -45,14 +44,10 @@ export default function ImageInput({ name }: { name: string }) {
       <div className="overflow-x-scroll">
         <div className="flex gap-3">
           {previewImageList.map((image, index) => (
-            <div
-              className="relative h-32 w-32 shrink-0 bg-yellow-100"
-              key={index}
-            >
-              <Image
+            <div className="h-32 w-32 shrink-0 bg-yellow-100" key={index}>
+              <img
                 src={image}
                 alt="preview image"
-                fill
                 className="rounded-lg"
                 onClick={() => onRemoveImage(index)}
               />
