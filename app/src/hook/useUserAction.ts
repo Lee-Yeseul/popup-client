@@ -1,8 +1,8 @@
-import { instance } from '@/app/src/api'
 import { useUserStore } from '@/app/src/store/userStore'
 import { SignInResponse } from '@/app/src/type/auth'
 import { GetUserInfoResponse } from '@/app/src/type/user'
 import { decodeJWT } from '@/app/src/util'
+import { authAPI } from '../api/auth'
 
 export default function useUserAction() {
   const updateUser = useUserStore((state) => state.update)
@@ -17,18 +17,15 @@ export default function useUserAction() {
       email: decodedJWT.email,
       username: decodedJWT.user,
     })
-
-    instance.defaults.headers.common.Authorization = `Bearer ${accessToken}`
   }
 
-  const logout = () => {
-    instance.defaults.headers.common.Authorization = ''
+  const logout = async () => {
+    await authAPI.logout()
     deleteUser()
   }
 
   const saveUserInfo = (userInfo: GetUserInfoResponse) => {
-    const defaultImage =
-      'https://img1.daumcdn.net/thumb/R1280x0.fjpg/?fname=http://t1.daumcdn.net/brunch/service/user/32E9/image/BA2Qyx3O2oTyEOsXe2ZtE8cRqGk.JPG'
+    const defaultImage = ''
 
     updateUser({
       isLogin: true,

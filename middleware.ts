@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import type { NextFetchEvent, NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 import withAuth from '@/app/src/middleware/withAuth'
 import withoutAuth from '@/app/src/middleware/withoutAuth'
 
-export async function middleware(request: NextRequest, event: NextFetchEvent) {
+export async function middleware(request: NextRequest) {
   try {
     if (
       request.nextUrl.pathname === '/my-page' ||
@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest, event: NextFetchEvent) {
       return await withoutAuth(request)
     }
   } catch (error) {
-    return NextResponse.redirect(new URL('/auth/sign-in', request.url))
+    return NextResponse.redirect(new URL('/', request.url))
   }
 }
 
