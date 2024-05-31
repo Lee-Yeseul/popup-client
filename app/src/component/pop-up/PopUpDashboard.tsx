@@ -42,18 +42,22 @@ export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
         ({ title, startDate, endDate, id, address, imageList }) => (
           <Link href={`/pop-up/${id}`} key={id}>
             <Card className="hover:cursor-pointer">
-              <div className={`relative h-52 w-full`}>
-                <div className="absolute left-0 right-0 z-10">
-                  <div className="mr-1 mt-1 flex justify-end">
-                    <Tag
-                      value={getStatus(new Date(startDate), new Date(endDate))}
-                      className="bg-clip-text text-base/7 font-semibold text-white backdrop-blur-sm"
-                    ></Tag>
-                  </div>
+              <div className="relative">
+                <div className="absolute left-0 right-0 z-10 mr-1 mt-1 flex justify-end">
+                  <Tag
+                    value={getStatus(new Date(startDate), new Date(endDate))}
+                    className="bg-clip-text text-base/7 font-semibold text-white backdrop-blur-sm"
+                  />
                 </div>
-
-                {imageList && <ImageBox imagePath={`pop-up/${imageList[0]}`} />}
               </div>
+
+              {imageList && (
+                <ImageBox
+                  imagePath={`pop-up/${imageList[0]}`}
+                  className="xs:h-56 xs:w-full sm:aspect-square"
+                />
+              )}
+
               <Card.Description>
                 <div className="text-sm text-gray-500">
                   <div className="mt-1 text-base font-bold text-black">
