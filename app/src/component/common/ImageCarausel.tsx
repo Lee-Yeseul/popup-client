@@ -112,11 +112,10 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
         >
           {imageList.map((image, index) => (
             <div className="relative h-full w-full shrink-0" key={index}>
-              <Image
+              <img
                 key={index}
-                fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className={`${bgColor ? bgColor : 'bg-black'} object-contain`}
+                className={`${bgColor ? bgColor : 'bg-black'} h-full w-full object-contain`}
                 src={image.url}
                 alt={image.url}
               />
