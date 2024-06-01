@@ -13,7 +13,7 @@ export default async function authenticateAction(request: NextRequest) {
   })
 
   if (response.status === 401) {
-    const response = await fetch(`http://localhost:8080/api/auth/renew`, {
+    const response = await fetch(`${baseURL}/auth/renew`, {
       method: 'POST',
       headers: {
         cookie: `refresh_token=${refresh_token}`,
@@ -21,8 +21,8 @@ export default async function authenticateAction(request: NextRequest) {
       credentials: 'include',
     })
     const data = await response.json()
+    console.log(data)
     if (data.statusCode === 401) return false
-    return true
   }
   if (response.status === 200) return true
 }

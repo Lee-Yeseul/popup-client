@@ -33,7 +33,6 @@ instance.interceptors.response.use(
         return Promise.reject(response)
       }
     } catch (err) {
-      console.log(err)
       return Promise.reject(response)
     }
   },
