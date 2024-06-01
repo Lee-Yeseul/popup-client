@@ -14,8 +14,12 @@ export default function MyPage() {
   const { logout } = useUserAction()
 
   const getMyPopUpList = async () => {
-    const { data } = await popUpAPI.getMyPopUpList()
-    setDataList(data)
+    try {
+      const { data } = await popUpAPI.getMyPopUpList()
+      setDataList(data)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const onClickLogout = () => {
