@@ -32,7 +32,7 @@ export default function NearByPopUpMap() {
     setIsLoaded(true)
 
     const mapList = await getMapList()
-    console.log(mapList)
+
     if (!mapList) return
     setPositions(mapList)
   }
@@ -80,7 +80,7 @@ export default function NearByPopUpMap() {
               lng: lng,
             }}
             style={{ width: '100%', height: '100%' }}
-            level={3}
+            level={4}
           >
             {positions.map(({ latitude, longitude, title }) => (
               <div key={`${title}_${latitude}_${longitude}`}>
