@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 🔗 SERVICE LINK
 
-## Getting Started
+☞ https://www.popup-now.site/pop-up
 
-First, run the development server:
+## 📖 INTRODUCTION
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+팝업 스토어의 실시간 현장 상황 공유를 위한 서비스
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- 현재 진행중인 팝업 스토어 정보
+  ![](https://i.imgur.com/Cs7RroT.png)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 실시간 현장 상황 공유를 위한 실시간 채팅 서비스
+  <img src="https://i.imgur.com/qirzorA.png" alt="이미지 설명" width="300" height="200">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- 내 위치 기반 근처 팝업 정보 확인을 위한 지도 view
+  <img src="https://i.imgur.com/4GdrduI.png" alt="이미지 설명" width="300" height="200">
 
-## Learn More
+## ⚒️ TECH STACK
 
-To learn more about Next.js, take a look at the following resources:
+- Language
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  - javascript
+  - typescript
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Framework
 
-## Deploy on Vercel
+  - next.js
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Library
+  - socket.io
+  - zustand
+  - react-hook-form
+  - react-kakao-maps-sdk
+  - tailwindCSS
