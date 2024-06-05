@@ -10,8 +10,8 @@ import { PopUpLocationInfo } from '@/app/src/type/pop-up'
 export default function NearByPopUpMap() {
   const { toast } = useToast()
   const [isLoaded, setIsLoaded] = useState(false)
-  const [lat, setLat] = useState(33.5563)
-  const [lng, setLng] = useState(126.79581)
+  const [lat, setLat] = useState(37.5406846)
+  const [lng, setLng] = useState(127.0566319)
   const [positions, setPositions] = useState<PopUpLocationInfo[]>([])
 
   const getMapList = async () => {
@@ -32,6 +32,7 @@ export default function NearByPopUpMap() {
     setIsLoaded(true)
 
     const mapList = await getMapList()
+    console.log(mapList)
     if (!mapList) return
     setPositions(mapList)
   }
@@ -79,7 +80,7 @@ export default function NearByPopUpMap() {
               lng: lng,
             }}
             style={{ width: '100%', height: '100%' }}
-            level={2}
+            level={3}
           >
             {positions.map(({ latitude, longitude, title }) => (
               <div key={`${title}_${latitude}_${longitude}`}>
