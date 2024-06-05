@@ -6,6 +6,7 @@ import Spinner from '@/app/src/component/common/Spinner'
 import useToast from '@/app/src/component/common/toast/useToast'
 import { popUpAPI } from '@/app/src/api/pop-up'
 import { PopUpLocationInfo } from '@/app/src/type/pop-up'
+import Link from 'next/link'
 
 export default function NearByPopUpMap() {
   const { toast } = useToast()
@@ -94,9 +95,13 @@ export default function NearByPopUpMap() {
                   position={{ lat: latitude, lng: longitude }}
                   yAnchor={2}
                 >
-                  <div className="mb-1 rounded-lg bg-primary-500 p-2 text-white">
-                    <span>{title}</span>
-                  </div>
+                  <Link
+                    href={`https://map.kakao.com/link/search/${latitude},${longitude}`}
+                  >
+                    <div className="mb-1 flex items-center gap-2 rounded-lg bg-primary-500 p-2 text-white">
+                      {title}
+                    </div>
+                  </Link>
                 </CustomOverlayMap>
               </div>
             ))}
