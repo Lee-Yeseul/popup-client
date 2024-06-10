@@ -20,7 +20,7 @@ export default function PopUpCreateForm({
   const [content, setContent] = useState('')
   const router = useRouter()
 
-  const onsubmit = async (submitData: CreatePopUpSchema) => {
+  const onSubmit = async (submitData: CreatePopUpSchema) => {
     try {
       const { imageList } = submitData
       delete submitData['imageList']
@@ -46,6 +46,7 @@ export default function PopUpCreateForm({
       await popUpAPI.putPopUpById(id, {
         imageList: imagePathList,
       })
+      toast('팝업이 성공적으로 생성되었습니다.', 'success')
       router.push(`/pop-up/${id}`)
     } catch (error) {
       console.log(error)
@@ -57,7 +58,7 @@ export default function PopUpCreateForm({
       {isLogin && (
         <Form<CreatePopUpSchema>
           schema={createPopUpSchema}
-          handleSubmit={(data) => onsubmit(data)}
+          handleSubmit={(data) => onSubmit(data)}
         >
           <div className="mt-4">
             <Form.TextInput
