@@ -1,22 +1,24 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useUserStore } from '@/app/src/store/userStore'
 import { popUpAPI } from '../../api/pop-up'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { userAPI } from '../../api/user'
 
 interface PopUpControlButtonProps {
   id: string
   isAvailable: boolean
+  authorId: string
 }
 
 export default function PopUpControlButton({
   id,
   isAvailable,
+  authorId,
 }: PopUpControlButtonProps) {
   const router = useRouter()
   const [isChecked, setIsChecked] = useState(isAvailable)
-  const { isLogin } = useUserStore()
+  const [hasAuthority, setHasAuthority] = useState(false)
 
   const onClickToggle = async () => {
     try {
@@ -36,9 +38,22 @@ export default function PopUpControlButton({
     }
   }
 
+  const checkAuthority = async () => {
+    try {
+      const { data } = await userAPI.getUserInfo()
+      if (data.id === authorId) return setHasAuthority(true)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    checkAuthority()
+  }, [])
+
   return (
     <>
-      {isLogin && (
+      {hasAuthority && (
         <div className="flex w-full justify-end gap-2 px-2">
           <label className="inline-flex cursor-pointer items-center">
             <input

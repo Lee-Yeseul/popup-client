@@ -8,8 +8,10 @@ import useUserAction from '@/app/src/hook/useUserAction'
 import { authAPI } from '@/app/src/api/auth'
 import { userAPI } from '@/app/src/api/user'
 import Link from 'next/link'
+import useToast from '../common/toast/useToast'
 
 export default function SignInForm() {
+  const { toast } = useToast()
   const [errorMessage, setErrorMessage] = useState<string>('')
   const router = useRouter()
   const { login, saveUserInfo } = useUserAction()
@@ -25,10 +27,15 @@ export default function SignInForm() {
     } catch (error: any) {
       if (error.status === 401) {
         setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.')
+        toast('이메일 또는 비밀번호가 일치하지 않습니다.', 'error')
+        return
       }
       if (error.status === 404) {
         setErrorMessage('존재하지 않는 이메일입니다.')
+        toast('존재하지 않는 이메일입니다.', 'error')
+        return
       }
+      toast('로그인에 실패했습니다.', 'error')
     }
   }
   return (

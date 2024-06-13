@@ -47,7 +47,11 @@ export default async function PopupDetailPage({
       <main className="mt-16">
         {popUpDetail && (
           <>
-            <PopUpControlButton id={id} isAvailable={popUpDetail.isAvailable} />
+            <PopUpControlButton
+              id={id}
+              isAvailable={popUpDetail.isAvailable}
+              authorId={popUpDetail.authorId}
+            />
             <PopUpCard popUpDetail={popUpDetail} />
             <Divider />
             <div className="mx-6 mt-2.5">

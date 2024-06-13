@@ -12,6 +12,8 @@ export default async function authenticateAction(request: NextRequest) {
     credentials: 'include',
   })
 
+  if (userInfo.status === 200) return true
+
   if (userInfo.status === 401) {
     const newAccessToken = await fetch(`${baseURL}/auth/renew`, {
       method: 'POST',
@@ -23,7 +25,7 @@ export default async function authenticateAction(request: NextRequest) {
     console.log(refresh_token, newAccessToken)
     const data = await newAccessToken.json()
     console.log(data)
-    if (data.statusCode === 401) return false
+    if (data.statusCode === 200) return true
   }
-  if (userInfo.status === 200) return true
+  return false
 }
