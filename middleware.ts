@@ -3,9 +3,13 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 import authenticate from './app/src/middleware/authenticate'
+import { cookies } from 'next/headers'
 
 export async function middleware(request: NextRequest) {
   const isAuthenticated = await authenticate(request)
+  const cookieStore = cookies()
+  const token = cookieStore.get('access_token')
+  console.log('token', token)
 
   try {
     if (
