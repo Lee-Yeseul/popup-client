@@ -1,4 +1,4 @@
-const positiveAdjectives = [
+export const positiveAdjectives = [
   '슬기로운',
   '밝은',
   '행복한',
@@ -91,7 +91,7 @@ const positiveAdjectives = [
   '활기찬',
 ]
 
-const animals = [
+export const animals = [
   '사자',
   '호랑이',
   '사슴',

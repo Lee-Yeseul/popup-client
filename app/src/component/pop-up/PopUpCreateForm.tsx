@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import MDEditor from '@uiw/react-md-editor'
 import Form from '@/app/src/component/common/form'
@@ -20,7 +20,7 @@ export default function PopUpCreateForm({
   const [content, setContent] = useState('')
   const router = useRouter()
 
-  const onsubmit = async (submitData: CreatePopUpSchema) => {
+  const onSubmit = async (submitData: CreatePopUpSchema) => {
     try {
       const { imageList } = submitData
       delete submitData['imageList']
@@ -46,24 +46,19 @@ export default function PopUpCreateForm({
       await popUpAPI.putPopUpById(id, {
         imageList: imagePathList,
       })
+      toast('팝업이 성공적으로 생성되었습니다.', 'success')
       router.push(`/pop-up/${id}`)
     } catch (error) {
       console.log(error)
     }
   }
 
-  useEffect(() => {
-    if (!isLogin) {
-      router.push('/')
-      toast('접근 불가능한 페이지입니다.', 'error')
-    }
-  }, [])
   return (
     <div className="mx-6">
       {isLogin && (
         <Form<CreatePopUpSchema>
           schema={createPopUpSchema}
-          handleSubmit={(data) => onsubmit(data)}
+          handleSubmit={(data) => onSubmit(data)}
         >
           <div className="mt-4">
             <Form.TextInput
@@ -149,7 +144,6 @@ export default function PopUpCreateForm({
             </div>
           </div>
           <Form.SubmitButton className="mt-10 w-full bg-secondary-100 py-2.5 text-xl font-bold">
-
             기본정보 작성 완료
           </Form.SubmitButton>
         </Form>

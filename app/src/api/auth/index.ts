@@ -21,6 +21,9 @@ export const authAPI = {
   isUsernameUnique: (username: string): APIResponse<boolean> => {
     return instance.post(`${basicPathName}/is-username-unique`, { username })
   },
+  logout: () => {
+    return instance.post(`${basicPathName}/logout`)
+  },
 
   // postKakaoLoginCode: (code: string): APIResponse<SignInResponse> => {
   //   return instance.post(`${basicPathName}/kakao-code`, { code })

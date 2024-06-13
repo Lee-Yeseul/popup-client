@@ -19,7 +19,7 @@ export default function SignInForm() {
       login(data)
       const { data: userInfo } = await userAPI.getUserInfo()
       saveUserInfo(userInfo)
-      // setIsDialogOpen(false)
+
       setErrorMessage('')
       router.push('/')
     } catch (error: any) {
@@ -34,11 +34,11 @@ export default function SignInForm() {
   return (
     <main className="flex h-[80vh] w-full flex-col items-center justify-center">
       <div className="flex w-2/3 flex-col items-center gap-2">
-        <h3 className="text-xl font-bold">로그인</h3>
+        <h3 className="my-8 text-3xl font-bold text-primary-500">pop up NOW</h3>
         <Form<SignInSchema>
           schema={signInSchema}
           handleSubmit={(data) => onLoginBtnClick(data)}
-          className="flex w-full flex-col gap-1"
+          className="flex w-full flex-col gap-2"
         >
           <Form.TextInput
             name="email"
@@ -54,15 +54,15 @@ export default function SignInForm() {
           {errorMessage && (
             <div className="mt-1 text-sm text-red-500">{errorMessage}</div>
           )}
-          <Form.SubmitButton className="mt-2 h-12 w-full rounded-md border-1 border-solid border-gray-400 hover:bg-gray-50">
+          <Form.SubmitButton className="mt-4 h-12 w-full rounded-md bg-primary-500 font-bold text-white hover:bg-primary-400">
             로그인
           </Form.SubmitButton>
         </Form>
         <Link
           href={'/auth/sign-up'}
-          className="flex h-12 w-full items-center justify-center rounded-md border-1 border-solid border-gray-400 hover:bg-gray-50"
+          className="flex h-12 w-full items-center justify-center rounded-md bg-primary-500 font-bold text-white hover:bg-primary-400"
         >
-          <div>회원가입</div>
+          <div>이메일 회원가입</div>
         </Link>
       </div>
     </main>

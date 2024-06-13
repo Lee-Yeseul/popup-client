@@ -34,7 +34,8 @@ const config: Config = {
         },
         primary: {
           300: '#4B96FF',
-          400: '#A7B5FF',
+          400: '#2D49DE',
+
           500: '#00178F',
         },
         secondary: {

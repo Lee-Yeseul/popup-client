@@ -6,12 +6,13 @@ import Spinner from '@/app/src/component/common/Spinner'
 import useToast from '@/app/src/component/common/toast/useToast'
 import { popUpAPI } from '@/app/src/api/pop-up'
 import { PopUpLocationInfo } from '@/app/src/type/pop-up'
+import Link from 'next/link'
 
 export default function NearByPopUpMap() {
   const { toast } = useToast()
   const [isLoaded, setIsLoaded] = useState(false)
-  const [lat, setLat] = useState(33.5563)
-  const [lng, setLng] = useState(126.79581)
+  const [lat, setLat] = useState(37.5406846)
+  const [lng, setLng] = useState(127.0566319)
   const [positions, setPositions] = useState<PopUpLocationInfo[]>([])
 
   const getMapList = async () => {
@@ -32,6 +33,7 @@ export default function NearByPopUpMap() {
     setIsLoaded(true)
 
     const mapList = await getMapList()
+
     if (!mapList) return
     setPositions(mapList)
   }
@@ -79,7 +81,7 @@ export default function NearByPopUpMap() {
               lng: lng,
             }}
             style={{ width: '100%', height: '100%' }}
-            level={2}
+            level={4}
           >
             {positions.map(({ latitude, longitude, title }) => (
               <div key={`${title}_${latitude}_${longitude}`}>
@@ -93,9 +95,13 @@ export default function NearByPopUpMap() {
                   position={{ lat: latitude, lng: longitude }}
                   yAnchor={2}
                 >
-                  <div className="mb-1 rounded-lg bg-primary-500 p-2 text-white">
-                    <span>{title}</span>
-                  </div>
+                  <Link
+                    href={`https://map.kakao.com/link/search/${latitude},${longitude}`}
+                  >
+                    <div className="mb-1 flex items-center gap-2 rounded-lg bg-primary-500 p-2 text-white">
+                      {title}
+                    </div>
+                  </Link>
                 </CustomOverlayMap>
               </div>
             ))}
