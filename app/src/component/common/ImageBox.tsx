@@ -56,8 +56,7 @@ export default function ImageBox({
         <img
           src={imageUrl}
           alt={alt ?? 'pop_up_thumbnail'}
-          className={`bg-black ${objectFit ?? 'object-contain'} ${className}`}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className={`${objectFit ?? 'object-contain'} ${className}`}
         />
       ) : (
         <div
