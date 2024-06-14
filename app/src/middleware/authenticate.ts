@@ -22,7 +22,7 @@ export default async function authenticateAction(request: NextRequest) {
       },
       credentials: 'include',
     })
-    console.log(refresh_token, newAccessToken)
+
     const data = await newAccessToken.json()
 
     if (data.statusCode === 200) return true
