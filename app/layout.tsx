@@ -1,4 +1,4 @@
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -41,11 +41,11 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="kor">
+    <html lang="ko">
       <body className={inter.className} id="root">
         <div className="flex h-full w-full justify-center font-pretendard">
           <div className="w-full min-w-[350px] max-w-[550px] shadow-lg">
-            <Suspense>{children}</Suspense>
+            {children}
             <Footer />
             <BottomNav />
             <Script

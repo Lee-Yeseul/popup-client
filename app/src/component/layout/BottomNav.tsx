@@ -15,7 +15,7 @@ export default function BottomNav() {
       <div className="flex h-full w-full items-center justify-around bg-white text-sm">
         <Link href={'/pop-up/map'}>
           <div
-            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/pop-up/map' ? 'text-primary-500' : 'text-gray-400'}`}
+            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/pop-up/map' ? 'text-primary-500' : 'text-gray-500'}`}
           >
             <Map
               width="25"
@@ -28,7 +28,7 @@ export default function BottomNav() {
         </Link>
         <Link href={'/'}>
           <div
-            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/pop-up' ? 'text-primary-500' : 'text-gray-400'}`}
+            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/pop-up' ? 'text-primary-500' : 'text-gray-500'}`}
           >
             <Home
               width="25"
@@ -41,7 +41,7 @@ export default function BottomNav() {
         </Link>
         <Link href={'/my-page'}>
           <div
-            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/my-page' ? 'text-primary-500' : 'text-gray-400'}`}
+            className={`flex h-full w-28 flex-1 flex-col items-center justify-between ${pathname === '/my-page' ? 'text-primary-500' : 'text-gray-500'}`}
           >
             <Person
               width="22"
