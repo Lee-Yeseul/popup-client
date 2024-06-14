@@ -9,6 +9,7 @@ import Toast from '@/app/src/component/common/toast/Toast'
 import { Analytics } from '@vercel/analytics/react'
 import { GoogleAnalytics } from '@next/third-parties/google'
 import Script from 'next/script'
+import { pretendard } from './src/util/font'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -42,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={inter.className} id="root">
+      <body className={`${inter.className} ${pretendard.variable}`} id="root">
         <div className="flex h-full w-full justify-center font-pretendard">
           <div className="w-full min-w-[350px] max-w-[550px] shadow-lg">
             {children}
