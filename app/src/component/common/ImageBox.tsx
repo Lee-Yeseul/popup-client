@@ -56,10 +56,12 @@ export default function ImageBox({
         <img
           src={imageUrl}
           alt={alt ?? 'pop_up_thumbnail'}
-          className={`${objectFit ?? 'object-contain'} ${className}`}
+          className={`${objectFit ?? 'bg-black object-contain'} ${className}`}
         />
       ) : (
-        <div className={`h-full w-full rounded-md bg-black ${className}`}></div>
+        <div
+          className={`h-full w-full rounded-md bg-neutral-100 ${className}`}
+        ></div>
       )}
     </div>
   )

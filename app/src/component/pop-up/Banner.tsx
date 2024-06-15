@@ -7,8 +7,7 @@ export default function Banner() {
         <ImageBox
           imagePath="banner/banner_1.png"
           alt="banner"
-          objectFit="object-fill"
-          className="h-64 w-full"
+          objectFit="object-contain"
         />
       </div>
     </div>
