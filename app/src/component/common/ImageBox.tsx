@@ -59,9 +59,7 @@ export default function ImageBox({
           className={`${objectFit ?? 'object-contain'} ${className}`}
         />
       ) : (
-        <div
-          className={`h-full w-full rounded-md bg-neutral-100 ${className}`}
-        ></div>
+        <div className={`h-full w-full rounded-md bg-black ${className}`}></div>
       )}
     </div>
   )
