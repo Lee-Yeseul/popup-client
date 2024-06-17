@@ -17,7 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: serviceURL,
+      url: `${serviceURL}/pop-up`,
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 1,
