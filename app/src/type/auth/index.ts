@@ -4,6 +4,6 @@ export type SignInResponse = {
   refreshToken: string
 }
 
-export type renewAccessToken = {
+export type RenewAccessToken = {
   newAccessToken: string
 }

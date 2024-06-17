@@ -1,5 +1,5 @@
 type QueryObject = {
-  [key: string]: string | string[]
+  [key: string]: string | string[] | boolean
 }
 
 export function queryStringify(queryObject: QueryObject): string {
@@ -8,7 +8,7 @@ export function queryStringify(queryObject: QueryObject): string {
     if (Array.isArray(value)) {
       value.forEach((item) => searchParams.append(key, item))
     } else {
-      searchParams.append(key, value)
+      searchParams.append(key, String(value))
     }
   })
   return searchParams.toString()

@@ -1,5 +1,5 @@
-import { APIResponse, IndexSignature } from '@/app/src/type'
-import { instance } from '..'
+import { IndexSignature } from '@/app/src/type'
+import { fetchAPI } from '..'
 import {
   CreateBasicPopUpInfo,
   PopUp,
@@ -7,40 +7,48 @@ import {
   PopUpLocationInfo,
   PopUpQuery,
 } from '@/app/src/type/pop-up'
+import { queryStringify } from '../../util'
 
-const basicPathName = '/pop-up'
+const basicPathName = 'pop-up'
+
 export const popUpAPI = {
-  getPopUpList: (query?: PopUpQuery): APIResponse<PopUp[]> => {
-    return instance.get(`${basicPathName}/list`, { params: query })
+  getPopUpList: (query?: PopUpQuery) => {
+    if (!query) return fetchAPI.get<PopUp[]>(`${basicPathName}/list`)
+
+    const queryString = queryStringify(query).toString()
+    return fetchAPI.get<PopUp[]>(`${basicPathName}/list?${queryString}`)
   },
-  getMyPopUpList: (): APIResponse<PopUp[]> => {
-    return instance.get(`${basicPathName}/list/me`)
+  getMyPopUpList: () => {
+    return fetchAPI.get<PopUp[]>(`${basicPathName}/list/me`)
   },
-  getPopUpDetail: (id: string): APIResponse<PopUpDetail> => {
-    return instance.get(`${basicPathName}/${id}`)
+  getPopUpDetail: (id: string) => {
+    return fetchAPI.get<PopUpDetail>(`${basicPathName}/${id}`)
   },
-  getPopUpCategoryList: (): APIResponse<IndexSignature> => {
-    return instance.get(`${basicPathName}/category`)
+  getPopUpCategoryList: () => {
+    return fetchAPI.get<IndexSignature>(`${basicPathName}/category`)
   },
-  getPopUpMapList: (): APIResponse<PopUpLocationInfo[]> => {
-    return instance.get(`${basicPathName}/map/list`)
+  getPopUpMapList: () => {
+    return fetchAPI.get<PopUpLocationInfo[]>(`${basicPathName}/map/list`)
   },
-  postPopUp: (data: CreateBasicPopUpInfo): APIResponse<IndexSignature> => {
-    return instance.post(`${basicPathName}`, data)
+  postPopUp: (data: CreateBasicPopUpInfo) => {
+    return fetchAPI.post<CreateBasicPopUpInfo, IndexSignature>(
+      `${basicPathName}`,
+      data,
+    )
   },
-  putPopUpById: (
-    id: string,
-    data: Partial<CreateBasicPopUpInfo>,
-  ): APIResponse<IndexSignature> => {
-    return instance.put(`${basicPathName}/${id}`, data)
+  putPopUpById: (id: string, data: Partial<CreateBasicPopUpInfo>) => {
+    return fetchAPI.put<CreateBasicPopUpInfo, IndexSignature>(
+      `${basicPathName}/${id}`,
+      data,
+    )
   },
-  putPopUpIsAvailableById: (
-    id: string,
-    isAvailable: boolean,
-  ): APIResponse<IndexSignature> => {
-    return instance.put(`${basicPathName}/${id}`, { isAvailable })
+  putPopUpIsAvailableById: (id: string, isAvailable: boolean) => {
+    return fetchAPI.put<{ isAvailable: boolean }, IndexSignature>(
+      `${basicPathName}/${id}`,
+      { isAvailable },
+    )
   },
   deletePopUpById: (id: string) => {
-    return instance.delete(`${basicPathName}/${id}`)
+    return fetchAPI.delete(`${basicPathName}/${id}`)
   },
 }

@@ -7,6 +7,8 @@ import SocketProvider from '@/app/src/component/chat/SocketProvider'
 import Chat from '@/app/src/component/chat'
 import { randomNicknameGenerator } from '@/app/src/util/randomNicknameGenerator'
 import { useUserStore } from '@/app/src/store/userStore'
+import { userAPI } from '../../api/user'
+import useUserAction from '../../hook/useUserAction'
 
 interface PopUpChatProps {
   roomId: string
@@ -15,10 +17,21 @@ interface PopUpChatProps {
 export default function PopUpChat({ roomId }: PopUpChatProps) {
   const [isChatOpen, setIsChatOpen] = useState(true)
   const { username, update } = useUserStore()
+  const { saveUserInfo } = useUserAction()
+
+  const getUserInfo = async () => {
+    try {
+      const { data } = await userAPI.getUserInfo()
+      saveUserInfo(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
     if (username) return
     update({ username: randomNicknameGenerator() })
+    getUserInfo()
   }, [])
 
   return (

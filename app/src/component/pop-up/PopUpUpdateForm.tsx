@@ -9,6 +9,7 @@ import useToast from '@/app/src/component/common/toast/useToast'
 import { PopUpDetail } from '@/app/src/type/pop-up'
 import { convertDateToISOFormat } from '@/app/src/util/date'
 import { userAPI } from '../../api/user'
+import { HTTPError } from '../../util/customError'
 
 interface PopUpUpdateFormProps {
   categoryOptions: any
@@ -34,8 +35,10 @@ export default function PopUpUpdateForm({
       toast('수정 완료되었습니다.', 'success')
       router.push(`/pop-up/${id}`)
     } catch (error) {
-      toast('수정에 실패했습니다.', 'success')
-      console.log(error)
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+        return
+      }
     }
   }
 

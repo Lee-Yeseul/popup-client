@@ -8,6 +8,7 @@ import { popUpAPI } from '@/app/src/api/pop-up'
 import { imageAPI } from '@/app/src/api/image'
 import { useUserStore } from '@/app/src/store/userStore'
 import useToast from '../common/toast/useToast'
+import { HTTPError } from '../../util/customError'
 
 interface PopUpCreateFormProps {
   categoryOptions: any
@@ -49,7 +50,10 @@ export default function PopUpCreateForm({
       toast('팝업이 성공적으로 생성되었습니다.', 'success')
       router.push(`/pop-up/${id}`)
     } catch (error) {
-      console.log(error)
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+        return
+      }
     }
   }
 
