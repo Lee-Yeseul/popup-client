@@ -60,9 +60,9 @@ export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
 
               <Card.Description>
                 <div className="text-sm text-gray-500">
-                  <div className="mt-1 text-base font-bold text-black">
+                  <h3 className="mt-1 text-base font-bold text-black">
                     {title}
-                  </div>
+                  </h3>
                   <div className="text-sm text-gray-500">{address}</div>
                   {convertDateToKor(startDate)}
                   <span className="mx-0.5">~</span>

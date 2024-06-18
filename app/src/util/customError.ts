@@ -8,24 +8,9 @@ export class HTTPError extends Error {
     this.message = message
   }
 }
-export class APIError extends Error {
-  redirectUrl: string = ''
-  notFound: boolean = false
-}
-
-export class NotFoundError extends APIError {
-  name = 'NotFoundError'
-  message = '찾을 수 없습니다.'
-  notFound = true
-}
-
-export class AuthError extends APIError {
-  name = 'AuthError'
-  message = '인증되지 않은 사용자입니다.'
-  redirectUrl = '/login'
-}
-
-export class ServerError extends APIError {
-  name = 'serverError'
-  message = 'server error'
+export class AuthError extends HTTPError {
+  constructor() {
+    super(401, 'Unauthorized user')
+    this.name = 'AuthError'
+  }
 }

@@ -5,6 +5,6 @@ const basicPathName = 'user'
 
 export const userAPI = {
   getUserInfo: () => {
-    return fetchAPI.get<GetUserInfoResponse>(`${basicPathName}/user-info`)
+    return fetchAPI.get<null, GetUserInfoResponse>(`${basicPathName}/user-info`)
   },
 }

@@ -13,22 +13,22 @@ const basicPathName = 'pop-up'
 
 export const popUpAPI = {
   getPopUpList: (query?: PopUpQuery) => {
-    if (!query) return fetchAPI.get<PopUp[]>(`${basicPathName}/list`)
+    if (!query) return fetchAPI.get<null, PopUp[]>(`${basicPathName}/list`)
 
     const queryString = queryStringify(query).toString()
-    return fetchAPI.get<PopUp[]>(`${basicPathName}/list?${queryString}`)
+    return fetchAPI.get<null, PopUp[]>(`${basicPathName}/list?${queryString}`)
   },
   getMyPopUpList: () => {
-    return fetchAPI.get<PopUp[]>(`${basicPathName}/list/me`)
+    return fetchAPI.get<null, PopUp[]>(`${basicPathName}/list/me`)
   },
   getPopUpDetail: (id: string) => {
-    return fetchAPI.get<PopUpDetail>(`${basicPathName}/${id}`)
+    return fetchAPI.get<null, PopUpDetail>(`${basicPathName}/${id}`)
   },
   getPopUpCategoryList: () => {
-    return fetchAPI.get<IndexSignature>(`${basicPathName}/category`)
+    return fetchAPI.get<null, IndexSignature>(`${basicPathName}/category`)
   },
   getPopUpMapList: () => {
-    return fetchAPI.get<PopUpLocationInfo[]>(`${basicPathName}/map/list`)
+    return fetchAPI.get<null, PopUpLocationInfo[]>(`${basicPathName}/map/list`)
   },
   postPopUp: (data: CreateBasicPopUpInfo) => {
     return fetchAPI.post<CreateBasicPopUpInfo, IndexSignature>(
