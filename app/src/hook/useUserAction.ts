@@ -1,6 +1,6 @@
 import { useUserStore } from '@/app/src/store/userStore'
 import { GetUserInfoResponse } from '@/app/src/type/user'
-import { decodeJWT } from '@/app/src/util'
+import { decodeJWT, deleteCookie } from '@/app/src/util'
 import { authAPI } from '@/app/src/api/auth'
 
 export default function useUserAction() {
@@ -19,6 +19,8 @@ export default function useUserAction() {
   const logout = async () => {
     await authAPI.logout()
     deleteUser()
+    deleteCookie('access_token')
+    deleteCookie('refresh_token')
   }
 
   const saveUserInfo = (userInfo: GetUserInfoResponse) => {
