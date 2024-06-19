@@ -45,7 +45,7 @@ const createFetchMethod = (method: string) => {
     fetchInterceptor<O>(() =>
       fetch(`${baseURL}/${endPoint}`, {
         method,
-        body: method !== 'GET' ? JSON.stringify(data) : undefined,
+        body: method !== 'GET' ? JSON.stringify(data) : null,
         ...commonFetchOptions,
       }),
     ).then((responseData) => ({
