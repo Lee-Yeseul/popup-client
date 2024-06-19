@@ -51,4 +51,7 @@ export const popUpAPI = {
   deletePopUpById: (id: string) => {
     return fetchAPI.delete(`${basicPathName}/${id}`)
   },
+  getPopularPopUp: (take: number) => {
+    return fetchAPI.get<null, PopUp[]>(`${basicPathName}/popular/${take}`)
+  },
 }

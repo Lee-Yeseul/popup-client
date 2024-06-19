@@ -54,7 +54,7 @@ export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
               {imageList && (
                 <ImageBox
                   imagePath={`pop-up/${imageList[0]}`}
-                  className="xs:h-56 xs:w-full sm:aspect-square"
+                  className="aspect-square xs:h-56 xs:w-full"
                 />
               )}
 
