@@ -1,5 +1,5 @@
 import PopUpListHeader from '@/app/src/component/pop-up/PopUpListHeader'
-import { ReactNode, Suspense } from 'react'
+import { ReactNode } from 'react'
 
 export default function PopUpListPageLayout({
   children,
@@ -9,9 +9,7 @@ export default function PopUpListPageLayout({
   return (
     <>
       <PopUpListHeader />
-      <Suspense>
-        <div className="min-h-[90vh]">{children}</div>
-      </Suspense>
+      <div className="min-h-[90vh]">{children}</div>
     </>
   )
 }

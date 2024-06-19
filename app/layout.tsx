@@ -14,7 +14,7 @@ import { pretendard } from './src/util/font'
 const inter = Inter({ subsets: ['latin'] })
 
 const serviceName = process.env.SERVICE_NAME
-const serviceURL = `${process.env.NEXT_PUBLIC_PROTOCOL}://${process.env.NEXT_PUBLIC_HOST_NAME}`
+const serviceURL = `${process.env.NEXT_PUBLIC_PROTOCOL}://www.popup-now.site`
 
 export const metadata: Metadata = {
   title: {

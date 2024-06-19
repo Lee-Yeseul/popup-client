@@ -35,12 +35,10 @@ export default function PopUpCreateForm({
 
       for (let i = 0; i < imageList.length; i++) {
         const path = 'pop-up'
-        const { data } = await imageAPI.createPreSignedUrl({
+        const { body } = await imageAPI.createPreSignedUrl({
           path,
           filename: `${id}_${i}`,
         })
-
-        const { body } = data
 
         const { url, fields } = body
 

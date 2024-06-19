@@ -14,21 +14,20 @@ export const queryStringify = (queryObject: QueryObject): string => {
   return searchParams.toString()
 }
 
-export const decodeJWT = (token: string) => {
-  const base64Payload = token.split('.')[1]
-  const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
-  const decodedJWT = JSON.parse(
-    decodeURIComponent(
-      window
-        .atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-        })
-        .join(''),
-    ),
+const base64UrlDecode = (str: string) => {
+  const base64 = str.replace(/-/g, '+').replace(/_/g, '/')
+  return decodeURIComponent(
+    atob(base64)
+      .split('')
+      .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+      .join(''),
   )
-  return decodedJWT
+}
+
+export const decodeJWT = (token: string) => {
+  const [_, payload] = token.split('.')
+  const decodedPayload = JSON.parse(base64UrlDecode(payload))
+  return { ...decodedPayload }
 }
 
 export const isTokenExpired = (tokenName: string): boolean => {

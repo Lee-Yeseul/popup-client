@@ -3,6 +3,7 @@ import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
 import Banner from '@/app/src/component/pop-up/Banner'
 import Divider from '@/app/src/component/common/Divider'
 import { popUpAPI } from '@/app/src/api/pop-up'
+import { Suspense } from 'react'
 
 export async function generateMetadata() {
   const title = process.env.SERVICE_NAME
@@ -38,7 +39,9 @@ export default async function PopUpListPage() {
   return (
     <main className="mt-16">
       <Banner />
-      {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
+      <Suspense fallback={<Divider />}>
+        {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
+      </Suspense>
       <Divider />
       <PopUpDashboard />
     </main>
