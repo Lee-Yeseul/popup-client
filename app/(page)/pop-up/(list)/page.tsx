@@ -9,6 +9,9 @@ export async function generateMetadata() {
   const description = process.env.SERVICE_DESCRIPTION
 
   return {
+    alternates: {
+      canonical: '/pop-up',
+    },
     openGraph: {
       title,
       description,
