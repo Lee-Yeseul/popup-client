@@ -19,6 +19,9 @@ export async function generateMetadata({
 
   return {
     title,
+    alternates: {
+      canonical: `/pop-up/${id}`,
+    },
     openGraph: {
       title,
       description: `${title}에 대한 상세 정보 페이지입니다.`,
