@@ -54,15 +54,15 @@ export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
               {imageList && (
                 <ImageBox
                   imagePath={`pop-up/${imageList[0]}`}
-                  className="xs:h-56 xs:w-full sm:aspect-square"
+                  className="aspect-square xs:h-56 xs:w-full"
                 />
               )}
 
               <Card.Description>
                 <div className="text-sm text-gray-500">
-                  <h3 className="mt-1 text-base font-bold text-black">
+                  <h2 className="mt-1 text-base font-bold text-black">
                     {title}
-                  </h3>
+                  </h2>
                   <div className="text-sm text-gray-500">{address}</div>
                   {convertDateToKor(startDate)}
                   <span className="mx-0.5">~</span>
