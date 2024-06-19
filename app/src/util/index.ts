@@ -1,20 +1,20 @@
 type QueryObject = {
-  [key: string]: string | string[]
+  [key: string]: string | string[] | boolean
 }
 
-export function queryStringify(queryObject: QueryObject): string {
+export const queryStringify = (queryObject: QueryObject): string => {
   const searchParams = new URLSearchParams()
   Object.entries(queryObject).forEach(([key, value]) => {
     if (Array.isArray(value)) {
       value.forEach((item) => searchParams.append(key, item))
     } else {
-      searchParams.append(key, value)
+      searchParams.append(key, String(value))
     }
   })
   return searchParams.toString()
 }
 
-export function decodeJWT(token: string) {
+export const decodeJWT = (token: string) => {
   const base64Payload = token.split('.')[1]
   const base64 = base64Payload.replace(/-/g, '+').replace(/_/g, '/')
   const decodedJWT = JSON.parse(
@@ -31,7 +31,31 @@ export function decodeJWT(token: string) {
   return decodedJWT
 }
 
-export function deleteCookie(name: string) {
+export const isTokenExpired = (tokenName: string): boolean => {
+  if (typeof document === 'undefined') return true
+
+  const token = getCookie(tokenName)
+  if (!token) return true
+
+  const { exp } = decodeJWT(token)
+  const now = Date.now()
+
+  return exp * 1000 < now
+}
+
+export const getCookie = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp(
+      '(?:^|; )' +
+        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') +
+        '=([^;]*)',
+    ),
+  )
+
+  return matches ? decodeURIComponent(matches[1]) : null
+}
+
+export const deleteCookie = (name: string) => {
   document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 }
 

@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation'
 import { popUpAPI } from '../../api/pop-up'
 import { useEffect, useState } from 'react'
 import { userAPI } from '../../api/user'
+import { HTTPError } from '../../util/customError'
+import useToast from '../common/toast/useToast'
 
 interface PopUpControlButtonProps {
   id: string
@@ -16,6 +18,7 @@ export default function PopUpControlButton({
   isAvailable,
   authorId,
 }: PopUpControlButtonProps) {
+  const { toast } = useToast()
   const router = useRouter()
   const [isChecked, setIsChecked] = useState(isAvailable)
   const [hasAuthority, setHasAuthority] = useState(false)
@@ -24,8 +27,11 @@ export default function PopUpControlButton({
     try {
       await popUpAPI.putPopUpIsAvailableById(id, !isChecked)
       setIsChecked(!isChecked)
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+        return
+      }
     }
   }
 
@@ -33,8 +39,11 @@ export default function PopUpControlButton({
     try {
       await popUpAPI.deletePopUpById(id)
       router.push('/')
-    } catch (err) {
-      console.log(err)
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+        return
+      }
     }
   }
 

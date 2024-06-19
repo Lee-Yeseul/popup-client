@@ -1,31 +1,39 @@
 import { SignInSchema, SignUpSchema } from '@/app/src/schema/auth'
-import { instance } from '..'
-import { SignInResponse, renewAccessToken } from '@/app/src/type/auth'
-import { APIResponse } from '@/app/src/type'
+import { fetchAPI } from '..'
+import { RenewAccessToken, SignInResponse } from '@/app/src/type/auth'
+import { GetUserInfoResponse } from '@/app/src/type/user'
 
-const basicPathName = '/auth'
+const basicPathName = 'auth'
 
 export const authAPI = {
-  signIn: (bodyData: SignInSchema): APIResponse<SignInResponse> => {
-    return instance.post(`${basicPathName}/signin`, bodyData)
+  signIn: (bodyData: SignInSchema) => {
+    return fetchAPI.post<SignInSchema, SignInResponse>(
+      `${basicPathName}/signin`,
+      bodyData,
+    )
   },
-  signUp: (bodyData: SignUpSchema): APIResponse<void> => {
-    return instance.post(`${basicPathName}/signup`, bodyData)
+  signUp: (bodyData: SignUpSchema) => {
+    return fetchAPI.post<SignUpSchema, null>(
+      `${basicPathName}/signup`,
+      bodyData,
+    )
   },
-  renewAccessToken: (): APIResponse<renewAccessToken> => {
-    return instance.post(`${basicPathName}/renew`)
+  renewAccessToken: () => {
+    return fetchAPI.post<null, RenewAccessToken>(`${basicPathName}/renew`)
   },
-  isEmailUnique: (email: string): APIResponse<boolean> => {
-    return instance.post(`${basicPathName}/is-email-unique`, { email })
+  isEmailUnique: (email: Pick<GetUserInfoResponse, 'email'>) => {
+    return fetchAPI.post<Pick<GetUserInfoResponse, 'email'>, boolean>(
+      `${basicPathName}/is-email-unique`,
+      email,
+    )
   },
-  isUsernameUnique: (username: string): APIResponse<boolean> => {
-    return instance.post(`${basicPathName}/is-username-unique`, { username })
+  isUsernameUnique: (username: Pick<GetUserInfoResponse, 'username'>) => {
+    return fetchAPI.post<Pick<GetUserInfoResponse, 'username'>, boolean>(
+      `${basicPathName}/is-username-unique`,
+      username,
+    )
   },
   logout: () => {
-    return instance.post(`${basicPathName}/logout`)
+    return fetchAPI.post(`${basicPathName}/logout`)
   },
-
-  // postKakaoLoginCode: (code: string): APIResponse<SignInResponse> => {
-  //   return instance.post(`${basicPathName}/kakao-code`, { code })
-  // },
 }

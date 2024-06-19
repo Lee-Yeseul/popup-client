@@ -7,11 +7,12 @@ import { PopUp } from '@/app/src/type/pop-up'
 import Link from 'next/link'
 import useUserAction from '@/app/src/hook/useUserAction'
 import { useRouter } from 'next/navigation'
+import { userAPI } from '@/app/src/api/user'
 
 export default function MyPage() {
   const router = useRouter()
   const [dataList, setDataList] = useState<PopUp[]>([])
-  const { logout } = useUserAction()
+  const { logout, saveUserInfo } = useUserAction()
 
   const getMyPopUpList = async () => {
     try {
@@ -27,8 +28,14 @@ export default function MyPage() {
     router.push('/')
   }
 
+  const getUserInfo = async () => {
+    const { data } = await userAPI.getUserInfo()
+    saveUserInfo(data)
+  }
+
   useEffect(() => {
     getMyPopUpList()
+    getUserInfo()
   }, [])
 
   return (

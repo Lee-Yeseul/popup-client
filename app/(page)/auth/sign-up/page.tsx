@@ -6,6 +6,7 @@ import Form from '@/app/src/component/common/form'
 import { SignUpSchema, signUpSchema } from '@/app/src/schema/auth'
 import useToast from '@/app/src/component/common/toast/useToast'
 import { authAPI } from '@/app/src/api/auth'
+import { HTTPError } from '@/app/src/util/customError'
 
 type CheckUniqueState = boolean | 'notChecked'
 export default function AuthPage() {
@@ -19,35 +20,40 @@ export default function AuthPage() {
 
   const onSubmit = async (data: SignUpSchema) => {
     try {
-      const { status } = await authAPI.signUp(data)
-      if (status !== 201) throw new Error()
+      await authAPI.signUp(data)
       alert('환영합니다! 회원가입이 완료되었습니다.')
       router.push('/')
-    } catch (err: any) {
-      if (err.status === 409) alert('해당 이메일의 유저가 이미 존재합니다.')
-      alert('회원가입에 실패하였습니다. 다시 시도해주세요.')
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+      }
+      toast('알 수 없는 에러가 발생했습니다.', 'error')
     }
   }
 
   const onClickEmailDuplicateBtn = async (value: string) => {
     try {
-      const { data } = await authAPI.isEmailUnique(value)
-      setIsEmailUnique(data)
+      const { data } = await authAPI.isEmailUnique({ email: value })
       if (!data) return toast('중복된 이메일입니다.', 'error')
+      setIsEmailUnique(data)
       return toast('사용 가능한 이메일입니다.', 'success')
     } catch (error) {
-      toast('유효하지 않은 이메일입니다.', 'error')
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+      }
     }
   }
 
   const onClickUsernameDuplicateBtn = async (value: string) => {
     try {
-      const { data } = await authAPI.isUsernameUnique(value)
-      setIsUsernameUnique(data)
+      const { data } = await authAPI.isUsernameUnique({ username: value })
       if (!data) return toast('중복된 유저 이름입니다.', 'error')
+      setIsUsernameUnique(data)
       return toast('사용 가능한 유저 이름입니다.', 'success')
-    } catch (errorr) {
-      toast('유효하지 않은 유저 이름입니다.', 'error')
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        toast(error.message, 'error')
+      }
     }
   }
 

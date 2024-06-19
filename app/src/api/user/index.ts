@@ -1,12 +1,10 @@
-import { APIResponse } from '@/app/src/type'
-import { instance } from '..'
+import { fetchAPI } from '..'
 import { GetUserInfoResponse } from '@/app/src/type/user'
 
-const basicPathName = '/user'
+const basicPathName = 'user'
 
 export const userAPI = {
-  getUserInfo: (): APIResponse<GetUserInfoResponse> => {
-    return instance.get(`${basicPathName}/user-info`)
+  getUserInfo: () => {
+    return fetchAPI.get<null, GetUserInfoResponse>(`${basicPathName}/user-info`)
   },
-  updateUserInfo: () => {},
 }

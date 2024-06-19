@@ -1,7 +1,8 @@
-import { instance } from '..'
+import { fetchAPI } from '..'
+import { ChatMessageResponse } from '../../type/chat'
 
 export const chatAPI = {
   getChatListByRoomId: async (roomId: string) => {
-    return await instance.get(`/chat/${roomId}`)
+    return await fetchAPI.get<null, ChatMessageResponse[]>(`chat/${roomId}`)
   },
 }

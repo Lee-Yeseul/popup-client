@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 type CreatePreSignedUrl = {
   path: string
   filename: string
@@ -11,41 +9,52 @@ type UploadImage = {
   file: any
 }
 
-const awsURL = 'https://cydmzeqykh.execute-api.ap-northeast-2.amazonaws.com'
-const stage = 'dev'
+const awsURL = process.env.NEXT_PUBLIC_AWS_URL
+const stage = process.env.NEXT_PUBLIC_AWS_STAGE
 
 export const imageAPI = {
   createPreSignedUrl: async ({ path, filename }: CreatePreSignedUrl) => {
-    return await axios.post(
+    const data = await fetch(
       `${awsURL}/${stage}/image/create-image-presigned-url`,
       {
-        fileKey: `${path}/${filename}`,
+        method: 'POST',
+        body: JSON.stringify({
+          fileKey: `${path}/${filename}`,
+        }),
       },
     )
+
+    return await data.json()
   },
 
+  // header cors 문제 /
   uploadImage: async ({ url, fields, file }: UploadImage) => {
     const formData = new FormData()
 
-    formData.append('Content-Type', file.type)
     for (const x in fields) {
       formData.append(x, fields[x])
     }
 
+    formData.append('Content-Type', file.type)
     formData.append('file', file)
 
-    await axios.post(url, formData, {
-      headers: { 'Content-Type': 'multipart/form-data' },
+    return await fetch(url, {
+      method: 'POST',
+      body: formData,
     })
   },
 
   getImagePresignedUrl: async (path: string): Promise<string> => {
-    const { data } = await axios.post(
+    const response = await fetch(
       `${awsURL}/${stage}/image/get-image-presigned-url`,
       {
-        fileKey: path,
+        method: 'POST',
+        body: JSON.stringify({
+          fileKey: path,
+        }),
       },
     )
+    const data = await response.json()
     return data.body
   },
 }

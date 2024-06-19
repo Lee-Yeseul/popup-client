@@ -5,3 +5,7 @@ export type ChatMessage = {
   timestamp: Date
   senderId: string
 }
+
+export type ChatMessageResponse = ChatMessage & {
+  id: string
+}

@@ -48,9 +48,9 @@ export default async function PopUpCard({ popUpDetail }: PopUpCardProps) {
       {imageSourceList && <ImageCarousel imageList={imageSourceList} />}
 
       <div className="mx-6">
-        <h3 className="my-2 text-2xl font-bold">{title}</h3>
+        <h1 className="my-2 text-2xl font-bold">{title}</h1>
         <div className="flex flex-col gap-1 text-base/7 font-semibold">
-          <div>{subTitle}</div>
+          <h3>{subTitle}</h3>
           <div className="flex items-center gap-2">
             <EventAvailable width="24" height="24" fill="#1d1b78" />
             <div>

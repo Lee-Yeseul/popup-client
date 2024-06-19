@@ -15,7 +15,7 @@ export default async function authenticateAction(request: NextRequest) {
   if (userInfo.status === 200) return true
 
   if (userInfo.status === 401) {
-    const newAccessToken = await fetch(`${baseURL}/auth/renew`, {
+    const refreshTokenCheck = await fetch(`${baseURL}/auth/renew`, {
       method: 'POST',
       headers: {
         cookie: `refresh_token=${refresh_token}`,
@@ -23,9 +23,7 @@ export default async function authenticateAction(request: NextRequest) {
       credentials: 'include',
     })
 
-    const data = await newAccessToken.json()
-
-    if (data.statusCode === 200) return true
+    if (refreshTokenCheck.status === 200) return true
   }
   return false
 }
