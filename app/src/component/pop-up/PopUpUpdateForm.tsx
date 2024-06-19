@@ -10,6 +10,7 @@ import { PopUpDetail } from '@/app/src/type/pop-up'
 import { convertDateToISOFormat } from '@/app/src/util/date'
 import { userAPI } from '../../api/user'
 import { HTTPError } from '../../util/customError'
+import { getGeoCoordinates } from '../../util'
 
 interface PopUpUpdateFormProps {
   categoryOptions: any
@@ -28,9 +29,14 @@ export default function PopUpUpdateForm({
 
   const onsubmit = async (submitData: CreatePopUpSchema) => {
     try {
+      const { latitude, longitude } = await getGeoCoordinates(
+        submitData.fullAddress,
+      )
       await popUpAPI.putPopUpById(id, {
         ...submitData,
         content,
+        latitude,
+        longitude,
       })
       toast('수정 완료되었습니다.', 'success')
       router.push(`/pop-up/${id}`)

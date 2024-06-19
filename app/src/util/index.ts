@@ -90,3 +90,23 @@ export const calculateMapCenter = (coords: any[]) => {
 
   return center
 }
+
+export const getGeoCoordinates = (
+  address: string,
+): Promise<{ latitude: number; longitude: number }> => {
+  return new Promise((resolve, reject) => {
+    window.kakao.maps.load(() => {
+      const geocoder = new window.kakao.maps.services.Geocoder()
+      geocoder.addressSearch(address, (result, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          resolve({
+            latitude: Number(result[0].y),
+            longitude: Number(result[0].x),
+          })
+        } else {
+          reject(new Error('Failed to get geo coordinates'))
+        }
+      })
+    })
+  })
+}

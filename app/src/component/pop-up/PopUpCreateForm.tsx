@@ -9,6 +9,7 @@ import { imageAPI } from '@/app/src/api/image'
 import { useUserStore } from '@/app/src/store/userStore'
 import useToast from '../common/toast/useToast'
 import { HTTPError } from '../../util/customError'
+import { getGeoCoordinates } from '../../util'
 
 interface PopUpCreateFormProps {
   categoryOptions: any
@@ -51,8 +52,14 @@ export default function PopUpCreateForm({
         imagePathList.push(`${id}_${i}`)
       }
 
+      const { latitude, longitude } = await getGeoCoordinates(
+        submitData.fullAddress,
+      )
+
       await popUpAPI.putPopUpById(id, {
         imageList: imagePathList,
+        latitude,
+        longitude,
       })
       toast('팝업이 성공적으로 생성되었습니다.', 'success')
       router.push(`/pop-up/${id}`)
