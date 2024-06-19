@@ -33,16 +33,17 @@ const config: Config = {
           100: '#f7f7f5',
         },
         primary: {
+          100: '#A9CDFF',
           300: '#4B96FF',
           400: '#2D49DE',
 
           500: '#00178F',
         },
         secondary: {
-          100: '#FEE5E1',
-          200: '#FAD8D7',
-          300: '#FFA2B6',
-          400: '#FF708C',
+          100: '#FFFE97',
+          200: '#FFFE97',
+          300: '#FBF95B',
+          400: '#FFFC27',
         },
         dark: {},
         accent: {

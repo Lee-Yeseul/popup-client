@@ -1,10 +1,19 @@
 'use client'
-import Image from 'next/image'
+
 import { useRef, useState } from 'react'
+import useInterval from '../../hook/useInterval'
 
 interface CardProps {
   imageList: { id: number; url: string }[]
   bgColor?: string
+  objectFit?:
+    | 'object-contain'
+    | 'object-cover'
+    | 'object-cover'
+    | 'object-fill'
+    | 'scale-down'
+  height?: number
+  autoPlay?: boolean
 }
 
 type MoveToNthSlide = (
@@ -12,7 +21,13 @@ type MoveToNthSlide = (
   translateNumber: number,
 ) => void
 
-export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
+export default function ImageCarousel({
+  imageList: data,
+  bgColor,
+  objectFit,
+  height,
+  autoPlay,
+}: CardProps) {
   const imageList = [data[data.length - 1], ...data, data[0]]
   const ref = useRef<HTMLDivElement>(null)
 
@@ -91,6 +106,13 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
     })
   }
 
+  useInterval(
+    () => {
+      handleSwife(1)
+    },
+    autoPlay ? 2000 : null,
+  )
+
   return (
     <div>
       <div
@@ -99,7 +121,7 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
           width: '100%',
           minWidth: '350px',
           maxWidth: '550px',
-          height: '350px',
+          height: height ? height : '350px',
         }}
       >
         <div
@@ -114,8 +136,7 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
             <div className="relative h-full w-full shrink-0" key={index}>
               <img
                 key={index}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className={`${bgColor ? bgColor : 'bg-black'} h-full w-full object-contain`}
+                className={`${bgColor ? bgColor : 'bg-black'} ${objectFit ? objectFit : ' object-contain'} h-full w-full`}
                 src={image.url}
                 alt={image.url}
               />
@@ -124,13 +145,13 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
         </div>
         <button
           onClick={() => handleSwife(-1)}
-          className="shadow-grey-500 invisible absolute left-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
+          className="invisible absolute left-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 text-primary-500 opacity-75 shadow-lg hover:opacity-90 hover:shadow-sm group-hover:visible"
         >
           {'<'}
         </button>
         <button
           onClick={() => handleSwife(1)}
-          className="shadow-grey-500 invisible absolute right-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 opacity-75 hover:opacity-90 hover:shadow-sm group-hover:visible"
+          className="invisible absolute right-2 top-1/2 h-8 w-8 rounded-full bg-gray-100 p-2 text-primary-500 opacity-75 shadow-lg hover:opacity-90 hover:shadow-sm group-hover:visible"
         >
           {'>'}
         </button>
@@ -142,7 +163,7 @@ export default function ImageCarousel({ imageList: data, bgColor }: CardProps) {
                 className={`rounded-full ${
                   image.id === currentImageIndex - 1
                     ? 'h-2.5 w-2.5 bg-white'
-                    : 'h-2 w-2 bg-gray-300'
+                    : 'h-2 w-2 bg-gray-400'
                 }`}
               ></div>
             ))}
