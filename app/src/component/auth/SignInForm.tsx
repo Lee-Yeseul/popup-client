@@ -1,41 +1,39 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Form from '@/app/src/component/common/form'
+import useToast from '@/app/src/component/common/toast/useToast'
 import { SignInSchema, signInSchema } from '@/app/src/schema/auth'
 import useUserAction from '@/app/src/hook/useUserAction'
 import { authAPI } from '@/app/src/api/auth'
 import { userAPI } from '@/app/src/api/user'
-import Link from 'next/link'
-import useToast from '../common/toast/useToast'
+import { HTTPError } from '@/app/src/util/customError'
 
 export default function SignInForm() {
   const { toast } = useToast()
   const [errorMessage, setErrorMessage] = useState<string>('')
   const router = useRouter()
   const { login, saveUserInfo } = useUserAction()
+
   const onLoginBtnClick = async (loginData: SignInSchema) => {
     try {
       const { data } = await authAPI.signIn(loginData)
-      login(data)
+      login(data.accessToken)
+
       const { data: userInfo } = await userAPI.getUserInfo()
       saveUserInfo(userInfo)
 
       setErrorMessage('')
       router.push('/')
-    } catch (error: any) {
-      if (error.status === 401) {
-        setErrorMessage('이메일 또는 비밀번호가 일치하지 않습니다.')
-        toast('이메일 또는 비밀번호가 일치하지 않습니다.', 'error')
+    } catch (error) {
+      if (error instanceof HTTPError) {
+        setErrorMessage(error.message)
+        toast(error.message, 'error')
         return
       }
-      if (error.status === 404) {
-        setErrorMessage('존재하지 않는 이메일입니다.')
-        toast('존재하지 않는 이메일입니다.', 'error')
-        return
-      }
-      toast('로그인에 실패했습니다.', 'error')
+      toast('알 수 없는 에러가 발생했습니다.', 'error')
     }
   }
   return (

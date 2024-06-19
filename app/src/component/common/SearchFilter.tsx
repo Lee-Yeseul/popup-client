@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { usePopUpStore } from '@/app/src/store/popUpStore'
 import useDetectElement from '@/app/src/hook/useDetectElement'
 import { popUpAPI } from '@/app/src/api/pop-up'
+import { HTTPError } from '../../util/customError'
 
 interface SearchFilterProps {
   filterList: { label: string; value: string }[]
@@ -69,7 +70,9 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
 
       setPopUpList(data)
     } catch (error) {
-      console.log(error)
+      if (error instanceof HTTPError) {
+        console.log(error)
+      }
     }
   }
   useEffect(() => {

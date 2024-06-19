@@ -8,10 +8,10 @@ type StoreType = 'sessionStorage' | 'localStorage'
 export default function useStorage(type: StoreType) {
   if (typeof window === 'undefined') {
     return {
-      get: () => console.log(),
-      set: () => console.log(),
-      clear: () => console.log(),
-      delete: () => console.log(),
+      get: () => {},
+      set: () => {},
+      clear: () => {},
+      delete: () => {},
     }
   }
 
