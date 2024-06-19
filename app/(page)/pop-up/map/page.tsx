@@ -6,6 +6,9 @@ export async function generateMetadata() {
 
   return {
     title,
+    alternates: {
+      canonical: `/pop-up/map`,
+    },
     openGraph: {
       title,
       description,

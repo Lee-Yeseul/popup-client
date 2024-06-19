@@ -63,12 +63,12 @@ export default async function PopUpCard({ popUpDetail }: PopUpCardProps) {
             <div>{`${fullAddress}, ${addressDetail}`}</div>
           </div>
         </div>
-        <div className="my-2 flex items-center gap-1">
+        <div className="my-2 flex items-center gap-2">
           {tags.map((tag) => (
             <Tag
               key={tag}
-              value={`# ${tag}`}
-              className="bg-white text-sm/7 text-secondary-400"
+              value={`${tag}`}
+              className="bg-primary-500/10 text-sm/7 text-primary-500"
             />
           ))}
         </div>
