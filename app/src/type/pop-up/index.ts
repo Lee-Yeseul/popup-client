@@ -28,6 +28,8 @@ export type PopUpDetail = PopUp &
     fullAddress: string
     addressDetail: string
     isAvailable: boolean
+    latitude?: number
+    longitude?: number
   }
 
 export type PopUpQuery = {
@@ -44,4 +46,6 @@ export type PopUpCategory = {
 export type CreateBasicPopUpInfo = Partial<CreatePopUpSchema> & {
   content?: string
   imageList?: string[]
+  latitude?: number
+  longitude?: number
 }
