@@ -1,3 +1,5 @@
+import { InternalError } from './customError'
+
 type QueryObject = {
   [key: string]: string | string[] | boolean
 }
@@ -89,4 +91,42 @@ export const calculateMapCenter = (coords: any[]) => {
   }
 
   return center
+}
+
+export const getGeoCoordinates = (
+  address: string,
+): Promise<{ latitude: number; longitude: number }> => {
+  return new Promise((resolve, reject) => {
+    window.kakao.maps.load(() => {
+      const geocoder = new window.kakao.maps.services.Geocoder()
+      geocoder.addressSearch(address, (result, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          resolve({
+            latitude: Number(result[0].y),
+            longitude: Number(result[0].x),
+          })
+        } else {
+          reject(new InternalError(500, 'Failed to get geo coordinates'))
+        }
+      })
+    })
+  })
+}
+
+export const keywordSearch = (
+  keyword: string,
+): Promise<{ centerLat: number; centerLng: number }> => {
+  return new Promise((resolve, reject) => {
+    const ps = new kakao.maps.services.Places()
+
+    ps.keywordSearch(keyword, (data, status, _pagination) => {
+      if (status === kakao.maps.services.Status.OK) {
+        const centerLng = Number(data[0].x)
+        const centerLat = Number(data[0].y)
+        resolve({ centerLat, centerLng })
+      } else {
+        reject(new InternalError(500, 'Failed to perform keyword search'))
+      }
+    })
+  })
 }

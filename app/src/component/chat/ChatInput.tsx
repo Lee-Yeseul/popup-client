@@ -33,7 +33,7 @@ export default function ChatInput({ handleSubmit }: ChatInputProps) {
           onChange={(e) => setMessage(e.target.value)}
         />
         <button className="px-3" type="submit">
-          <Send width="30" height="30" fill="#FFA2B6" />
+          <Send width="30" height="30" fill="#00178F" />
         </button>
       </div>
     </form>
