@@ -68,6 +68,8 @@ export default function Form<Schema extends FieldValues>({
     control,
     setValue,
     getValues,
+    handleSubmit,
+    onSumbit,
   }
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
