@@ -58,7 +58,7 @@ export default function PopUpDashboard({ dataList }: PopUpDashboardProps) {
     <>
       <div className="my-3 mr-4 flex justify-end">
         <label className="inline-flex cursor-pointer items-center">
-          <span className="mr-3 font-semibold text-gray-900 dark:text-gray-300">
+          <span className="mr-3 font-medium text-gray-600 dark:text-gray-300">
             {'종료된 팝업 함께 보기'}
           </span>
           <input
