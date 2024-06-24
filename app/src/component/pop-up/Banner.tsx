@@ -2,7 +2,7 @@ import { imageAPI } from '../../api/image'
 import { popUpAPI } from '../../api/pop-up'
 import { PopUp } from '../../type/pop-up'
 
-import ImageCarousel from '../common/ImageCarausel'
+import ImageCarousel from '../common/ImageCarousel'
 
 export default async function Banner() {
   const getPopular3PopUpList = async () => {

@@ -2,7 +2,7 @@ import LocationOn from '@/public/assets/icons/locationOn.svg'
 import EventAvailable from '@/public/assets/icons/eventAvailable.svg'
 
 import Tag from '@/app/src/component/common/Tag'
-import ImageCarousel from '@/app/src/component/common/ImageCarausel'
+import ImageCarousel from '@/app/src/component/common/ImageCarousel'
 import { PopUpDetail } from '@/app/src/type/pop-up'
 import { convertDateToISOFormat } from '@/app/src/util/date'
 import { imageAPI } from '@/app/src/api/image'
