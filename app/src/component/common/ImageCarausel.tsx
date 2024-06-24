@@ -2,9 +2,10 @@
 
 import { useRef, useState } from 'react'
 import useInterval from '../../hook/useInterval'
+import Link from 'next/link'
 
 interface CardProps {
-  imageList: { id: number; url: string }[]
+  imageList: { id: number; url: string; link?: string }[]
   bgColor?: string
   objectFit?:
     | 'object-contain'
@@ -134,12 +135,23 @@ export default function ImageCarousel({
         >
           {imageList.map((image, index) => (
             <div className="relative h-full w-full shrink-0" key={index}>
-              <img
-                key={index}
-                className={`${bgColor ? bgColor : 'bg-black'} ${objectFit ? objectFit : ' object-contain'} h-full w-full`}
-                src={image.url}
-                alt={image.url}
-              />
+              {image.link ? (
+                <Link href={image.link ?? '/'}>
+                  <img
+                    key={index}
+                    className={`${bgColor ? bgColor : 'bg-black'} ${objectFit ? objectFit : ' object-contain'} h-full w-full`}
+                    src={image.url}
+                    alt={image.url}
+                  />
+                </Link>
+              ) : (
+                <img
+                  key={index}
+                  className={`${bgColor ? bgColor : 'bg-black'} ${objectFit ? objectFit : ' object-contain'} h-full w-full`}
+                  src={image.url}
+                  alt={image.url}
+                />
+              )}
             </div>
           ))}
         </div>

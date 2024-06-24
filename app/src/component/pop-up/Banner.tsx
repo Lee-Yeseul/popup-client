@@ -1,50 +1,45 @@
 import { imageAPI } from '../../api/image'
 import { popUpAPI } from '../../api/pop-up'
+import { PopUp } from '../../type/pop-up'
 
 import ImageCarousel from '../common/ImageCarausel'
 
 export default async function Banner() {
-  const imageList = ['banner/banner_1.png']
-
-  const getPopular3PopUpThumbnailImageList = async () => {
+  const getPopular3PopUpList = async () => {
     const { data } = await popUpAPI.getPopularPopUp(3)
-
-    return data.map(({ imageList }) => `pop-up/${imageList[0]}`)
+    return data
   }
 
-  const getImageSource = async (imagePathList: string[]) => {
+  const getImageSource = async (imagePathList: PopUp[]) => {
     try {
       const imageSourceList = []
       for (let i = 0; i < imagePathList.length; i++) {
         const s3ImageUrl = await imageAPI.getImagePresignedUrl(
-          `${imagePathList[i]}`,
+          `pop-up/${imagePathList[i].imageList[0]}`,
         )
         imageSourceList.push({
           id: i,
           url: s3ImageUrl,
+          link: `pop-up/${imagePathList[i].id}`,
         })
       }
+
       return imageSourceList
     } catch (error) {
       console.log(error)
     }
   }
+  const popular3PopUpImageList = await getPopular3PopUpList()
 
-  const popular3PopUpThumbnailImageList =
-    await getPopular3PopUpThumbnailImageList()
-
-  const imageSourceList = await getImageSource([
-    ...imageList,
-    ...popular3PopUpThumbnailImageList,
-  ])
+  const imageSourceList2 = await getImageSource([...popular3PopUpImageList])
 
   return (
     <div className="w-full">
-      <div className=" bg-neutral-100">
-        {imageSourceList && (
+      <div className="bg-neutral-100">
+        {imageSourceList2 && (
           <ImageCarousel
-            height={280}
-            imageList={imageSourceList}
+            height={320}
+            imageList={imageSourceList2}
             objectFit="object-fill"
             autoPlay
           />
