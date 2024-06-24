@@ -52,20 +52,22 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
         selectedCategory.filter((category) => category !== value),
       )
       params.delete('category', value)
-      router.push(`${pathname}?${params.toString()}`)
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
     } else {
       setSelectedCategory([...selectedCategory, value])
       params.append('category', value)
-      router.push(`${pathname}?${params.toString()}`)
+      router.push(`${pathname}?${params.toString()}`, { scroll: false })
     }
   }
 
   const getPopUpList = async () => {
     try {
+      const inProgress = params.get('inProgress') === 'false' ? false : true
       const { data } = await popUpAPI.getPopUpList({
         category: selectedCategory,
         search: params.get('search') ?? '',
         isAvailable: true,
+        inProgress,
       })
 
       setPopUpList(data)
