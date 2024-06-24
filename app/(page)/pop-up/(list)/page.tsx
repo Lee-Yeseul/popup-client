@@ -1,9 +1,10 @@
+import { Suspense } from 'react'
 import SearchFilter from '@/app/src/component/common/SearchFilter'
 import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
 import Banner from '@/app/src/component/pop-up/Banner'
 import Divider from '@/app/src/component/common/Divider'
 import { popUpAPI } from '@/app/src/api/pop-up'
-import { Suspense } from 'react'
+import DashboardFallback from '@/app/src/component/common/DashboardFallback'
 
 export async function generateMetadata() {
   const title = process.env.SERVICE_NAME
@@ -43,7 +44,9 @@ export default async function PopUpListPage() {
         {popUpCategoryList && <SearchFilter filterList={popUpCategoryList} />}
       </Suspense>
       <Divider />
-      <PopUpDashboard />
+      <Suspense fallback={<DashboardFallback />}>
+        <PopUpDashboard />
+      </Suspense>
     </main>
   )
 }

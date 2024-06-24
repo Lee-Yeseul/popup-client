@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import PopUpDashboard from '@/app/src/component/pop-up/PopUpDashboard'
 import { popUpAPI } from '@/app/src/api/pop-up'
 import { PopUp } from '@/app/src/type/pop-up'
@@ -8,6 +8,7 @@ import Link from 'next/link'
 import useUserAction from '@/app/src/hook/useUserAction'
 import { useRouter } from 'next/navigation'
 import { userAPI } from '@/app/src/api/user'
+import DashboardFallback from '@/app/src/component/common/DashboardFallback'
 
 export default function MyPage() {
   const router = useRouter()
@@ -57,7 +58,9 @@ export default function MyPage() {
           </button>
         </div>
       </div>
-      {dataList && <PopUpDashboard dataList={dataList} />}
+      <Suspense fallback={<DashboardFallback />}>
+        {dataList && <PopUpDashboard dataList={dataList} />}
+      </Suspense>
     </main>
   )
 }

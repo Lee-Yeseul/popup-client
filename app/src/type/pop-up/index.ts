@@ -36,6 +36,7 @@ export type PopUpQuery = {
   category?: string | string[]
   search?: string
   isAvailable?: boolean
+  inProgress?: boolean
 }
 
 export type PopUpCategory = {
