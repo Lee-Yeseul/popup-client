@@ -62,7 +62,7 @@ export default function SearchFilter({ filterList }: SearchFilterProps) {
 
   const getPopUpList = async () => {
     try {
-      const inProgress = params.get('inProgress') === 'true' ? true : false
+      const inProgress = params.get('inProgress') === 'false' ? false : true
       const { data } = await popUpAPI.getPopUpList({
         category: selectedCategory,
         search: params.get('search') ?? '',
